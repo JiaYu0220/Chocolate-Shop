@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
+  linkActiveClass: 'active',
   routes: [
     {
       path: '/',
@@ -26,9 +27,24 @@ const router = createRouter({
       component: () => import('../views/admin/AdminLayout.vue'),
       children: [
         {
+          path: 'dashboard',
+          name: 'adminDashboard',
+          component: () => import('../views/admin/AdminDashboard.vue'),
+        },
+        {
           path: 'products',
           name: 'adminProducts',
           component: () => import('../views/admin/AdminProducts.vue'),
+        },
+        {
+          path: 'orders',
+          name: 'adminOrders',
+          component: () => import('../views/admin/AdminOrders.vue'),
+        },
+        {
+          path: 'articles',
+          name: 'adminArticles',
+          component: () => import('../views/admin/AdminArticles.vue'),
         },
       ],
     },

@@ -1,4 +1,7 @@
 <template>
+   <!-- <LoadingOverlay :active="isLoading">
+   <img src="../assets/loading.gif" alt="Loading...">
+   </LoadingOverlay> -->
   <div class="bg-primary-100">
     <div class="container">
       <div class="h-screen flex justify-center items-center">
@@ -27,6 +30,8 @@
               </template>
               </FormFloat>
             </div>
+            <button type="button" class="w-full btn btn-primary mb-3"
+            @click="autoLogin">我懶得輸入 (測試用)</button>
             <button type="submit" class="w-full btn btn-primary mb-3">進入後台</button>
             <button type="button" class="w-full btn btn-link" @click="$router.go(-1)">回上一頁</button>
           </VForm>
@@ -37,6 +42,8 @@
 </template>
 <script>
 import FormFloat from '@/components/shared/form/FormFloat.vue';
+import { mapActions } from 'pinia';
+import loadingStore from '@/stores/loadingStore';
 
 const { VITE_URL } = import.meta.env;
 
@@ -51,10 +58,17 @@ export default {
     FormFloat,
   },
   methods: {
+    autoLogin() {
+      this.user = {
+        username: 'alice49885@gmail.com',
+        password: 'a12345',
+      };
+      this.login();
+    },
     async login() {
       try {
+        this.showLoading();
         const url = `${VITE_URL}/admin/signin`;
-        console.log(this.user);
         const { data } = await this.$http.post(url, this.user);
 
         const { token, expired } = data;
@@ -63,8 +77,11 @@ export default {
       } catch (error) {
         console.log(error);
         this.$swal(error.data?.message || '發生錯誤');
+      } finally {
+        this.hideLoading();
       }
     },
+    ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
   },
 };
 </script>

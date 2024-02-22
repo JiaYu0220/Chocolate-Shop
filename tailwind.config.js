@@ -40,6 +40,16 @@ export default {
       fontFamily: {
         zenMaru: ['"Zen Maru Gothic"', ...defaultTheme.fontFamily.sans],
       },
+      keyframes: {
+        accordionIn: {
+          '0%': { height: '0' },
+          '100%': { height: '376px' },
+        },
+      },
+      animation: {
+        'accordion-enter-active': 'accordionIn 0.5s ease',
+        'accordion-leave-active': 'accordionIn 0.5s ease reverse',
+      },
     },
   },
   plugins: [
