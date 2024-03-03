@@ -5,8 +5,8 @@
         <slot name="th"></slot>
       </tr>
     </thead>
-    <tbody>
-      <slot name="tr" tr-class="border-b-2 border-primary-200 hover:bg-primary-100/50"></slot>
+    <tbody class="*:border-b-2 *:border-primary-200 hover:*:bg-primary-100/50">
+      <slot name="tr"></slot>
     </tbody>
   </table>
 </template>

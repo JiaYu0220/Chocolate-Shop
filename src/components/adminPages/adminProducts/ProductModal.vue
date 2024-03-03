@@ -81,6 +81,7 @@
             <i class="bi bi-trash-fill"></i></button>
             <!-- 複製按鈕 -->
             <CopyBtn :text="tempProduct.imagesUrl[i]"
+            msg="圖片網址"
             class="absolute right-0 bottom-0 p-1 rounded-md
           bg-primary-50 text-primary-800 duration-150
           hover:text-primary-300"></CopyBtn>

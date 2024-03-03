@@ -5,8 +5,8 @@ export default defineStore('loading', {
     isLoading: false,
     loadingStatus: {
       productId: '',
+      orderId: '',
       cartId: '',
-      delOrder: '',
       delProduct: false,
       imageUrl: false,
       imagesUrl: false,

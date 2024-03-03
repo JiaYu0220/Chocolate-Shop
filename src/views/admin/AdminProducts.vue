@@ -29,9 +29,8 @@
       <th scope="col" class="min-w-10 text-end md:pr-4">編輯</th>
     </template>
     <!-- tbody -->
-    <template #tr="{trClass}">
-      <tr v-for="product in products" :key="product.id"
-      :class="trClass">
+    <template #tr>
+      <tr v-for="product in products" :key="product.id">
         <td class="py-2 pr-1 md:pr-2 md:pl-4">
           {{ product.category }}
         </td>
