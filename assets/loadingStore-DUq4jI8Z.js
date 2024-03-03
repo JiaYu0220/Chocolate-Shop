@@ -1,1 +1,0 @@
-import{y as a}from"./index-jy0z-i-L.js";const d=a("loading",{state:()=>({isLoading:!1,loadingStatus:{productId:"",orderId:"",cartId:"",delProduct:!1,imageUrl:!1,imagesUrl:!1,updateProduct:!1}}),actions:{showLoading(){this.isLoading=!0},hideLoading(){this.isLoading=!1}}});export{d as l};
