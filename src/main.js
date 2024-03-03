@@ -1,16 +1,19 @@
 import './assets/main.css';
+import 'animate.css';
 import 'vue-loading-overlay/dist/css/index.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.min.css';
+import 'vue-cropper/dist/index.css';
 
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-// import Loading from 'vue-loading-overlay';
-import { LoadingPlugin } from 'vue-loading-overlay';
+import Loading from 'vue-loading-overlay';
+// import { LoadingPlugin } from 'vue-loading-overlay';
 import VueSweetalert2 from 'vue-sweetalert2';
+import VueCropper from 'vue-cropper';
 
 // veeValidate
 import {
@@ -25,10 +28,19 @@ import App from './App.vue';
 import router from './router';
 
 const swlOptions = {
+  confirmButtonColor: '#5C270D',
+  confirmButtonText: '確定',
   color: '#261005',
   background: '#FFFFF9',
-  confirmButtonColor: '#5C270D',
-  cancelButtonColor: '#b91c1c',
+  showClass: {
+    popup: `
+    animate__animated animate__fadeIn animate__faster `,
+  },
+  hideClass: {
+    popup: `
+    animate__animated animate__fadeOut animate__faster
+    `,
+  },
 };
 
 // veeValidate
@@ -49,8 +61,9 @@ app.use(pinia);
 app.use(router);
 app.use(VueAxios, axios);
 app.use(VueSweetalert2, swlOptions);
-app.use(LoadingPlugin);
-// app.component('LoadingOverlay', Loading);
+// app.use(LoadingPlugin);
+app.use(VueCropper);
+app.component('LoadingOverlay', Loading);
 app.component('VForm', Form);
 app.component('VField', Field);
 app.component('ErrorMessage', ErrorMessage);

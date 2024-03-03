@@ -38,7 +38,7 @@ export default {
         },
       },
       fontFamily: {
-        zenMaru: ['"Zen Maru Gothic"', ...defaultTheme.fontFamily.sans],
+        zenMaru: ['"Mochiy Pop One"', ...defaultTheme.fontFamily.sans],
       },
       keyframes: {
         accordionIn: {

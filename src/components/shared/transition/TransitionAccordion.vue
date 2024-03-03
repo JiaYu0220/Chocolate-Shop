@@ -6,7 +6,7 @@
 <style>
 .accordion-enter-active,
 .accordion-leave-active {
-  transition: height 0.5s ease-in-out;
+  transition: height 0.3s ease-in-out;
 }
 
 .accordion-enter-from,
