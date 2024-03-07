@@ -133,25 +133,7 @@
   </template>
   </ModalComponent>
 </template>
-<style>
-/* datepicker 樣式 */
-.dp__main ~ label{
-  @apply after:content-['*'] after:text-red-600 after:ml-1
-}
-.dp__input{
-  @apply w-full pt-5 form-control
-}
-.dp__today{
-  @apply border-primary-800
-}
-.dp__range_end, .dp__range_start, .dp__active_date{
-  @apply bg-primary-800 text-primary-50
-}
-.dp__theme_light{
-  @apply bg-primary-50 text-primary-950 shadow-sm
-}
 
-</style>
 <script>
 import ModalComponent from '@/components/shared/modal/ModalComponent.vue';
 import FormFloat from '@/components/shared/form/FormFloat.vue';

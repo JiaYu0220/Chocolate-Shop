@@ -182,7 +182,6 @@ export default {
         // 關閉 loading
         this.loadingStatus.orderId = '';
       } catch (error) {
-        console.log(error);
         // 關閉 loading
         this.loadingStatus.orderId = '';
         // 通知
