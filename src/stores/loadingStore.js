@@ -5,12 +5,15 @@ export default defineStore('loading', {
     isLoading: false,
     loadingStatus: {
       productId: '',
+      newProduct: false,
       orderId: '',
+      articleId: '',
+      newArticle: false,
+      couponId: '',
+      newCoupon: false,
       cartId: '',
-      delProduct: false,
       imageUrl: false,
       imagesUrl: false,
-      updateProduct: false,
     },
   }),
   actions: {
