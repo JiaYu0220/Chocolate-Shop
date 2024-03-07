@@ -4,7 +4,7 @@
     <div class="container">
       <div class="h-screen flex justify-center items-center">
         <div class="w-72">
-          <LogoComponent class="mb-8" size="5xl"/>
+          <LogoComponent class="mb-8" size="4xl"/>
           <VForm v-slot="{ errors }" @submit="login"
           class="bg-primary-50 p-4 rounded-lg border-2 border-primary-800">
             <h2 class="font-bold text-xl text-center py-6">
