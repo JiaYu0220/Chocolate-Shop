@@ -33,7 +33,7 @@ export default {
   },
   data() {
     return {
-      inputStyle: 'w-full pt-5 form-control peer',
+      inputStyle: 'w-full pt-5 form-control  read-only:bg-stone-50 peer',
     };
   },
 };

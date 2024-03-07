@@ -56,7 +56,6 @@ export default {
       if (this.returnUrl) {
         // emit 傳出 url
         if (this.isMultiple) {
-          console.log('多檔案');
           this.uploadMultiImg(event); // 多檔案
         } else {
           this.uploadImg(event); // 單一檔案
@@ -79,9 +78,10 @@ export default {
 
         this.loadingStatus.imageUrl = false;
       } catch (error) {
-        console.log(error);
         this.loadingStatus.imageUrl = false;
-        this.$swal(error.data.message);
+        // 通知
+        const { message } = error.response.data;
+        this.$swal(Array.isArray(message) ? message[0] : message);
       }
     },
     async uploadMultiImg(event) {
@@ -90,7 +90,6 @@ export default {
 
         const { files } = event.target;
         const url = `${VITE_URL}/api/${VITE_PATH}/admin/upload`;
-        console.log(files);
 
         // 多個圖片的 promise
         const promiseArr = Object.values(files).map(async (file) => {
@@ -102,9 +101,7 @@ export default {
 
         // axios
         const resArr = await Promise.all(promiseArr);
-        console.log(resArr);
         this.$emit('emitChange', resArr);
-        // this.tempProduct.imagesUrl.push(...resArr);
 
         // 清空
         const targetInput = event.target;
@@ -112,9 +109,10 @@ export default {
 
         this.loadingStatus.imagesUrl = false;
       } catch (error) {
-        console.log(error);
         this.loadingStatus.imagesUrl = false;
-        this.$swal(error.data.message);
+        // 通知
+        const { message } = error.response.data;
+        this.$swal(Array.isArray(message) ? message[0] : message);
       }
     },
   },

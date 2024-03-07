@@ -56,10 +56,16 @@ export default {
       this.isShow = false;
       this.enableScroll();
       this.$refs[this.target].scrollTop = 0;
-      if (this.closeAttachMethod) {
-        this.closeAttachMethod();
-      }
+      // 關閉之外還要再執行其他方法
+      // if (this.closeAttachMethod) {
+      //   this.closeAttachMethod();
+      // }
+      this.$emit('resetForm');
     },
+    // closeFormModal() {
+    //   this.closeModal();
+    //   this.$emit('closeAndReset');
+    // },
     disableScroll() {
       document.body.classList.add('modal-open');
       // 搭配 position: fixed 讓背景停在現在位置
