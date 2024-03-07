@@ -1,1 +1,0 @@
-import{_ as o,o as t,c as n,n as s}from"./index-CQupeNWV.js";const r={props:["size"]};function a(c,p,e,_,i,l){return t(),n("h1",{class:s(`font-zenMaru text-${e.size} text-primary-800 text-center text-nowrap logoShadow`)}," / 可_可 \\ ",2)}const x=o(r,[["render",a]]);export{x as L};

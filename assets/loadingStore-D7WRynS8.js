@@ -1,0 +1,1 @@
+import{q as a}from"./index-DVC19zHe.js";const o=a("loading",{state:()=>({isLoading:!1,loadingStatus:{productId:"",newProduct:!1,orderId:"",articleId:"",newArticle:!1,couponId:"",newCoupon:!1,cartId:"",imageUrl:!1,imagesUrl:!1}}),actions:{showLoading(){this.isLoading=!0},hideLoading(){this.isLoading=!1}}});export{o as l};
