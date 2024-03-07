@@ -15,6 +15,7 @@
     "@tailwindcss/forms": "^0.5.7",
     "@vee-validate/i18n": "^4.12.5",
     "@vee-validate/rules": "^4.12.5",
+    "@vuepic/vue-datepicker": "^8.2.0",
     "animate.css": "^4.1.1",
     "axios": "^1.6.7",
     "bootstrap-icons": "^1.11.3",

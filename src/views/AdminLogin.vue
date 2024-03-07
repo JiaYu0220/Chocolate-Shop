@@ -4,8 +4,8 @@
     <div class="container">
       <div class="h-screen flex justify-center items-center">
         <div class="w-72">
-          <h1 class="font-zenMaru text-5xl text-primary-800 text-center mb-4">歐可</h1>
-          <VForm v-slot="{ errors }" @submit.prevent="login"
+          <LogoComponent class="mb-8" size="5xl"/>
+          <VForm v-slot="{ errors }" @submit="login"
           class="bg-primary-50 p-4 rounded-lg border-2 border-primary-800">
             <h2 class="font-bold text-xl text-center py-6">
               後台登入
@@ -52,21 +52,23 @@
 <script>
 import FormFloat from '@/components/shared/form/FormFloat.vue';
 import MyLoading from '@/components/shared/helpers/MyLoading.vue';
+import LogoComponent from '@/components/shared/logo/LogoComponent.vue';
 import { mapActions } from 'pinia';
 import loadingStore from '@/stores/loadingStore';
 
 const { VITE_URL } = import.meta.env;
 
 export default {
+  components: {
+    FormFloat,
+    MyLoading,
+    LogoComponent,
+  },
   data() {
     return {
       user: {},
       isPwVisible: false,
     };
-  },
-  components: {
-    FormFloat,
-    MyLoading,
   },
   methods: {
     autoLogin() {
@@ -85,17 +87,13 @@ export default {
         const { token, expired } = data;
         document.cookie = `token=${token}; expires=${new Date(expired)}`;
         this.$router.push('/admin/products');
-      } catch (error) {
-        // console.log(error);
-        this.$swal(error.data?.message || '發生錯誤');
-      } finally {
         this.hideLoading();
+      } catch (error) {
+        this.hideLoading();
+        this.$swal(error.data?.message || '發生錯誤，請稍後再試');
       }
     },
     ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
   },
-  // computed: {
-  //   ...mapState(loadingStore, ['isLoading']),
-  // },
 };
 </script>

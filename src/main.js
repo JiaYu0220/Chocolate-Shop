@@ -4,6 +4,7 @@ import 'vue-loading-overlay/dist/css/index.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.min.css';
 import 'vue-cropper/dist/index.css';
+import '@vuepic/vue-datepicker/dist/main.css';
 
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
@@ -11,9 +12,9 @@ import { createPinia } from 'pinia';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import Loading from 'vue-loading-overlay';
-// import { LoadingPlugin } from 'vue-loading-overlay';
 import VueSweetalert2 from 'vue-sweetalert2';
 import VueCropper from 'vue-cropper';
+import VueDatePicker from '@vuepic/vue-datepicker';
 
 // veeValidate
 import {
@@ -67,6 +68,7 @@ app.component('LoadingOverlay', Loading);
 app.component('VForm', Form);
 app.component('VField', Field);
 app.component('ErrorMessage', ErrorMessage);
+app.component('VueDatePicker', VueDatePicker);
 
 GlobalVariables.variables = app.config.globalProperties;
 

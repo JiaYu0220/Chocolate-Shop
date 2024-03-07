@@ -18,6 +18,14 @@
       </RouterLink>
     </li>
     <li class="mb-4 font-bold">
+      <RouterLink to="/admin/coupons" class="block text-center py-3 mx-2 rounded-md
+      hover:bg-primary-800 hover:text-primary-200 hover:shadow-md duration-300
+      md:pl-7 md:text-left"
+      @click="$emit('close-menu')">
+      <i class="bi bi-ticket-perforated-fill me-4"></i>優惠券
+      </RouterLink>
+    </li>
+    <li class="mb-4 font-bold">
       <RouterLink to="/admin/orders" class="block text-center py-3 mx-2 rounded-md
       hover:bg-primary-800 hover:text-primary-200 hover:shadow-md duration-300
       md:pl-7 md:text-left"
