@@ -42,7 +42,7 @@
             @click="autoLogin">一鍵登入 (測試用)</button>
             <button type="submit" class="w-full btn btn-primary btn-lg mb-3">進入後台</button>
             <button type="button" class="w-full btn btn-link btn-lg"
-            @click="$router.go(-1)">回上一頁</button>
+            @click="$router.push('/')">回首頁</button>
           </VForm>
         </div>
       </div>
