@@ -59,8 +59,8 @@
           v-model="fileName" placeholder>
         </template>
       </FormFloat>
-      <button v-if="option.img" class="btn btn-primary rounded-l-none text-nowrap"
-      @click="download()" >下載</button>
+      <button type="button" v-if="option.img" class="btn btn-primary rounded-l-none text-nowrap"
+      @click="download" >下載</button>
     </div>
     <!-- 裁剪完圖片 -->
     <!-- <div class="" v-show="cropperUrl">
@@ -88,7 +88,7 @@ export default {
         full: true, // 是否输出原图比例的截图
         outputType: 'png', // 裁剪生成图片的格式
         original: false, // 上传图片按照原始比例渲染
-        canScale: true, // 图片是否允许滚轮缩放
+        canScale: false, // 图片是否允许滚轮缩放
         canMove: false, // 上传图片是否可以移动
         canMoveBox: true, // 截图框能否拖动
         autoCrop: true, // 是否默认生成截图框，开启後宽度高度才生效

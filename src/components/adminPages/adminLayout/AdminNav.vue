@@ -1,8 +1,8 @@
 <template>
   <ul class="text-primary-950 bg-primary-100 flex-grow flex flex-col justify-center w-full
-  md:text-lg md:justify-start" :class="ulClass">
+  md:text-lg md:justify-start">
     <li class="mb-4 font-bold">
-      <RouterLink to="/admin/dashboard" class="block text-center py-3 mx-2 rounded-md
+      <RouterLink to="/admin/dashboard" class="block text-center py-3 rounded-md
       hover:bg-primary-800 hover:text-primary-200 hover:shadow-md duration-300
       md:pl-7 md:text-left"
       @click="$emit('close-menu')">
@@ -10,7 +10,7 @@
       </RouterLink>
     </li>
     <li class="mb-4 font-bold">
-      <RouterLink to="/admin/products" class="block text-center py-3 mx-2 rounded-md
+      <RouterLink to="/admin/products" class="block text-center py-3 rounded-md
       hover:bg-primary-800 hover:text-primary-200 hover:shadow-md duration-300
       md:pl-7 md:text-left"
       @click="$emit('close-menu')">
@@ -18,7 +18,7 @@
       </RouterLink>
     </li>
     <li class="mb-4 font-bold">
-      <RouterLink to="/admin/coupons" class="block text-center py-3 mx-2 rounded-md
+      <RouterLink to="/admin/coupons" class="block text-center py-3 rounded-md
       hover:bg-primary-800 hover:text-primary-200 hover:shadow-md duration-300
       md:pl-7 md:text-left"
       @click="$emit('close-menu')">
@@ -26,7 +26,7 @@
       </RouterLink>
     </li>
     <li class="mb-4 font-bold">
-      <RouterLink to="/admin/orders" class="block text-center py-3 mx-2 rounded-md
+      <RouterLink to="/admin/orders" class="block text-center py-3 rounded-md
       hover:bg-primary-800 hover:text-primary-200 hover:shadow-md duration-300
       md:pl-7 md:text-left"
       @click="$emit('close-menu')">
@@ -34,7 +34,7 @@
       </RouterLink>
     </li>
     <li class="mb-4 font-bold">
-      <RouterLink to="/admin/articles" class="block text-center py-3 mx-2 rounded-md
+      <RouterLink to="/admin/articles" class="block text-center py-3 rounded-md
       hover:bg-primary-800 hover:text-primary-200 hover:shadow-md duration-300
       md:pl-7 md:text-left"
       @click="$emit('close-menu')">
@@ -42,7 +42,7 @@
       </RouterLink>
     </li>
     <li class="font-bold mt-2 md:mt-auto">
-      <a class="block text-center cursor-pointer py-3 rounded-md duration-300
+      <a class="block text-center cursor-pointer py-3 rounded-md duration-300 text-primary-700
       hover:bg-primary-800 hover:text-primary-200 hover:shadow-md
       md:pl-7 md:mx-2 md:text-left"
       @click="logout">
@@ -77,7 +77,6 @@ export default {
       isMenuOpen: false,
     };
   },
-  props: ['ulClass'],
   methods: {
     async logout() {
       try {

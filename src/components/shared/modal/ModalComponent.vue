@@ -1,6 +1,6 @@
 <template>
   <TransitionFade @on-after-leave="onAfterLeave">
-    <dialog v-show="isShow" :ref="target" @keydown.escape.prevent
+    <dialog v-show="isShow" :ref="target" @cancel.prevent="closeModal"
     class="backdrop:bg-gray-950/30 rounded-md shadow-md p-8 bg-primary-50 w-full md:w-2/3 lg:w-1/2"
     :class="[{'backdrop:bg-transparent':!isShow}, $attrs.class]">
       <div class="flex mb-6">
@@ -14,14 +14,11 @@
     </dialog>
   </TransitionFade>
 </template>
-<style>
-body.modal-open{
-  width: 100%;
-  position: fixed;
-}
-</style>
+
 <script>
+import { mapActions } from 'pinia';
 import TransitionFade from '@/components/shared/transition/TransitionFade.vue';
+import scrollStore from '@/stores/scrollStore';
 
 export default {
   components: {
@@ -45,8 +42,7 @@ export default {
   methods: {
     showModal() {
       // 取得目前 scrollbar 位置
-      this.topScroll = window.scrollY;
-      this.leftScroll = window.scrollX;
+      this.getCurrentScroll();
 
       this.modal.showModal();
       this.isShow = true;
@@ -55,7 +51,7 @@ export default {
     closeModal() {
       this.isShow = false;
       this.enableScroll();
-      this.$refs[this.target].scrollTop = 0;
+      this.modal.scrollTop = 0;
       // 關閉之外還要再執行其他方法
       // if (this.closeAttachMethod) {
       //   this.closeAttachMethod();
@@ -66,20 +62,10 @@ export default {
     //   this.closeModal();
     //   this.$emit('closeAndReset');
     // },
-    disableScroll() {
-      document.body.classList.add('modal-open');
-      // 搭配 position: fixed 讓背景停在現在位置
-      document.body.style.top = `-${this.topScroll}px`;
-    },
-    enableScroll() {
-      document.body.classList.remove('modal-open');
-      document.body.style.top = '';
-      // 讓卷軸到打開前的位置
-      window.scrollTo(this.leftScroll, this.topScroll);
-    },
     onAfterLeave() {
       this.modal.close();
     },
+    ...mapActions(scrollStore, ['getCurrentScroll', 'disableScroll', 'enableScroll']),
   },
 };
 </script>

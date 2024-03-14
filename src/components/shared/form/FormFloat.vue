@@ -17,7 +17,7 @@
       <slot name="label">{{label}}</slot>
       </label>
       <slot name="icon" icon-class="absolute right-0 p-2 top-1/2 -translate-y-1/2
-      bg-primary-50 border-r border-stone-300"
+      bg-primary-50 border-r border-stone-300 rounded"
       ></slot>
     </div>
     <ErrorMessage v-if="errors" :name="label" class="text-red-600 mt-1 ml-3"></ErrorMessage>

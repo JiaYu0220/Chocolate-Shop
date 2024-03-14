@@ -37,7 +37,7 @@
           <div v-else
           class="mb-3 md:w-1/2">
             <div class="relative border-2 border-primary-300 rounded-md p-1">
-              <img :src="tempProduct.imageUrl"
+              <img loading="lazy" :src="tempProduct.imageUrl"
               class="object-cover rounded-sm" alt="產品圖">
               <!-- 複製按鈕 -->
               <CopyBtn :text="tempProduct.imageUrl" msg="圖片網址"
@@ -74,7 +74,7 @@
           v-if="Array.isArray(tempProduct.imagesUrl)">
             <div v-for="(img, i) in tempProduct.imagesUrl" :key="`img${i}`"
             class="relative border-2 border-primary-300 rounded-md p-1">
-              <img :src="img" class="object-cover" alt="產品圖">
+              <img loading="lazy" :src="img" class="object-cover" alt="產品圖">
               <!-- 刪除按鈕 -->
               <button type="button" class="absolute right-0 top-0
               p-1 rounded-md bg-primary-50 text-primary-800 duration-150
