@@ -5,7 +5,7 @@ const { $swal } = GlobalVariables.variables;
 
 export default defineStore('swalStore', {
   actions: {
-    swalToast(title) {
+    swalToast(title, container = 'body') {
       return $swal({
         toast: true,
         position: 'top-end',
@@ -13,9 +13,10 @@ export default defineStore('swalStore', {
         timer: 1500,
         title,
         icon: 'success',
+        target: container, // dialog 使用 swal 時，要將 swal 的容器新增在 dialog 內 (預設為 body)
       });
     },
-    delSwal(type, item) {
+    delSwal(type, item, container = 'body') {
       const str = `確定要刪除${type}「${item}」嗎？`;
 
       return $swal({
@@ -24,6 +25,7 @@ export default defineStore('swalStore', {
           cancelButton: 'btn btn-outline-cancel',
           title: 'text-2xl',
         },
+        target: container, // dialog 使用 swal 時，要將 swal 的容器新增在 dialog 內 (預設為 body)
         buttonsStyling: false,
         title: str,
         text: '注意：刪除後無法復原！',

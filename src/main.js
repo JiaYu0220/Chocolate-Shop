@@ -15,6 +15,7 @@ import Loading from 'vue-loading-overlay';
 import VueSweetalert2 from 'vue-sweetalert2';
 import VueCropper from 'vue-cropper';
 import VueDatePicker from '@vuepic/vue-datepicker';
+// import { register } from 'swiper/element/bundle';
 
 // veeValidate
 import {
@@ -64,6 +65,7 @@ app.use(VueAxios, axios);
 app.use(VueSweetalert2, swlOptions);
 // app.use(LoadingPlugin);
 app.use(VueCropper);
+// app.use(register);
 app.component('LoadingOverlay', Loading);
 app.component('VForm', Form);
 app.component('VField', Field);

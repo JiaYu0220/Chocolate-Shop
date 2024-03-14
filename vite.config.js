@@ -8,10 +8,18 @@ import eslintPlugin from 'vite-plugin-eslint';
 export default defineConfig({
   base: '/Chocolate-Shop/',
   plugins: [
-    vue(),
+    vue({
+      template: {
+        compilerOptions: {
+          // 將所有帶 swiper- 的標籤名都視為自定義元素
+          isCustomElement: (tag) => tag.startsWith('swiper-'),
+        },
+      },
+    }),
     eslintPlugin({
       include: ['src/**/*.js', 'src/**/*.vue', 'src/*.js', 'src/*.vue'],
     }),
+
   ],
   resolve: {
     alias: {
