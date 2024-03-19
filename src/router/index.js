@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
-  linkActiveClass: 'active',
+  linkExactActiveClass: 'active', // 準確比對，在其他頁面時首頁連結才不會被活化
   routes: [
     {
       path: '/',
@@ -25,9 +25,32 @@ const router = createRouter({
           component: () => import('../views/user/ProductsView.vue'),
         },
         {
+          path: 'product/:id',
+          name: 'product',
+          component: () => import('../views/user/ProductInfo.vue'),
+          props: (route) => ({
+            id: route.params.id,
+          }),
+        },
+        {
+          path: 'favorites',
+          name: 'favorites',
+          component: () => import('../views/user/FavoriteProduct.vue'),
+        },
+        {
+          path: 'cart',
+          name: 'cart',
+          component: () => import('../views/user/CartView.vue'),
+        },
+        {
           path: 'articles',
           name: 'articles',
           component: () => import('../views/user/ArticlesView.vue'),
+        },
+        {
+          path: 'article/:id',
+          name: 'article',
+          component: () => import('../views/user/ArticleInfo.vue'),
         },
       ],
     },

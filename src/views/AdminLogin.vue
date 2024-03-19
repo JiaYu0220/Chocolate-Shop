@@ -41,8 +41,7 @@
             <button type="button" class="w-full btn btn-primary btn-lg mb-3"
             @click="autoLogin">一鍵登入 (測試用)</button>
             <button type="submit" class="w-full btn btn-primary btn-lg mb-3">進入後台</button>
-            <button type="button" class="w-full btn btn-link btn-lg"
-            @click="$router.push('/')">回首頁</button>
+            <RouterLink to="/" class="block text-center btn btn-link btn-lg">回首頁</RouterLink>
           </VForm>
         </div>
       </div>
