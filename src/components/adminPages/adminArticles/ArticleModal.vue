@@ -1,5 +1,6 @@
 <template>
-  <ModalComponent target="article" ref="articleModalComponent" @reset-form="resetModalForm">
+  <CenterModal
+   target="article" ref="articleCenterModal" @reset-form="resetModalForm">
     <!-- 標題 -->
     <template #title="{titleClass}">
       <h3 :class="titleClass">{{isNew ? '新增' : '編輯'}}文章</h3>
@@ -12,7 +13,7 @@
       <div class="flex justify-between items-end mb-3">
         <h4 class="text-xl font-bold text-primary-800">圖片</h4>
         <!-- 裁剪小工具 -->
-        <CropperComponent :down-name="`文章${tempArticle.num}`"></CropperComponent>
+        <CropperComponent down-name="文章"></CropperComponent>
       </div>
       <div class="pb-4 md:pb-8 mb-4 border-b border-primary-700">
         <template v-if="!tempArticle.image">
@@ -60,19 +61,19 @@
           </template>
         </FormFloat>
 
-        <!-- 內容 -->
-        <FormFloat label-for="description" label="內容" :errors="errors">
+        <!-- 簡介 -->
+        <FormFloat label-for="description" label="簡介" :errors="errors">
           <template #default="{inputClass}">
-            <VField type="text" name="內容" id="description" v-model="tempArticle.description"
+            <VField type="text" name="簡介" id="description" v-model="tempArticle.description"
             :class="inputClass" rules="required"
             as="textarea"
             placeholder required></VField>
           </template>
         </FormFloat>
         <!-- 內容 -->
-        <FormFloat label-for="content" label="內容2" :errors="errors">
+        <FormFloat label-for="content" label="內容" :errors="errors">
           <template #default="{inputClass}">
-            <VField type="text" name="內容2" id="content" v-model="tempArticle.content"
+            <VField type="text" name="內容" id="content" v-model="tempArticle.content"
             :class="inputClass" rules="required"
             as="textarea"
             placeholder required></VField>
@@ -140,27 +141,31 @@
       </div>
 
     </VForm>
-  </ModalComponent>
+    <!-- loading -->
+    <LoadingOverlay :active="loadingStatus.editArticle" :is-full-page="false" color="#5C270D">
+    </LoadingOverlay>
+  </CenterModal>
 </template>
 
 <script>
 import { mapActions, mapState } from 'pinia';
 import swalStore from '@/stores/swalStore';
 import loadingStore from '@/stores/loadingStore';
-import ModalComponent from '@/components/shared/modal/ModalComponent.vue';
+import CenterModal from '@/components/shared/modal/CenterModal.vue';
 import FormFloat from '@/components/shared/form/FormFloat.vue';
 import FileInput from '@/components/shared/form/FileInput.vue';
 import CopyBtn from '@/components/shared/button/CopyBtn.vue';
 import ChecksRadio from '@/components/shared/form/ChecksRadio.vue';
 import CropperComponent from '@/components/shared/helpers/CropperComponent.vue';
+// import IconLoading from '@/components/icons/IconLoading.vue';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
   components: {
-    ModalComponent, FormFloat, ChecksRadio, CropperComponent, FileInput, CopyBtn,
+    CenterModal, FormFloat, ChecksRadio, CropperComponent, FileInput, CopyBtn,
   },
   props: {
-    article: Object,
+    id: String,
     tags: Array,
     isNew: Boolean,
     pagination: Object,
@@ -168,31 +173,43 @@ export default {
   data() {
     return {
       tempArticle: {},
+      tempId: '',
       tempImageUrl: '',
       tempTag: '',
       isTagDuplicate: false,
+      loading: true,
     };
   },
-  mounted() {
-    this.tempArticle = this.article;
-  },
-  watch: {
-    article() {
-      this.tempArticle = this.article;
-      if (String(this.tempArticle.due_date).length === 10) {
-        this.tempArticle.due_date *= 1000;
-      }
-    },
-  },
   methods: {
-    showModal() {
-      this.$refs.articleModalComponent.showModal();
+    async showModal() {
+      this.$refs.articleCenterModal.showModal();
     },
     closeModal() {
-      this.$refs.articleModalComponent.closeModal();
+      this.$refs.articleCenterModal.closeModal();
+    },
+    async getSingleArticle(id) {
+      try {
+        this.loadingStatus.editArticle = true;
+        const url = `${VITE_URL}/api/${VITE_PATH}/admin/article/${id}`;
+        const res = await this.$http.get(url);
+        this.tempArticle = res.data.article;
+        // 若之前沒有加入 tag 就加空陣列
+        if (!Array.isArray(this.tempArticle.tag)) {
+          this.tempArticle.tag = [];
+        }
+
+        this.loadingStatus.editArticle = false;
+      } catch (error) {
+        this.loadingStatus.editArticle = false;
+        // 通知
+        const { message } = error.response.data;
+        this.$swal(Array.isArray(message) ? message[0] : message);
+      }
     },
     resetModalForm() {
       this.$refs.articleForm.resetForm();
+      this.tempArticle.image = '';
+      console.log(this.tempArticle);
       this.tempTag = '';
       this.isTagDuplicate = false;
     },
@@ -209,6 +226,7 @@ export default {
     },
     async updateArticle() {
       try {
+        console.log('開始', this.tempArticle);
         // 新增文章
         let url = `${VITE_URL}/api/${VITE_PATH}/admin/article`;
         let httpMethod = 'post';
@@ -227,11 +245,7 @@ export default {
           page = this.pagination.current_page;
           // 設定按鈕 loading
           this.loadingStatus.articleId = this.tempArticle.id;
-        } else {
-          // 設定按鈕 loading
-          this.loadingStatus.newArticle = true;
         }
-
         // 關閉 modal
         this.closeModal();
         // axios
@@ -243,13 +257,11 @@ export default {
         this.$emit('getData', page);
         // 關閉 loading
         this.loadingStatus.articleId = '';
-        this.loadingStatus.newArticle = false;
         // 通知
         this.swalToast(alertText);
       } catch (error) {
         // 關閉 loading
         this.loadingStatus.articleId = '';
-        this.loadingStatus.newArticle = false;
         // 通知
         const { message } = error.response.data;
         this.$swal(Array.isArray(message) ? message[0] : message);

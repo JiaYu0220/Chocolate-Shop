@@ -1,5 +1,5 @@
 <template>
-  <ModalComponent target="coupon" ref="couponModalComponent" @reset-form="resetModalForm">
+  <CenterModal target="coupon" ref="couponCenterModal" @reset-form="resetModalForm">
     <!-- 標題 -->
     <template #title="{titleClass}">
       <h3 :class="titleClass">{{isNew ? '新增' : '編輯'}}優惠券</h3>
@@ -71,11 +71,11 @@
       </div>
 
     </VForm>
-  </ModalComponent>
+  </CenterModal>
 </template>
 
 <script>
-import ModalComponent from '@/components/shared/modal/ModalComponent.vue';
+import CenterModal from '@/components/shared/modal/CenterModal.vue';
 import FormFloat from '@/components/shared/form/FormFloat.vue';
 import { mapActions, mapState } from 'pinia';
 import swalStore from '@/stores/swalStore';
@@ -85,7 +85,7 @@ import ChecksRadio from '@/components/shared/form/ChecksRadio.vue';
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
   components: {
-    ModalComponent, FormFloat, ChecksRadio,
+    CenterModal, FormFloat, ChecksRadio,
   },
   props: {
     coupon: Object,
@@ -110,10 +110,10 @@ export default {
   },
   methods: {
     showModal() {
-      this.$refs.couponModalComponent.showModal();
+      this.$refs.couponCenterModal.showModal();
     },
     closeModal() {
-      this.$refs.couponModalComponent.closeModal();
+      this.$refs.couponCenterModal.closeModal();
     },
     resetModalForm() {
       this.$refs.couponForm.resetForm();

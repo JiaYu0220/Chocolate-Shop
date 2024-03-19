@@ -19,7 +19,7 @@ import loadingStore from '@/stores/loadingStore';
 
 export default {
   props: {
-    data: Object,
+    data: [Object, String],
     loadingId: String,
   },
   components: {

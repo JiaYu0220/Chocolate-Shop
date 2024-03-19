@@ -27,11 +27,11 @@
       <th scope="col" class="text-center">
         狀態
       </th>
-      <th scope="col" class="min-w-10 text-end">編輯</th>
+      <th scope="col"></th>
     </template>
     <!-- tbody -->
-    <template #tr>
-      <tr v-for="product in products" :key="product.id">
+    <template #tr="{trClass}">
+      <tr :class="trClass" v-for="product in products" :key="product.id">
         <td>{{ product.category }}</td>
         <td>{{ product.title }}</td>
         <td class="text-end">{{ product.origin_price }}</td>

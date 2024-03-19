@@ -21,7 +21,7 @@
           <td>{{ coupon.title }}</td>
           <td>{{ coupon.percent }}</td>
           <td>{{ coupon.code }}</td>
-          <td>{{ handleDate(coupon.due_date) }}</td>
+          <td>{{ timestampToDate(coupon.due_date) }}</td>
           <td>
             <ActiveBadge :active="coupon.is_enabled">
               <template #trueMsg>啟用</template>
@@ -131,7 +131,7 @@ export default {
     },
     ...mapActions(swalStore, ['delSwal', 'swalToast']),
     ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
-    ...mapActions(helperStore, ['handleDate']),
+    ...mapActions(helperStore, ['timestampToDate']),
   },
   computed: {
     ...mapState(loadingStore, ['isLoading', 'loadingStatus']),

@@ -1,5 +1,5 @@
 <template>
-  <ModalComponent target="product" ref="productModalComponent" @reset-form="resetModalForm">
+  <CenterModal target="product" ref="productCenterModal" @reset-form="resetModalForm">
       <!-- 標題 -->
       <template #title="{titleClass}">
         <h3 :class="titleClass">{{isNew ? '新增' : '編輯'}}產品</h3>
@@ -95,7 +95,7 @@
         <h4 class="text-xl font-bold text-primary-800 mb-4">文字</h4>
         <div class="flex flex-col gap-3">
           <!-- 名稱 -->
-          <FormFloat :label-for="'title'" :label="'名稱'" :errors="errors">
+          <FormFloat label-for="title" label="名稱" :errors="errors">
             <template #default="{inputClass}">
               <VField type="text" name="名稱" id="title" v-model="tempProduct.title"
               :class="inputClass" rules="required" placeholder required></VField>
@@ -104,7 +104,7 @@
           <div class="flex gap-3">
             <!-- 類別 -->
             <div class="w-2/3">
-              <FormFloat :label-for="'category'" :label="'類別'" :errors="errors">
+              <FormFloat label-for="category" label="類別" :errors="errors">
                 <template #default="{inputClass}">
                   <VField type="text" name="類別" id="category" list="categoryList"
                   v-model="tempProduct.category"
@@ -118,7 +118,7 @@
             </div>
             <!-- 原價 -->
             <div class="w-1/3">
-              <FormFloat :label-for="'origin_price'" :label="'原價'" :errors="errors">
+              <FormFloat label-for="origin_price" label="原價" :errors="errors">
                 <template #default="{inputClass}">
                   <VField type="number" name="原價" min="0" id="origin_price"
                   v-model.number="tempProduct.origin_price"
@@ -130,7 +130,7 @@
           <div class="flex gap-3">
             <!-- 單位 -->
             <div class="w-2/3">
-              <FormFloat :label-for="'unit'" :label="'單位'" :errors="errors">
+              <FormFloat label-for="unit" label="單位" :errors="errors">
                 <template #default="{inputClass}">
                   <VField type="text" name="單位" id="unit" v-model="tempProduct.unit"
                   :class="inputClass" rules="required" placeholder required></VField>
@@ -139,7 +139,7 @@
             </div>
             <!-- 售價 -->
             <div class="w-1/3">
-              <FormFloat :label-for="'price'" :label="'售價'" :errors="errors">
+              <FormFloat label-for="price" label="售價" :errors="errors">
                 <template #default="{inputClass}">
                   <VField type="number" name="售價"  min="0" id="price"
                   v-model.number="tempProduct.price"
@@ -150,7 +150,7 @@
           </div>
           <hr>
           <!-- 產品描述 -->
-          <FormFloat :label-for="'description'" :label="'產品描述'">
+          <FormFloat label-for="description" label="產品描述">
             <template #default="{inputClass}">
               <textarea type="text" name="產品描述" id="description" v-model="tempProduct.description"
               :class="inputClass" placeholder>
@@ -158,7 +158,7 @@
             </template>
           </FormFloat>
           <!-- 說明內容 -->
-          <FormFloat :label-for="'content'" :label="'說明內容'">
+          <FormFloat label-for="content" label="說明內容">
             <template #default="{inputClass}">
               <textarea
               type="text" name="說明內容" id="content" v-model="tempProduct.content"
@@ -184,12 +184,12 @@
           儲存編輯</button>
         </div>
       </VForm>
-  </ModalComponent>
+  </CenterModal>
 </template>
 
 <script>
 import CropperComponent from '@/components/shared/helpers/CropperComponent.vue';
-import ModalComponent from '@/components/shared/modal/ModalComponent.vue';
+import CenterModal from '@/components/shared/modal/CenterModal.vue';
 import FormFloat from '@/components/shared/form/FormFloat.vue';
 import FileInput from '@/components/shared/form/FileInput.vue';
 import CopyBtn from '@/components/shared/button/CopyBtn.vue';
@@ -202,7 +202,7 @@ import loadingStore from '@/stores/loadingStore';
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
   components: {
-    ModalComponent, FormFloat, FileInput, CopyBtn, LoadingBtn, CropperComponent, ChecksRadio,
+    CenterModal, FormFloat, FileInput, CopyBtn, LoadingBtn, CropperComponent, ChecksRadio,
   },
   props: {
     product: Object,
@@ -227,10 +227,10 @@ export default {
   },
   methods: {
     showModal() {
-      this.$refs.productModalComponent.showModal();
+      this.$refs.productCenterModal.showModal();
     },
     closeModal() {
-      this.$refs.productModalComponent.closeModal();
+      this.$refs.productCenterModal.closeModal();
     },
     resetModalForm() {
       this.$refs.productForm.resetForm();

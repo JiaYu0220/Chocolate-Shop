@@ -1,6 +1,6 @@
 <template>
-  <ModalComponent
-  target="order" ref="orderModalComponent" @reset-form="resetModalForm">
+  <CenterModal
+  target="order" ref="orderCenterModal" @reset-form="resetModalForm">
 
     <!-- 標題 -->
     <template #title="{titleClass}">
@@ -29,6 +29,8 @@
                 :class="inputClass" readonly>
               </template>
             </FormFloat>
+            <p class="text-primary-800" v-if="coupon">
+            使用優惠券 {{coupon}}</p>
           </div>
 
         </div>
@@ -101,7 +103,7 @@
               <td>
                 <div class="flex items-center gap-2">
                   <div class="w-12 h-9 overflow-hidden rounded-sm">
-                    <img :src="product.product.imageUrl" alt="產品圖">
+                    <img lazy="loading" :src="product.product.imageUrl" alt="產品圖">
                   </div>
                   {{ product.product.title }}
                 </div>
@@ -131,11 +133,11 @@
       </div>
     </VForm>
   </template>
-  </ModalComponent>
+  </CenterModal>
 </template>
 
 <script>
-import ModalComponent from '@/components/shared/modal/ModalComponent.vue';
+import CenterModal from '@/components/shared/modal/CenterModal.vue';
 import FormFloat from '@/components/shared/form/FormFloat.vue';
 import { mapActions, mapState } from 'pinia';
 import swalStore from '@/stores/swalStore';
@@ -147,7 +149,7 @@ import TableComponent from '@/components/shared/table/TableComponent.vue';
 
 export default {
   components: {
-    ModalComponent, FormFloat, ChecksRadio, TableComponent,
+    CenterModal, FormFloat, ChecksRadio, TableComponent,
   },
   props: {
     order: Object,
@@ -157,24 +159,29 @@ export default {
     return {
       tempOrder: {},
       orderDate: '',
+      coupon: null,
     };
-  },
-  mounted() {
-    this.tempOrder = this.order;
   },
   watch: {
     order() {
-      this.tempOrder = this.order;
-      this.orderDate = this.handleDate(this.order.create_at);
+      this.init();
     },
-
   },
   methods: {
+    init() {
+      this.tempOrder = this.order;
+      if (this.tempOrder?.products) {
+        const productValues = Object.values(this.tempOrder?.products);
+        this.coupon = productValues[0].coupon.title;
+      }
+      this.tempOrder.total = Math.floor(this.tempOrder?.total);
+      this.orderDate = this.timestampToDate(this.order?.create_at);
+    },
     showModal() {
-      this.$refs.orderModalComponent.showModal();
+      this.$refs.orderCenterModal.showModal();
     },
     closeModal() {
-      this.$refs.orderModalComponent.closeModal();
+      this.$refs.orderCenterModal.closeModal();
     },
     resetModalForm() {
       this.$refs.orderForm.resetForm();
@@ -191,7 +198,7 @@ export default {
     ...mapActions(swalStore, ['swalToast']),
     ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
     ...mapActions(validateStore, ['isPhone']),
-    ...mapActions(helperStore, ['handleDate']),
+    ...mapActions(helperStore, ['timestampToDate']),
   },
   computed: {
     total() {

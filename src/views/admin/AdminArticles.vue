@@ -9,11 +9,11 @@
   <TableComponent class="mb-8">
   <template #th>
     <th scope="col">標題</th>
-    <th class="hidden md:table-cell" scope="col">內容</th>
+    <th class="hidden md:table-cell" scope="col">簡介</th>
     <th scope="col">圖片</th>
     <th scope="col">標籤</th>
     <th scope="col">最後更新</th>
-    <th class="hidden md:table-cell" scope="col">作者</th>
+    <th class="hidden md:table-cell text-nowrap" scope="col">作者</th>
     <th scope="col">發布</th>
     <th scope="col"></th>
   </template>
@@ -26,7 +26,7 @@
       <!-- 圖 -->
       <td>
       <div class="w-12 h-9 md:w-16 md:h-12">
-        <img class="rounded-md bg-cover" :src="article.image" alt="文章圖">
+        <img lazy="loading" class="rounded-md bg-cover" :src="article.image" alt="文章圖">
       </div>
       </td>
       <!-- 標籤 -->
@@ -41,10 +41,11 @@
       </td>
       <!-- 最後更新時間 -->
       <td>
-        <span>{{ handleDate(article.create_at) }}</span>
+        <span>{{ timestampToDate(article.create_at) }}</span>
       </td>
       <!-- 作者 -->
-      <td class="hidden md:table-cell">{{ article.author }}</td>
+      <td class="hidden md:table-cell text-nowrap">{{ article.author }}</td>
+      <!-- 狀態 -->
       <td class="text-center">
         <ActiveBadge :active="article.isPublic">
           <template #trueMsg>發布</template>
@@ -53,7 +54,7 @@
       </td>
       <td>
         <AdminActionBtns
-        :data="article" loadingId="articleId"
+        :data="article" :id="article.id" loadingId="articleId"
         @open-modal="openModal" @del-item="delArticle">
         </AdminActionBtns>
       </td>
@@ -62,7 +63,7 @@
   </TableComponent>
   <PaginationComponent :pagination="pagination" @get-data="getAdminArticles" />
 
-  <ArticleModal ref="articleModal" :article="tempArticle" :is-new="isNew"
+  <ArticleModal ref="articleModal" :id="tempId" :is-new="isNew"
   :pagination="pagination" :tags="tags"
   @get-data="getAdminArticles" />
 </template>
@@ -86,7 +87,7 @@ export default {
   data() {
     return {
       articles: [],
-      tempArticle: {},
+      tempId: '',
       isNew: false,
       pagination: {},
       tags: [],
@@ -105,12 +106,12 @@ export default {
         this.pagination = res.data.pagination;
         // 取得不重複的標籤列表
         this.tags = this.handleArrayInData(this.articles, 'tag');
+        this.hideLoading();
       } catch (error) {
+        this.hideLoading();
         // 通知
         const { message } = error.response.data;
         this.$swal(Array.isArray(message) ? message[0] : message);
-      } finally {
-        this.hideLoading();
       }
     },
     async delArticle(article) {
@@ -137,7 +138,8 @@ export default {
         this.$swal(Array.isArray(message) ? message[0] : message);
       }
     },
-    openModal(type, item) {
+    async openModal(type, item) {
+      this.$refs.articleModal.showModal();
       switch (type) {
         case 'new':
           this.tempArticle = {
@@ -147,20 +149,17 @@ export default {
           this.isNew = true;
           break;
         case 'edit':
-          this.tempArticle = JSON.parse(JSON.stringify(item));
-          if (!Array.isArray(this.tempArticle.tag)) {
-            this.tempArticle.tag = [];
-          }
+          await this.$refs.articleModal.getSingleArticle(item.id);
+
           this.isNew = false;
           break;
         default:
           break;
       }
-      this.$refs.articleModal.showModal();
     },
     ...mapActions(swalStore, ['delSwal', 'swalToast']),
     ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
-    ...mapActions(helperStore, ['handleDate', 'handleArrayInData']),
+    ...mapActions(helperStore, ['timestampToDate', 'handleArrayInData']),
   },
   computed: {
     ...mapState(loadingStore, ['isLoading', 'loadingStatus']),

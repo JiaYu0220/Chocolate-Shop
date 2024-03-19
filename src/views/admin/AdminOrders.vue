@@ -7,8 +7,8 @@
       <!-- <th scope="col">地址</th> -->
       <th scope="col">連絡</th>
       <th scope="col" class="min-w-15">品項</th>
-      <th scope="col" class="text-end">總額</th>
-      <th scope="col" class="min-w-15">備註</th>
+      <th scope="col" class="text-end text-nowrap">總額</th>
+      <th scope="col" class="min-w-15 text-nowrap">備註</th>
       <th scope="col">日期</th>
       <th scope="col">付款</th>
       <th scope="col"></th>
@@ -25,11 +25,12 @@
           </td> -->
           <!-- 聯絡 -->
           <td class="text-center md:text-start">
-            <a class="link block" :href="`mailto:${order.user.email}`">
+            <a class="link inline-block after:bottom-0 before:bottom-0"
+            :href="`mailto:${order.user.email}`">
               <span class="hidden md:inline">{{ order.user.email }}</span>
               <i class="bi bi-envelope-arrow-up-fill text-primary-700 md:hidden"></i>
             </a>
-            <a class="link block"
+            <a class="link inline-block after:bottom-0 before:bottom-0"
             :href="handleTelLink(order.user.tel)">
               <span class="hidden md:inline">{{ order.user.tel }}</span>
               <i class="bi bi-telephone-outbound-fill text-primary-700 md:hidden"></i>
@@ -43,7 +44,7 @@
             </p>
           </td>
           <!-- 總額 -->
-          <td class="text-end">{{ order.total }}</td>
+          <td class="text-end">{{ Math.floor(order.total) }}</td>
           <!-- 備註 -->
           <td>
             <span class="line-clamp-5">
@@ -52,8 +53,8 @@
           </td>
           <!-- 日期 -->
           <td>
-            <span class="hidden md:inline">{{ handleDate(order.create_at) }}</span>
-            <span class="md:hidden">{{ handleDate(order.create_at).substring(5) }}</span>
+            <span class="hidden md:inline">{{ timestampToDate(order.create_at) }}</span>
+            <span class="md:hidden">{{ timestampToDate(order.create_at).substring(5) }}</span>
           </td>
           <!-- 是否付款 -->
           <td>
@@ -195,7 +196,7 @@ export default {
     },
     ...mapActions(swalStore, ['delSwal', 'swalToast']),
     ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
-    ...mapActions(helperStore, ['handleDate']),
+    ...mapActions(helperStore, ['timestampToDate']),
   },
   computed: {
     ...mapState(loadingStore, ['isLoading', 'loadingStatus']),

@@ -1,48 +1,17 @@
 <template>
   <ul class="text-primary-950 bg-primary-100 flex-grow flex flex-col justify-center w-full
   md:text-lg md:justify-start">
-    <li class="mb-4 font-bold">
-      <RouterLink to="/admin/dashboard" class="block text-center py-3 rounded-md
-      hover:bg-primary-800 hover:text-primary-200 hover:shadow-md duration-300
+    <li v-for="item in catalog" :key="item.title" class="mb-4 font-bold">
+      <RouterLink :to="`/admin/${item.path}`" class="block text-center py-3 rounded-md
+      hover:bg-primary-800 hover:text-primary-200 hover:shadow-md duration-300 mx-2
       md:pl-7 md:text-left"
       @click="$emit('close-menu')">
-        <i class="bi bi-clipboard-data-fill me-4"></i>總覽
-      </RouterLink>
-    </li>
-    <li class="mb-4 font-bold">
-      <RouterLink to="/admin/products" class="block text-center py-3 rounded-md
-      hover:bg-primary-800 hover:text-primary-200 hover:shadow-md duration-300
-      md:pl-7 md:text-left"
-      @click="$emit('close-menu')">
-        <i class="bi bi-bag-fill me-4"></i>產品
-      </RouterLink>
-    </li>
-    <li class="mb-4 font-bold">
-      <RouterLink to="/admin/coupons" class="block text-center py-3 rounded-md
-      hover:bg-primary-800 hover:text-primary-200 hover:shadow-md duration-300
-      md:pl-7 md:text-left"
-      @click="$emit('close-menu')">
-      <i class="bi bi-ticket-perforated-fill me-4"></i>優惠券
-      </RouterLink>
-    </li>
-    <li class="mb-4 font-bold">
-      <RouterLink to="/admin/orders" class="block text-center py-3 rounded-md
-      hover:bg-primary-800 hover:text-primary-200 hover:shadow-md duration-300
-      md:pl-7 md:text-left"
-      @click="$emit('close-menu')">
-        <i class="bi bi-stickies-fill me-4"></i>訂單
-      </RouterLink>
-    </li>
-    <li class="mb-4 font-bold">
-      <RouterLink to="/admin/articles" class="block text-center py-3 rounded-md
-      hover:bg-primary-800 hover:text-primary-200 hover:shadow-md duration-300
-      md:pl-7 md:text-left"
-      @click="$emit('close-menu')">
-        <i class="bi bi-file-richtext-fill me-4"></i>文章
+        <i :class="`bi ${item.icon} me-4`"></i>{{ item.title }}
       </RouterLink>
     </li>
     <li class="font-bold mt-2 md:mt-auto">
-      <a class="block text-center cursor-pointer py-3 rounded-md duration-300 text-primary-700
+      <a class="block text-center cursor-pointer py-3 rounded-md text-primary-700
+      border-l-8 border-transparent transition-color duration-300
       hover:bg-primary-800 hover:text-primary-200 hover:shadow-md
       md:pl-7 md:mx-2 md:text-left"
       @click="logout">
@@ -52,7 +21,7 @@
   </ul>
 </template>
 
-<style>
+<style scoped>
 .active {
   @apply bg-primary-800 text-primary-200 shadow-md pointer-events-none
 }
@@ -75,6 +44,7 @@ export default {
   data() {
     return {
       isMenuOpen: false,
+      catalog: [{ title: '產品', path: 'products', icon: 'bi-bag-fill' }, { title: '優惠券', path: 'coupons', icon: 'bi-ticket-perforated-fill' }, { title: '訂單', path: 'orders', icon: 'bi-stickies-fill' }, { title: '文章', path: 'articles', icon: 'bi-file-richtext-fill' }],
     };
   },
   methods: {
@@ -85,10 +55,10 @@ export default {
         await this.$http.post(url);
         document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 GMT";';
         this.$router.push('/login');
-      } catch (error) {
-        this.$swal('登出失敗，請再試一次');
-      } finally {
         this.hideLoading();
+      } catch (error) {
+        this.hideLoading();
+        this.$swal('登出失敗，請再試一次');
       }
     },
     ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
