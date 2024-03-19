@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 
 export default defineStore('helperStore', {
   actions: {
-    handleDate(time) {
+    timestampToDate(time) {
       return new Date(time * 1000).toLocaleDateString();
     },
     handleArrayInData(dataArray, arrayName) {

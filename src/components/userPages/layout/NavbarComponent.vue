@@ -11,17 +11,15 @@
           </button>
 
           <!-- logo -->
-          <RouterLink to="/">
-            <div class="bg-primary-200 rounded-sm
+          <RouterLink to="/" class="bg-primary-200 rounded-sm
             hover:opacity-80 transition-opacity duration-150">
               <LogoComponent class="px-3 pt-1 pb-3 text-2xl md:px-4 md:pt-3 md:pb-5 md:text-4xl"/>
-            </div>
           </RouterLink>
           <!-- 桌機 分頁 -->
           <ul class="hidden
           md:flex gap-6 text-md 0 *:transition-all *:duration-150 *:rounded-sm
         hover:*:text-primary-800 hover:*:bg-primary-200
-        focus:*:text-primary-800 focus:*:bg-primary-200">
+        ">
             <li><RouterLink class="inline-block p-2" to="/about">關於我們</RouterLink></li>
             <li><RouterLink class="inline-block p-2" to="/products">產品列表</RouterLink></li>
             <li><RouterLink class="inline-block p-2" to="/articles">最新消息</RouterLink></li>
@@ -39,7 +37,7 @@
               </button>
             </li>
             <li>
-              <RouterLink class="block py-2 px-3" to="/about">
+              <RouterLink class="block py-2 px-3" to="/favorites">
                 <i class="bi bi-heart-fill" aria-label="收藏"></i>
               </RouterLink>
             </li>
@@ -57,9 +55,12 @@
           *:transition-all *:duration-300 *:rounded-sm *:text-center
           hover:*:text-primary-800 hover:*:bg-primary-200
           focus:*:text-primary-800 focus:*:bg-primary-200">
-            <li><RouterLink class="block py-3" to="/about">關於我們</RouterLink></li>
-            <li><RouterLink class="block py-3" to="/products">產品列表</RouterLink></li>
-            <li><RouterLink class="block py-3" to="/articles">最新消息</RouterLink></li>
+            <li><RouterLink class="block py-3" to="/about"
+            @click="toggleMenu">關於我們</RouterLink></li>
+            <li><RouterLink class="block py-3" to="/products"
+            @click="toggleMenu">產品列表</RouterLink></li>
+            <li><RouterLink class="block py-3" to="/articles"
+            @click="toggleMenu">最新消息</RouterLink></li>
           </ul>
         </div>
       </div>
@@ -69,8 +70,10 @@
   <!-- 購物車 modal -->
   <CartModal ref="cartModal"></CartModal>
 </template>
-<style >
-
+<style scoped>
+  .active{
+    @apply text-primary-800 bg-primary-200 rounded-sm pointer-events-none
+  }
 </style>
 <script>
 import { mapActions, mapState } from 'pinia';

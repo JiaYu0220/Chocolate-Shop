@@ -1,3 +1,14 @@
 <template>
-  <h3 class="text-center text-primary-800 font-bold text-3xl md:text-4xl mb-9"><slot></slot></h3>
+  <div class="mb-9"
+  :class="{'flex justify-between items-center':linkTo, 'text-center':!linkTo}">
+    <h3 class="text-primary-800 font-bold text-3xl md:text-4xl">{{ title }}</h3>
+    <RouterLink v-if="linkTo" class="link font-bold" :to="linkTo">
+    {{ linkText }} →
+    </RouterLink>
+  </div>
 </template>
+<script>
+export default {
+  props: ['title', 'linkTo', 'linkText'],
+};
+</script>

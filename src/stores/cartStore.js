@@ -29,8 +29,6 @@ export default defineStore('cartStore', {
         this.usedCoupon = this.carts[0]?.coupon?.code;
         this.total = data?.data?.total;
         this.final_total = Math.floor(data?.data?.final_total);
-
-        hideLoading();
       } catch (error) {
         hideLoading();
         // 通知
@@ -59,7 +57,7 @@ export default defineStore('cartStore', {
         $swal(Array.isArray(message) ? message[0] : message);
       }
     },
-    async putCart(item) {
+    async putCart(item, qty) {
       try {
         loadingStatus.cartId = item.id;
 
@@ -67,7 +65,7 @@ export default defineStore('cartStore', {
 
         const data = {
           product_id: item.product_id,
-          qty: item.qty,
+          qty,
         };
 
         await axios.put(url, { data });
@@ -80,13 +78,13 @@ export default defineStore('cartStore', {
         $swal(Array.isArray(message) ? message[0] : message);
       }
     },
-    debouncePutCart(item) {
+    debouncePutCart(item, qty) {
       // 如果在指定秒數內事件再次觸發，就會取消之前的計時器並設置一個新的計時器
       clearTimeout(this.timer);
 
       // 當指定秒數內沒有新的事件觸發時，即呼叫實際的事件處理函式 func
       this.timer = setTimeout(() => {
-        this.putCart(item);
+        this.putCart(item, qty);
       }, 300);
     },
     async delCart(cart, swalContainer = 'body') {
@@ -129,10 +127,14 @@ export default defineStore('cartStore', {
     },
     async postCoupon(code, swalContainer) {
       try {
+        loadingStatus.newCoupon = true;
         const url = `${VITE_URL}/api/${VITE_PATH}/coupon`;
         const res = await axios.post(url, { data: { code } });
         this.final_total = Math.floor(res.data.data.final_total);
+        this.usedCoupon = code;
+        loadingStatus.newCoupon = false;
       } catch (error) {
+        loadingStatus.newCoupon = false;
         // 通知
         const { message } = error.response.data;
         $swal({

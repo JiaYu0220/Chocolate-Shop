@@ -35,5 +35,21 @@ export default defineStore('swalStore', {
         cancelButtonText: '先不要刪',
       });
     },
+    confirmSwal(title, container = 'body') {
+      return $swal({
+        customClass: {
+          confirmButton: 'btn btn-primary mr-3',
+          cancelButton: 'btn btn-outline-cancel',
+          title: 'text-2xl',
+        },
+        target: container, // dialog 使用 swal 時，要將 swal 的容器新增在 dialog 內 (預設為 body)
+        buttonsStyling: false,
+        title,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: '提交訂單',
+        cancelButtonText: '取消',
+      });
+    },
   },
 });

@@ -5,7 +5,7 @@
     <i class="bi bi-scissors mr-1"></i>裁剪圖片小工具
   </button>
   <!-- modal -->
-  <ModalComponent ref="cropperModal" target="cropperModal" :close-attach-method="clear">
+  <CenterModal ref="cropperModal" target="cropperModal" :close-attach-method="clear">
     <!-- modal 標題 -->
     <template #title="{titleClass}">
       <h3 :class="titleClass">裁剪圖片小工具</h3>
@@ -66,14 +66,14 @@
     <!-- <div class="" v-show="cropperUrl">
     <img :src="cropperUrl" alt="">
     </div> -->
-  </ModalComponent>
+  </CenterModal>
 
 </template>
 
 <script>
 import FormFloat from '@/components/shared/form/FormFloat.vue';
 import FileInput from '@/components/shared/form/FileInput.vue';
-import ModalComponent from '../modal/ModalComponent.vue';
+import CenterModal from '../modal/CenterModal.vue';
 
 export default {
   data() {
@@ -104,7 +104,7 @@ export default {
     };
   },
   components: {
-    FormFloat, FileInput, ModalComponent,
+    FormFloat, FileInput, CenterModal,
   },
   props: {
     downName: String,
@@ -156,3 +156,4 @@ export default {
   },
 };
 </script>
+../modal/AdminModal.vue

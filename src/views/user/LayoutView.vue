@@ -4,7 +4,7 @@
     <!-- header -->
     <NavbarComponent/>
     <!-- content -->
-    <div class="mt-[89px] md:mt-[105px]">
+    <div class="mt-[89px] md:mt-[105px] grow bg-primary-50">
       <RouterView />
     </div>
     <!-- footer -->
@@ -66,12 +66,9 @@ export default {
   components: {
     MyLoading, NavbarComponent,
   },
-  data() {
-    return {
-    };
-  },
   mounted() {
     this.getCart();
+    console.log('layout');
   },
   methods: {
     closeModal() {
@@ -80,8 +77,9 @@ export default {
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
     },
-    ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
+    ...mapActions(loadingStore, ['showLoading']),
     ...mapActions(cartStore, ['getCart']),
+
   },
 
 };

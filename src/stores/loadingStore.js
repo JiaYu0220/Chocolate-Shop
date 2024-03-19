@@ -8,7 +8,7 @@ export default defineStore('loading', {
       newProduct: false,
       orderId: '',
       articleId: '',
-      newArticle: false,
+      editArticle: false,
       couponId: '',
       newCoupon: false,
       cartId: '',
