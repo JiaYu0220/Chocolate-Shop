@@ -7,11 +7,12 @@
     </div>
     <ul>
       <li v-for="item in aboutUs" :key="item.title"
-      class="flex items-center odd:flex-row-reverse gap-4 mb-10">
-        <div class="w-1/2 rounded-sm overflow-hidden">
+      class="flex flex-col md:flex-row items-center
+       md:odd:flex-row-reverse gap-4 mb-10">
+        <div class="w-full max-h-80 md:w-1/2 rounded-sm overflow-hidden">
           <img class="object-cover h-full w-full" :src="item.image" alt="">
         </div>
-        <div class="w-1/2">
+        <div class="w-full md:w-1/2">
           <h3 class="text-primary-800 text-lg font-bold md:text-xl mb-2">{{ item.title }}</h3>
           <p class="md:text-lg">{{ item.content }}</p>
         </div>
