@@ -2,6 +2,9 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
+  scrollBehavior() {
+    return { top: 0 };
+  },
   linkExactActiveClass: 'active', // 準確比對，在其他頁面時首頁連結才不會被活化
   routes: [
     {
