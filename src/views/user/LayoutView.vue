@@ -4,7 +4,7 @@
     <!-- header -->
     <NavbarComponent/>
     <!-- content -->
-    <div class="mt-[89px] md:mt-[105px] grow bg-primary-50">
+    <div class="mt-[89px] md:mt-[105px] grow bg-primary-50" >
       <RouterView />
     </div>
     <!-- footer -->
@@ -54,21 +54,23 @@
       </div>
     </footer>
   </div>
+  <ScrollTopBtn></ScrollTopBtn>
 </template>
+
 <script>
 import { mapActions } from 'pinia';
 import loadingStore from '@/stores/loadingStore';
 import cartStore from '@/stores/cartStore';
 import MyLoading from '@/components/shared/helpers/MyLoading.vue';
 import NavbarComponent from '@/components/userPages/layout/NavbarComponent.vue';
+import ScrollTopBtn from '@/components/shared/helpers/ScrollTopBtn.vue';
 
 export default {
   components: {
-    MyLoading, NavbarComponent,
+    MyLoading, NavbarComponent, ScrollTopBtn,
   },
   mounted() {
     this.getCart();
-    console.log('layout');
   },
   methods: {
     closeModal() {
@@ -79,7 +81,6 @@ export default {
     },
     ...mapActions(loadingStore, ['showLoading']),
     ...mapActions(cartStore, ['getCart']),
-
   },
 
 };
