@@ -145,7 +145,6 @@ export default {
   },
   mounted() {
     this.init();
-    console.log('home');
   },
   methods: {
     async init() {
