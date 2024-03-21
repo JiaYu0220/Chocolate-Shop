@@ -5,7 +5,17 @@
     <NavbarComponent/>
     <!-- content -->
     <div class="mt-[89px] md:mt-[105px] grow bg-primary-50" >
-      <RouterView />
+      <RouterView :my-timer="timer" />
+    </div>
+    <div class="fixed bottom-0 left-0 w-full flex justify-center item-center py-2
+  bg-orange-600 text-primary-50 text-sm md:text-base md:py-3">
+      <p class="pr-4">結帳輸入 ILOVECACAO <span class="font-bold">全館 8 折</span></p>
+      <i class="bi bi-alarm me-1 hidden md:inline"></i>
+      <ul class="flex gap-1">
+        <li v-for="(item, key) in timer" :key="item">
+          <p class="font-bold">{{ `${item} ${key}` }}</p>
+        </li>
+      </ul>
     </div>
     <!-- footer -->
     <footer class="bg-primary-800 text-primary-200 py-6 mt-auto">
@@ -24,8 +34,8 @@
               <li><a class="inline-flex items-center gap-3 md:gap-4" href="tel:+886-912345678">
                 <i class="bi bi-phone text-xl md:text-3xl"></i>0912345678
               </a></li>
-              <li><a class="inline-flex items-center gap-3 md:gap-4" href="mailto:hi@cocoa.com">
-                <i class="bi bi-envelope text-xl md:text-3xl"></i>hi@cocoa.com
+              <li><a class="inline-flex items-center gap-3 md:gap-4" href="mailto:hi@cacao.com">
+                <i class="bi bi-envelope text-xl md:text-3xl"></i>hi@cacao.com
               </a></li>
             </ul>
           </div>
@@ -71,6 +81,13 @@ export default {
   },
   mounted() {
     this.getCart();
+    this.handleTimer();
+  },
+  data() {
+    return {
+      timer: {},
+      timerInterval: null,
+    };
   },
   methods: {
     closeModal() {
@@ -78,6 +95,24 @@ export default {
     },
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
+    },
+    handleTimer() {
+      const deadLine = Date.parse('2024-03-31') / 1000;
+      // 清除之前的計時器，避免多個計時器並行運行
+      if (this.timerInterval) {
+        clearInterval(this.timerInterval);
+      }
+      // 設置新的計時器
+      this.timerInterval = setInterval(() => {
+        const now = Math.floor(new Date().getTime() / 1000);
+        const time = deadLine - now;
+        this.timer = {
+          日: Math.floor(time / 60 / 60 / 24).toString().padStart(2, '0'),
+          時: (Math.floor(time / 60 / 60) % 24).toString().padStart(2, '0'),
+          分: (Math.floor(time / 60) % 60).toString().padStart(2, '0'),
+          秒: (time % 60).toString().padStart(2, '0'),
+        };
+      }, 1000);
     },
     ...mapActions(loadingStore, ['showLoading']),
     ...mapActions(cartStore, ['getCart']),

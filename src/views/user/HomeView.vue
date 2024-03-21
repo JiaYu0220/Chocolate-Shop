@@ -79,26 +79,11 @@
     <div class="container">
       <SectionTitle title="巧克力也可以吃得很健康"></SectionTitle>
       <ul class="flex flex-wrap -m-4 *:text-center *:w-full *:sm:w-1/2 *:p-4 md:*:w-1/4">
-      <li>
-        <i class="bi bi-emoji-heart-eyes text-7xl"></i>
-        <h4 class="text-2xl font-bold mt-6 mb-2">美味</h4>
-        <p class="text-left">嚴選台灣在地食材，搭配獨家比例配方，保證一試成主顧</p>
-      </li>
-      <li>
-        <i class="bi bi-emoji-laughing text-7xl"></i>
-        <h4 class="text-2xl font-bold mt-6 mb-2">快樂</h4>
-        <p class="text-left">巧克力含有色胺酸，能促進血清素分泌讓你擁有快樂好心情</p>
-      </li>
-      <li>
-        <i class="bi bi-tree text-7xl"></i>
-        <h4 class="text-2xl font-bold mt-6 mb-2">健康</h4>
-        <p class="text-left">低加工、低糖、零添加，讓你吃的無負擔、無罪惡</p>
-      </li>
-      <li>
-        <i class="bi bi-hand-thumbs-up text-7xl"></i>
-        <h4 class="text-2xl font-bold mt-6 mb-2">安心</h4>
-        <p class="text-left">經 SGS 檢驗合格、所有巧克力產品皆符合歐盟標準</p>
-      </li>
+        <li v-for="item in features" :key="item.title">
+          <i :class="`bi ${item.icon} text-7xl`"></i>
+          <h4 class="text-2xl font-bold mt-6 mb-2">{{ item.title }}</h4>
+          <p class="text-left">{{ item.text }}</p>
+        </li>
       </ul>
     </div>
   </section>
@@ -110,8 +95,39 @@
     </div>
   </section>
   <!-- 倒數 -->
+  <section class="bg-primary-100">
+    <div class="container pt-10 md:pt-20">
+      <SectionTitle title="快閃優惠"></SectionTitle>
+      <div class="h-96 rounded">
+        <img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1672332161085-4231c7cf93c2?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+      </div>
+      <div class="p-6 bg-orange-700 text-primary-50 text-center gap-4
+      flex flex-col md:flex-row md:items-center md:justify-center md:p-10 md:gap-16">
+        <div>
+          <p class="text-2xl mb-1 font-bold text-nowrap md:text-5xl">全館 8 折</p>
+          <p class="text-nowrap md:text-lg">輸入優惠碼 ILOVECACAO</p>
+        </div>
+        <!-- 倒數 -->
+        <div class="flex flex-col items-center gap-8 lg:gap-16 lg:flex-row">
+          <ul class="flex justify-center gap-2 md:py-0 md:gap-3">
+            <li
+            v-for="(item, key) in timer" :key="item">
+              <p class="text-2xl font-bold mb-1 md:text-4xl">
+                {{ item }}
+              <span v-if="key !== '秒'" class="px-2">:</span></p>
+              <p class="text-sm text-start pl-2 md:pl-3 md:text-base">{{ key }}</p>
+            </li>
+          </ul>
+          <RouterLink class=" btn border border-primary-50 md:text-xl md:btn-lg
+          hover:bg-primary-50 hover:text-orange-700 focus:bg-primary-50 focus:text-orange-700
+          active:bg-primary-50 active:text-orange-700
+          " to="/products">去購物</RouterLink>
+        </div>
+      </div>
+    </div>
+  </section>
   <!-- 最新消息 -->
-  <section class="bg-primary-100 overflow-hidden">
+  <section class="bg-primary-50">
     <div class="container py-10 md:py-20">
       <SectionTitle title="最新消息" link-to="/articles" link-text="查看所有文章"></SectionTitle>
       <ul v-if="articles.length" class="flex flex-wrap sm:-mx-2 sm:-my-4" >
@@ -142,6 +158,18 @@ import ArticleCard from '@/components/userPages/article/ArticleCard.vue';
 export default {
   components: {
     SaleMarquee, SectionTitle, MyLoading, ProductSwiper, ArticleCard,
+  },
+  props: ['myTimer'],
+  data() {
+    return {
+      timer: {},
+      features: [{ title: '美味', text: '嚴選台灣在地食材，搭配獨家比例配方，保證一試成主顧', icon: 'bi-emoji-heart-eyes' }, { title: '快樂', text: '巧克力含有色胺酸，能促進血清素分泌讓你擁有快樂好心情', icon: 'bi-emoji-laughing' }, { title: '健康', text: '低加工、低糖、零添加，讓你吃的無負擔、無罪惡', icon: 'bi-tree' }, { title: '安心', text: '經 SGS 檢驗合格、所有巧克力產品皆符合歐盟標準', icon: 'bi-hand-thumbs-up' }],
+    };
+  },
+  watch: {
+    myTimer() {
+      this.timer = this.myTimer;
+    },
   },
   mounted() {
     this.init();

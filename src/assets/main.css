@@ -90,14 +90,14 @@
   }
 
   .btn-danger {
-    @apply border-2 border-red-700 bg-red-700 text-primary-50;
+    @apply border-2 border-orange-700 bg-orange-700 text-primary-50;
   }
   .btn-danger:hover {
-    @apply border-2 border-red-800 bg-red-800;
+    @apply border-2 border-orange-800 bg-orange-800;
   }
 
-  .btn-danger-warning {
-    @apply border-2 border-red-700 bg-primary-50;
+  .btn-outline-danger {
+    @apply border-2 border-orange-700 bg-primary-50;
   }
   .btn-outline-danger:hover {
     @apply bg-red-100;
@@ -105,7 +105,7 @@
 
   .btn-danger:active,
   .btn-danger:focus {
-    @apply ring ring-offset-2 ring-red-500/50;
+    @apply ring ring-offset-2 ring-orange-500/50;
   }
 
   .btn-outline-cancel {
