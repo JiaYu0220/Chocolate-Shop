@@ -7,7 +7,7 @@
     <div class="mt-[89px] md:mt-[105px] grow bg-primary-50" >
       <RouterView :my-timer="timer" />
     </div>
-    <div class="fixed bottom-0 left-0 w-full flex justify-center item-center py-2
+    <div class="fixed bottom-0 left-0 z-20 w-full flex justify-center item-center py-2
   bg-orange-600 text-primary-50 text-sm md:text-base md:py-3">
       <p class="pr-4">結帳輸入 ILOVECACAO <span class="font-bold">全館 8 折</span></p>
       <i class="bi bi-alarm me-1 hidden md:inline"></i>
@@ -18,7 +18,7 @@
       </ul>
     </div>
     <!-- footer -->
-    <footer class="bg-primary-800 text-primary-200 py-6 mt-auto">
+    <footer class="bg-primary-800 text-primary-200 pt-6 pb-14 mt-auto md:pb-16">
       <div class="container">
         <div class="flex justify-between border-b border-primary-200 pb-6 mb-4">
           <div class="flex flex-col">
