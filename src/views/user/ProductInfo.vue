@@ -2,28 +2,36 @@
   <div v-if="Object.keys(product).length" class="container py-10">
     <div class="flex flex-col sm:flex-row pb-16">
       <!-- 圖 -->
-      <div class="sm:w-1/2 pb-5 sm:pb-0 sm:pr-4 h-96">
+      <div class="sm:w-1/2 pb-5 sm:pb-0 sm:pr-4 h-96 md:h-[500px]">
+        <!-- 顯示的圖 -->
         <swiper-container class="w-full h-4/5 mx-auto *:rounded-sm *:overflow-hidden"
         thumbs-swiper=".thumbs" space-between="10" navigation="true">
-          <swiper-slide lazy="true"><img class="object-cover h-full w-full" loading="lazy"
-          :src="product.imageUrl" alt="產品圖"></swiper-slide>
+          <!-- 主圖 -->
+          <swiper-slide lazy="true">
+            <VueMagnifier :src="product.imageUrl"
+            mgShape="square" class="object-cover aspect-square"/>
+          </swiper-slide>
+          <!-- 其他圖 -->
           <swiper-slide v-for="(img, i) in product.imagesUrl" :key="`img${i}`" lazy="true">
-            <img class="object-fit" loading="lazy" :src="img" alt="產品圖">
+            <VueMagnifier :src="img" class="object-cover aspect-square"/>
           </swiper-slide>
         </swiper-container>
+        <!-- thumbs -->
         <swiper-container class="thumbs h-1/5 pt-2
         *:w-1/4 *:h-full *:opacity-40 *:cursor-pointer *:rounded-sm *:overflow-hidden"
         slides-per-view="4" free-mode="true" space-between="10"
         watch-slides-progress="true">
+          <!-- 主圖 -->
           <swiper-slide lazy="true"><img loading="lazy" class="object-cover h-full w-full"
           :src="product.imageUrl" alt="產品圖"></swiper-slide>
+          <!-- 其他圖 -->
           <swiper-slide v-for="(img, i) in product.imagesUrl" :key="`img${i}`" lazy="true">
-            <img class="object-fit" loading="lazy" :src="img" alt="產品圖">
+            <img class="object-cover h-full w-full" loading="lazy" :src="img" alt="產品圖">
           </swiper-slide>
         </swiper-container>
       </div>
       <!-- 內容 -->
-      <div class="sm:w-1/2 sm:pl-4 flex flex-col justify-between">
+      <div class="sm:w-1/2 sm:pl-4 flex flex-col justify-between relative">
         <h2 class="font-bold text-2xl text-primary-800 mb-3">{{ product.title }}</h2>
         <p class="mb-5">{{ product.unit }}</p>
         <p class="mb-5">{{ product.description }}</p>
@@ -64,7 +72,7 @@
     <!-- 推薦商品 -->
     <div class="flex justify-between items-center mb-5">
       <h2 class="text-primary-800 text-xl font-bold">推薦商品</h2>
-      <RouterLink to="/products" class="btn btn-link">查看所有商品</RouterLink>
+      <RouterLink to="/products" class="link font-bold">查看所有商品 →</RouterLink>
     </div>
     <ProductSwiper/>
   </div>
@@ -89,13 +97,16 @@ import { register } from 'swiper/element/bundle';
 import LoadingBtn from '@/components/shared/button/LoadingBtn.vue';
 import ProductSwiper from '@/components/userPages/product/ProductSwiper.vue';
 import productStore from '@/stores/productStore';
+import VueMagnifier from '@websitebeaver/vue-magnifier';
+import '@websitebeaver/vue-magnifier/styles.css';
+import swalStore from '@/stores/swalStore';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 
 export default {
   props: ['id'],
   components: {
-    LoadingBtn, ProductSwiper,
+    LoadingBtn, ProductSwiper, VueMagnifier,
   },
   data() {
     return {
@@ -106,6 +117,14 @@ export default {
   mounted() {
     register();
     this.init();
+  },
+  watch: {
+    '$route.params.id': {
+      handler() {
+        this.init();
+      },
+      deep: true,
+    },
   },
   methods: {
     async init() {
@@ -128,13 +147,13 @@ export default {
       } catch (error) {
         this.hideLoading();
         // 通知
-        const { message } = error.response.data;
-        this.$swal(Array.isArray(message) ? message[0] : message);
+        this.apiErrorSwal(error);
       }
     },
     ...mapActions(cartStore, ['postCart']),
     ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
     ...mapActions(productStore, ['getAllProducts']),
+    ...mapActions(swalStore, ['apiErrorSwal']),
   },
   computed: {
     ...mapState(loadingStore, ['loadingStatus']),
