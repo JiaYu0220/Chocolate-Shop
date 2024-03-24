@@ -15,7 +15,8 @@
               <template #default="{inputClass}">
                 <VField
                 type="email" name="電子信箱" id="email"
-                rules="email|required" v-model="user.username"
+                rules="email|required"
+                autocomplete="username" v-model="user.username"
                 :class="inputClass" placeholder required>
                 </VField>
               </template>
@@ -26,7 +27,9 @@
                 <template #default="{inputClass}">
                   <VField
                   :type="`${isPwVisible? 'text': 'password'}`" name="密碼" id="password"
-                  rules="required" v-model="user.password"
+                  rules="required"
+                  autocomplete="current-password"
+                  v-model="user.password"
                   :class="inputClass" placeholder required>
                   </VField>
                 </template>
