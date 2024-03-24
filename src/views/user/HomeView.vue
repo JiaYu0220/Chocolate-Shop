@@ -98,8 +98,11 @@
   <section class="bg-primary-100">
     <div class="container pt-10 md:pt-20">
       <SectionTitle title="快閃優惠"></SectionTitle>
-      <div class="h-96 rounded">
-        <img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1672332161085-4231c7cf93c2?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+      <div class="rounded relative">
+        <img class="object-cover w-full" lazy="loading" src="https://storage.googleapis.com/vue-course-api.appspot.com/jiayu/1711024085141.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=dgPjEh%2BoMN9HqpgPCOYpMPSvmcjvky0%2BYvmvD0Q4T8pubg%2BU92ZgA4E10wNqeIKbv62XpiQuiwcno7VIDL4hrd6n6JoGKqpFp8T%2FhHozBz83kN1jWa0Er7JqJxRU%2BnTOngwy1AD7h5E4co1a0RcpJQsheMsO9mMkNeEsTlRwKIyenxyumtBnNr6XR362IKmrEv9INKYBCwD6sDf8AAJqn6vL%2FF4ajiMkN0L2M5xEyTJ9OaAhxA8vHGjO5mP8Fn6BAO7S93NmIVnPwzMEcKjOcqLuN36GFR5pmfkXydsJqSheenwd9SaaOUoy8g3CQClCc0%2FeccNQo%2FunRKm2vlTWww%3D%3D" alt="">
+        <ProductSpot v-for="product in imageProductData" :key="product.id"
+        :class="product.position" :product="product">
+        </ProductSpot>
       </div>
       <div class="p-6 bg-orange-700 text-primary-50 text-center gap-4
       flex flex-col md:flex-row md:items-center md:justify-center md:p-10 md:gap-16">
@@ -142,7 +145,6 @@
   </section>
 
 </template>
-
 <script>
 import { mapActions, mapState } from 'pinia';
 import loadingStore from '@/stores/loadingStore';
@@ -154,16 +156,18 @@ import SectionTitle from '@/components/userPages/home/SectionTitle.vue';
 import MyLoading from '@/components/shared/helpers/MyLoading.vue';
 import ProductSwiper from '@/components/userPages/product/ProductSwiper.vue';
 import ArticleCard from '@/components/userPages/article/ArticleCard.vue';
+import ProductSpot from '@/components/userPages/home/ProductSpot.vue';
 
 export default {
   components: {
-    SaleMarquee, SectionTitle, MyLoading, ProductSwiper, ArticleCard,
+    SaleMarquee, SectionTitle, MyLoading, ProductSwiper, ArticleCard, ProductSpot,
   },
   props: ['myTimer'],
   data() {
     return {
       timer: {},
       features: [{ title: '美味', text: '嚴選台灣在地食材，搭配獨家比例配方，保證一試成主顧', icon: 'bi-emoji-heart-eyes' }, { title: '快樂', text: '巧克力含有色胺酸，能促進血清素分泌讓你擁有快樂好心情', icon: 'bi-emoji-laughing' }, { title: '健康', text: '低加工、低糖、零添加，讓你吃的無負擔、無罪惡', icon: 'bi-tree' }, { title: '安心', text: '經 SGS 檢驗合格、所有巧克力產品皆符合歐盟標準', icon: 'bi-hand-thumbs-up' }],
+      imageProductInfo: [{ id: '-NobCvfHIstyHzbSxthN', position: 'top-[25%] left-1/4' }, { id: '-NtVmptoh2i8Udg7zz9w', position: 'top-[25%] left-[48%]' }, { id: '-NtVoiUruLXM8sUb349I', position: 'top-[15%] left-[68%]' }],
     };
   },
   watch: {
@@ -193,7 +197,18 @@ export default {
     ...mapActions(articleStore, ['getAllArticles']),
   },
   computed: {
+    imageProductData() {
+      const data = [...this.imageProductInfo];
+      this.imageProductInfo.forEach((product, index) => {
+        const spotData = this.allProducts.find((item) => item.id === product.id);
+        if (spotData) {
+          data[index] = { ...product, ...spotData };
+        }
+      });
+      return data;
+    },
     ...mapState(articleStore, ['articles']),
+    ...mapState(productStore, ['allProducts']),
   },
 };
 </script>
