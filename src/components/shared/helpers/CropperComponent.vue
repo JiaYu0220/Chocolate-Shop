@@ -5,7 +5,7 @@
     <i class="bi bi-scissors mr-1"></i>裁剪圖片小工具
   </button>
   <!-- modal -->
-  <CenterModal ref="cropperModal" target="cropperModal" :close-attach-method="clear">
+  <FormModal ref="cropperModal" target="cropperModal" @reset-form="clear">
     <!-- modal 標題 -->
     <template #title="{titleClass}">
       <h3 :class="titleClass">裁剪圖片小工具</h3>
@@ -60,20 +60,20 @@
         </template>
       </FormFloat>
       <button type="button" v-if="option.img" class="btn btn-primary rounded-l-none text-nowrap"
-      @click="download" >下載</button>
+      @click="download">下載</button>
     </div>
     <!-- 裁剪完圖片 -->
     <!-- <div class="" v-show="cropperUrl">
     <img :src="cropperUrl" alt="">
     </div> -->
-  </CenterModal>
+  </FormModal>
 
 </template>
 
 <script>
 import FormFloat from '@/components/shared/form/FormFloat.vue';
 import FileInput from '@/components/shared/form/FileInput.vue';
-import CenterModal from '../modal/CenterModal.vue';
+import FormModal from '../modal/FormModal.vue';
 
 export default {
   data() {
@@ -104,7 +104,7 @@ export default {
     };
   },
   components: {
-    FormFloat, FileInput, CenterModal,
+    FormFloat, FileInput, FormModal,
   },
   props: {
     downName: String,
@@ -147,13 +147,10 @@ export default {
     // },
     // finish() {
     //   this.$refs.cropper.getCropBlob((data) => {
-    //     console.log(data);
     //     this.cropperUrl = window.URL.createObjectURL(data);
-    //     console.log(this.cropperUrl);
     //     this.postImg(data);
     //   });
     // },
   },
 };
 </script>
-../modal/AdminModal.vue

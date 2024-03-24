@@ -80,11 +80,9 @@ export default {
         this.coupons = res.data.coupons;
         this.pagination = res.data.pagination;
       } catch (error) {
-        // 通知
-        const { message } = error.response.data;
-        this.$swal(Array.isArray(message) ? message[0] : message);
-      } finally {
         this.hideLoading();
+        // 通知
+        this.apiErrorSwal(error);
       }
     },
     async delCoupon(coupon) {
@@ -107,8 +105,7 @@ export default {
         // 關閉 loading
         this.loadingStatus.couponId = '';
         // 通知
-        const { message } = error.response.data;
-        this.$swal(Array.isArray(message) ? message[0] : message);
+        this.apiErrorSwal(error);
       }
     },
     openModal(type, item) {
@@ -129,7 +126,7 @@ export default {
       }
       this.$refs.couponModal.showModal();
     },
-    ...mapActions(swalStore, ['delSwal', 'swalToast']),
+    ...mapActions(swalStore, ['delSwal', 'swalToast', 'apiErrorSwal']),
     ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
     ...mapActions(helperStore, ['timestampToDate']),
   },

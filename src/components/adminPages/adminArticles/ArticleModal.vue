@@ -1,6 +1,6 @@
 <template>
-  <CenterModal
-   target="article" ref="articleCenterModal" @reset-form="resetModalForm">
+  <FormModal
+   target="article" ref="articleFormModal" @reset-form="resetModalForm">
     <!-- 標題 -->
     <template #title="{titleClass}">
       <h3 :class="titleClass">{{isNew ? '新增' : '編輯'}}文章</h3>
@@ -144,25 +144,24 @@
     <!-- loading -->
     <LoadingOverlay :active="loadingStatus.editArticle" :is-full-page="false" color="#5C270D">
     </LoadingOverlay>
-  </CenterModal>
+  </FormModal>
 </template>
 
 <script>
 import { mapActions, mapState } from 'pinia';
 import swalStore from '@/stores/swalStore';
 import loadingStore from '@/stores/loadingStore';
-import CenterModal from '@/components/shared/modal/CenterModal.vue';
 import FormFloat from '@/components/shared/form/FormFloat.vue';
 import FileInput from '@/components/shared/form/FileInput.vue';
 import CopyBtn from '@/components/shared/button/CopyBtn.vue';
 import ChecksRadio from '@/components/shared/form/ChecksRadio.vue';
 import CropperComponent from '@/components/shared/helpers/CropperComponent.vue';
-// import IconLoading from '@/components/icons/IconLoading.vue';
+import FormModal from '@/components/shared/modal/FormModal.vue';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
   components: {
-    CenterModal, FormFloat, ChecksRadio, CropperComponent, FileInput, CopyBtn,
+    FormModal, FormFloat, ChecksRadio, CropperComponent, FileInput, CopyBtn,
   },
   props: {
     id: String,
@@ -182,10 +181,10 @@ export default {
   },
   methods: {
     async showModal() {
-      this.$refs.articleCenterModal.showModal();
+      this.$refs.articleFormModal.showModal();
     },
     closeModal() {
-      this.$refs.articleCenterModal.closeModal();
+      this.$refs.articleFormModal.closeModal();
     },
     async getSingleArticle(id) {
       try {
@@ -202,14 +201,12 @@ export default {
       } catch (error) {
         this.loadingStatus.editArticle = false;
         // 通知
-        const { message } = error.response.data;
-        this.$swal(Array.isArray(message) ? message[0] : message);
+        this.apiErrorSwal(error, this.$refs.articleFormModal);
       }
     },
     resetModalForm() {
       this.$refs.articleForm.resetForm();
       this.tempArticle.image = '';
-      console.log(this.tempArticle);
       this.tempTag = '';
       this.isTagDuplicate = false;
     },
@@ -226,7 +223,6 @@ export default {
     },
     async updateArticle() {
       try {
-        console.log('開始', this.tempArticle);
         // 新增文章
         let url = `${VITE_URL}/api/${VITE_PATH}/admin/article`;
         let httpMethod = 'post';
@@ -263,11 +259,10 @@ export default {
         // 關閉 loading
         this.loadingStatus.articleId = '';
         // 通知
-        const { message } = error.response.data;
-        this.$swal(Array.isArray(message) ? message[0] : message);
+        this.apiErrorSwal(error);
       }
     },
-    ...mapActions(swalStore, ['swalToast']),
+    ...mapActions(swalStore, ['swalToast', 'apiErrorSwal']),
     ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
   },
   computed: {

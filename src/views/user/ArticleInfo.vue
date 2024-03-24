@@ -39,6 +39,7 @@ import { mapActions, mapState } from 'pinia';
 import loadingStore from '@/stores/loadingStore';
 import helperStore from '@/stores/helperStore';
 import articleStore from '@/stores/articleStore';
+import swalStore from '@/stores/swalStore';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
@@ -86,8 +87,7 @@ export default {
       } catch (error) {
         this.hideLoading();
         // 通知
-        const { message } = error.response.data;
-        this.$swal(Array.isArray(message) ? message[0] : message);
+        this.apiErrorSwal(error);
       }
     },
     getAdjacentArticleId() {
@@ -103,6 +103,7 @@ export default {
     ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
     ...mapActions(helperStore, ['timestampToDate']),
     ...mapActions(articleStore, ['getAllArticles']),
+    ...mapActions(swalStore, ['apiErrorSwal']),
   },
   computed: {
     ...mapState(articleStore, ['articles']),

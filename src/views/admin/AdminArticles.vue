@@ -110,8 +110,7 @@ export default {
       } catch (error) {
         this.hideLoading();
         // 通知
-        const { message } = error.response.data;
-        this.$swal(Array.isArray(message) ? message[0] : message);
+        this.apiErrorSwal(error);
       }
     },
     async delArticle(article) {
@@ -134,8 +133,7 @@ export default {
         // 關閉 loading
         this.loadingStatus.articleId = '';
         // 通知
-        const { message } = error.response.data;
-        this.$swal(Array.isArray(message) ? message[0] : message);
+        this.apiErrorSwal(error);
       }
     },
     async openModal(type, item) {
@@ -157,7 +155,7 @@ export default {
           break;
       }
     },
-    ...mapActions(swalStore, ['delSwal', 'swalToast']),
+    ...mapActions(swalStore, ['delSwal', 'swalToast', 'apiErrorSwal']),
     ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
     ...mapActions(helperStore, ['timestampToDate', 'handleArrayInData']),
   },

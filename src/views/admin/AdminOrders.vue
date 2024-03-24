@@ -105,7 +105,6 @@ const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
   components: {
     TableComponent, PaginationComponent, OrderModal, AdminActionBtns,
-    // CopyBtn
   },
   data() {
     return {
@@ -139,8 +138,7 @@ export default {
       } catch (error) {
         this.hideLoading();
         // 通知
-        const { message } = error.response.data;
-        this.$swal(Array.isArray(message) ? message[0] : message);
+        this.apiErrorSwal(error);
       }
     },
     async delOrder(order) {
@@ -160,8 +158,7 @@ export default {
       } catch (error) {
         this.loadingStatus.orderId = '';
         // 通知
-        const { message } = error.response.data;
-        this.$swal(Array.isArray(message) ? message[0] : message);
+        this.apiErrorSwal(error);
       }
     },
     async putOrder(order) {
@@ -186,15 +183,14 @@ export default {
         // 關閉 loading
         this.loadingStatus.orderId = '';
         // 通知
-        const { message } = error.response.data;
-        this.$swal(Array.isArray(message) ? message[0] : message);
+        this.apiErrorSwal(error);
       }
     },
     openModal(item) {
       this.tempOrder = JSON.parse(JSON.stringify(item)); // 深拷貝
       this.$refs.orderModal.showModal();
     },
-    ...mapActions(swalStore, ['delSwal', 'swalToast']),
+    ...mapActions(swalStore, ['delSwal', 'swalToast', 'apiErrorSwal']),
     ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
     ...mapActions(helperStore, ['timestampToDate']),
   },

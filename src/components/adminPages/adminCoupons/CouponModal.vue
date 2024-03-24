@@ -1,5 +1,5 @@
 <template>
-  <CenterModal target="coupon" ref="couponCenterModal" @reset-form="resetModalForm">
+  <FormModal target="coupon" ref="couponFormModal" @reset-form="resetModalForm">
     <!-- 標題 -->
     <template #title="{titleClass}">
       <h3 :class="titleClass">{{isNew ? '新增' : '編輯'}}優惠券</h3>
@@ -71,21 +71,21 @@
       </div>
 
     </VForm>
-  </CenterModal>
+  </FormModal>
 </template>
 
 <script>
-import CenterModal from '@/components/shared/modal/CenterModal.vue';
 import FormFloat from '@/components/shared/form/FormFloat.vue';
 import { mapActions, mapState } from 'pinia';
 import swalStore from '@/stores/swalStore';
 import loadingStore from '@/stores/loadingStore';
 import ChecksRadio from '@/components/shared/form/ChecksRadio.vue';
+import FormModal from '@/components/shared/modal/FormModal.vue';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
   components: {
-    CenterModal, FormFloat, ChecksRadio,
+    FormModal, FormFloat, ChecksRadio,
   },
   props: {
     coupon: Object,
@@ -110,10 +110,10 @@ export default {
   },
   methods: {
     showModal() {
-      this.$refs.couponCenterModal.showModal();
+      this.$refs.couponFormModal.showModal();
     },
     closeModal() {
-      this.$refs.couponCenterModal.closeModal();
+      this.$refs.couponFormModal.closeModal();
     },
     resetModalForm() {
       this.$refs.couponForm.resetForm();
@@ -167,10 +167,10 @@ export default {
         this.loadingStatus.couponId = '';
         this.loadingStatus.newCoupon = false;
         // 通知
-        this.$swal(error.data?.message || '發生錯誤，請稍後再試');
+        this.apiErrorSwal(error);
       }
     },
-    ...mapActions(swalStore, ['swalToast']),
+    ...mapActions(swalStore, ['swalToast', 'apiErrorSwal']),
     ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
   },
   computed: {

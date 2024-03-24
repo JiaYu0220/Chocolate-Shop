@@ -6,7 +6,7 @@
         :class="inputClass" class="rounded-r-none border-0"
         v-model="couponCode" placeholder>
         <datalist id="couponList">
-          <option value="ILOVECOCOA">ILOVECOCOA</option>
+          <option value="ILOVECACAO">ILOVECACAO</option>
         </datalist>
         <LoadingBtn
         class="btn btn-primary-light rounded-l-none text-nowrap

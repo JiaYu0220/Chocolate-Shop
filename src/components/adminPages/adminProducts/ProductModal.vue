@@ -1,5 +1,5 @@
 <template>
-  <CenterModal target="product" ref="productCenterModal" @reset-form="resetModalForm">
+  <FormModal target="product" ref="productFormModal" @reset-form="resetModalForm">
       <!-- 標題 -->
       <template #title="{titleClass}">
         <h3 :class="titleClass">{{isNew ? '新增' : '編輯'}}產品</h3>
@@ -95,12 +95,25 @@
         <h4 class="text-xl font-bold text-primary-800 mb-4">文字</h4>
         <div class="flex flex-col gap-3">
           <!-- 名稱 -->
-          <FormFloat label-for="title" label="名稱" :errors="errors">
-            <template #default="{inputClass}">
-              <VField type="text" name="名稱" id="title" v-model="tempProduct.title"
-              :class="inputClass" rules="required" placeholder required></VField>
-            </template>
-          </FormFloat>
+          <div class="flex gap-3">
+            <div class="w-2/3">
+              <FormFloat label-for="title" label="名稱" :errors="errors">
+                <template #default="{inputClass}">
+                  <VField type="text" name="名稱" id="title" v-model="tempProduct.title"
+                  :class="inputClass" rules="required" placeholder required></VField>
+                </template>
+              </FormFloat>
+            </div>
+            <div class="w-1/3">
+              <FormFloat label-for="stock" label="庫存" :errors="errors">
+                <template #default="{inputClass}">
+                  <VField type="number" name="庫存" min="0" id="stock"
+                  v-model.number="tempProduct.stock"
+                  :class="inputClass" rules="required" placeholder required></VField>
+                </template>
+              </FormFloat>
+            </div>
+          </div>
           <div class="flex gap-3">
             <!-- 類別 -->
             <div class="w-2/3">
@@ -184,12 +197,11 @@
           儲存編輯</button>
         </div>
       </VForm>
-  </CenterModal>
+  </FormModal>
 </template>
 
 <script>
 import CropperComponent from '@/components/shared/helpers/CropperComponent.vue';
-import CenterModal from '@/components/shared/modal/CenterModal.vue';
 import FormFloat from '@/components/shared/form/FormFloat.vue';
 import FileInput from '@/components/shared/form/FileInput.vue';
 import CopyBtn from '@/components/shared/button/CopyBtn.vue';
@@ -198,11 +210,12 @@ import ChecksRadio from '@/components/shared/form/ChecksRadio.vue';
 import { mapActions, mapState } from 'pinia';
 import swalStore from '@/stores/swalStore';
 import loadingStore from '@/stores/loadingStore';
+import FormModal from '@/components/shared/modal/FormModal.vue';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
   components: {
-    CenterModal, FormFloat, FileInput, CopyBtn, LoadingBtn, CropperComponent, ChecksRadio,
+    FormModal, FormFloat, FileInput, CopyBtn, LoadingBtn, CropperComponent, ChecksRadio,
   },
   props: {
     product: Object,
@@ -227,10 +240,10 @@ export default {
   },
   methods: {
     showModal() {
-      this.$refs.productCenterModal.showModal();
+      this.$refs.productFormModal.showModal();
     },
     closeModal() {
-      this.$refs.productCenterModal.closeModal();
+      this.$refs.productFormModal.closeModal();
     },
     resetModalForm() {
       this.$refs.productForm.resetForm();
@@ -287,11 +300,10 @@ export default {
         this.loadingStatus.productId = '';
         this.loadingStatus.newProduct = false;
         // 通知
-        const { message } = error.response.data;
-        this.$swal(Array.isArray(message) ? message[0] : message);
+        this.apiErrorSwal(error);
       }
     },
-    ...mapActions(swalStore, ['swalToast']),
+    ...mapActions(swalStore, ['swalToast', 'apiErrorSwal']),
     ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
   },
   computed: {

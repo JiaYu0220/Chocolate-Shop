@@ -7,7 +7,7 @@
     <div class="mt-[89px] md:mt-[105px] grow bg-primary-50" >
       <RouterView :my-timer="timer" />
     </div>
-    <div class="fixed bottom-0 left-0 z-20 w-full flex justify-center item-center py-2
+    <div class="fixed bottom-0 left-0 z-20 w-full flex flex-wrap justify-center item-center py-2
   bg-orange-600 text-primary-50 text-sm md:text-base md:py-3">
       <p class="pr-4">結帳輸入 ILOVECACAO <span class="font-bold">全館 8 折</span></p>
       <i class="bi bi-alarm me-1 hidden md:inline"></i>
@@ -18,7 +18,7 @@
       </ul>
     </div>
     <!-- footer -->
-    <footer class="bg-primary-800 text-primary-200 pt-6 pb-14 mt-auto md:pb-16">
+    <footer class="bg-primary-800 text-primary-200 pt-6 pb-16 mt-auto">
       <div class="container">
         <div class="flex justify-between border-b border-primary-200 pb-6 mb-4">
           <div class="flex flex-col">
@@ -73,21 +73,22 @@ import loadingStore from '@/stores/loadingStore';
 import cartStore from '@/stores/cartStore';
 import MyLoading from '@/components/shared/helpers/MyLoading.vue';
 import NavbarComponent from '@/components/userPages/layout/NavbarComponent.vue';
-import ScrollTopBtn from '@/components/shared/helpers/ScrollTopBtn.vue';
+import ScrollTopBtn from '@/components/userPages/layout/ScrollTopBtn.vue';
 
 export default {
   components: {
     MyLoading, NavbarComponent, ScrollTopBtn,
   },
-  mounted() {
-    this.getCart();
-    this.handleTimer();
-  },
   data() {
     return {
       timer: {},
       timerInterval: null,
+      now: Math.floor(new Date().getTime() / 1000),
     };
+  },
+  mounted() {
+    this.getCart();
+    this.handleTimer();
   },
   methods: {
     closeModal() {
@@ -96,6 +97,7 @@ export default {
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
     },
+
     handleTimer() {
       const deadLine = Date.parse('2024-03-31') / 1000;
       // 清除之前的計時器，避免多個計時器並行運行

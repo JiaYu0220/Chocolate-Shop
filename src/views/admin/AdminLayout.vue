@@ -67,10 +67,10 @@ export default {
       .find((row) => row.startsWith('token='))
       ?.split('=')[1];
     this.$http.defaults.headers.common.Authorization = jiayuToken;
-    this.checkout();
+    this.checkLogin();
   },
   methods: {
-    async checkout() {
+    async checkLogin() {
       this.showLoading();
       try {
         const url = `${VITE_URL}/api/user/check`;

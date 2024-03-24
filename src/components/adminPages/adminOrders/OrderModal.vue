@@ -1,6 +1,6 @@
 <template>
-  <CenterModal
-  target="order" ref="orderCenterModal" @reset-form="resetModalForm">
+  <FormModal
+  target="order" ref="orderFormModal" @reset-form="resetModalForm">
 
     <!-- 標題 -->
     <template #title="{titleClass}">
@@ -133,11 +133,10 @@
       </div>
     </VForm>
   </template>
-  </CenterModal>
+  </FormModal>
 </template>
 
 <script>
-import CenterModal from '@/components/shared/modal/CenterModal.vue';
 import FormFloat from '@/components/shared/form/FormFloat.vue';
 import { mapActions, mapState } from 'pinia';
 import swalStore from '@/stores/swalStore';
@@ -146,10 +145,11 @@ import validateStore from '@/stores/validateStore';
 import helperStore from '@/stores/helperStore';
 import ChecksRadio from '@/components/shared/form/ChecksRadio.vue';
 import TableComponent from '@/components/shared/table/TableComponent.vue';
+import FormModal from '@/components/shared/modal/FormModal.vue';
 
 export default {
   components: {
-    CenterModal, FormFloat, ChecksRadio, TableComponent,
+    FormModal, FormFloat, ChecksRadio, TableComponent,
   },
   props: {
     order: Object,
@@ -178,10 +178,10 @@ export default {
       this.orderDate = this.timestampToDate(this.order?.create_at);
     },
     showModal() {
-      this.$refs.orderCenterModal.showModal();
+      this.$refs.orderFormModal.showModal();
     },
     closeModal() {
-      this.$refs.orderCenterModal.closeModal();
+      this.$refs.orderFormModal.closeModal();
     },
     resetModalForm() {
       this.$refs.orderForm.resetForm();

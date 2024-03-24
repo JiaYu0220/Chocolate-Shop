@@ -112,8 +112,7 @@ export default {
       } catch (error) {
         this.hideLoading();
         // 通知
-        const { message } = error.response.data;
-        this.$swal(Array.isArray(message) ? message[0] : message);
+        this.apiErrorSwal(error);
       }
     },
     async delProduct(product) {
@@ -161,7 +160,7 @@ export default {
       this.$refs.productModal.showModal();
     },
     ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
-    ...mapActions(swalStore, ['swalToast', 'delSwal']),
+    ...mapActions(swalStore, ['swalToast', 'delSwal', 'apiErrorSwal']),
     ...mapActions(helperStore, ['handleArrayInData']),
   },
   computed: {

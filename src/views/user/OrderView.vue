@@ -10,6 +10,7 @@
 <script>
 import { mapActions } from 'pinia';
 import loadingStore from '@/stores/loadingStore';
+import swalStore from '@/stores/swalStore';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
@@ -33,11 +34,11 @@ export default {
       } catch (error) {
         this.hideLoading();
         // 通知
-        const { message } = error.response.data;
-        this.$swal(Array.isArray(message) ? message[0] : message);
+        this.apiErrorSwal(error);
       }
     },
     ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
+    ...mapActions(swalStore, ['apiErrorSwal']),
   },
 };
 </script>

@@ -51,5 +51,13 @@ export default defineStore('swalStore', {
         cancelButtonText: '取消',
       });
     },
+    apiErrorSwal(error, container = 'body') {
+      const { message } = error.response.data;
+      const title = Array.isArray(message) ? message[0] : message.message;
+      return $swal({
+        title,
+        target: container,
+      });
+    },
   },
 });
