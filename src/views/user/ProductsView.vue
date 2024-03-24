@@ -16,24 +16,9 @@
       <h2 class="text-center text-2xl font-bold tracking-widest text-primary-800
       pb-6">{{ currentCategory || '全部' }}</h2>
       <ul class="flex justify-center gap-4 md:gap-8 text font-medium">
-        <li>
-          <span v-if="currentCategory === ''" class="relative text-primary-700
-          after:absolute after:content-[''] after:w-full after:h-[2px]
-          after:bg-primary-700 after:-bottom-1 after:left-0">全部</span>
-          <RouterLink v-else class="link"
-          :to="`/products`">
-            全部
-          </RouterLink>
-        </li>
-        <li v-for="category in categories" :key="category">
-          <span v-if="currentCategory === category" class="relative text-primary-700
-          after:absolute after:content-[''] after:w-full after:h-[2px]
-          after:bg-primary-700 after:-bottom-1 after:left-0">{{category}}</span>
-          <RouterLink v-else class="link"
-          :to="`/products?category=${category}`">
-            {{category}}
-          </RouterLink>
-        </li>
+        <CategoryLinks category="全部"></CategoryLinks>
+        <CategoryLinks v-for="(item, category) in categories" :key="category"
+        :category="category"></CategoryLinks>
       </ul>
     </div>
     <!-- 產品 -->
@@ -47,29 +32,27 @@
     </div>
   </div>
 </template>
-<style>
-.active{}
-</style>
 
 <script>
 import ProductCard from '@/components/userPages/product/ProductCard.vue';
 import PaginationComponent from '@/components/shared/pagination/PaginationComponent.vue';
 import { mapState, mapActions } from 'pinia';
 import loadingStore from '@/stores/loadingStore';
+import productStore from '@/stores/productStore';
+import CategoryLinks from '@/components/userPages/product/CategoryLinks.vue';
+import swalStore from '@/stores/swalStore';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 
 export default {
   components: {
-    ProductCard, PaginationComponent,
+    ProductCard, PaginationComponent, CategoryLinks,
   },
   data() {
     return {
       products: [],
       pagination: {},
-      categories: ['基本', '特殊口味', '禮盒', '料理'],
       // currentBreadcrumb: '全部',
-      currentCategory: '',
     };
   },
   mounted() {
@@ -87,7 +70,8 @@ export default {
     async getProducts(page = 1) {
       try {
         this.showLoading();
-        this.currentCategory = this.$route.query.category || '';
+        const { category = '' } = this.$route.query;
+        this.updatedCategory(category);
         const url = `${VITE_URL}/api/${VITE_PATH}/products?page=${page}&category=${this.currentCategory}`;
         const res = await this.$http.get(url);
         this.products = res.data.products;
@@ -97,14 +81,16 @@ export default {
       } catch (error) {
         this.hideLoading();
         // 通知
-        const { message } = error.response.data;
-        this.$swal(Array.isArray(message) ? message[0] : message);
+        this.apiErrorSwal(error);
       }
     },
     ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
+    ...mapActions(productStore, ['updatedCategory']),
+    ...mapActions(swalStore, ['apiErrorSwal']),
   },
   computed: {
     ...mapState(loadingStore, ['loadingStatus']),
+    ...mapState(productStore, ['categories', 'currentCategory']),
   },
 };
 </script>
