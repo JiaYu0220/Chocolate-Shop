@@ -2,7 +2,7 @@
   <swiper-container init="false"
   ref="productSwiper"
   >
-    <swiper-slide v-for="product in products" :key="product.id" lazy="true">
+    <swiper-slide v-for="product in products" :key="product.id">
     <ProductCard :product="product"></ProductCard>
     </swiper-slide>
   </swiper-container>
@@ -43,7 +43,7 @@ export default {
   mounted() {
     register();
     Object.assign(this.$refs.productSwiper, {
-      slidesPerView: 2,
+      slidesPerView: 1,
       spaceBetween: 12,
       setWrapperSize: true,
       navigation: {
@@ -55,6 +55,9 @@ export default {
       },
       grabCursor: true,
       breakpoints: {
+        480: {
+          slidesPerView: 2,
+        },
         768: {
           slidesPerView: 3,
           spaceBetween: 16,
