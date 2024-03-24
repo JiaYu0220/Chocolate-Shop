@@ -20,9 +20,30 @@
           md:flex gap-6 text-md 0 *:transition-all *:duration-150 *:rounded-sm
         hover:*:text-primary-800 hover:*:bg-primary-200
         ">
-            <li><RouterLink class="inline-block p-2" to="/about">關於我們</RouterLink></li>
-            <li><RouterLink class="inline-block p-2" to="/products">產品列表</RouterLink></li>
-            <li><RouterLink class="inline-block p-2" to="/articles">最新消息</RouterLink></li>
+
+          <RouterLink to="/about" custom
+          v-slot="{ navigate, isExactActive }">
+            <li class="inline-block p-2"
+            :class="isExactActive ? 'active' : 'cursor-pointer'"
+            @click="navigate" role="link">關於我們</li>
+          </RouterLink>
+
+          <li class="relative group">
+            <RouterLink class="inline-block p-2" to="/products">產品列表</RouterLink>
+            <TooltipComponent>
+              <ul class="flex gap-5 p-2">
+                <CategoryLinks v-for="(item, category) in categories" :key="category"
+                :category="category">
+                </CategoryLinks>
+              </ul>
+            </TooltipComponent>
+          </li>
+          <RouterLink to="/articles" custom
+          v-slot="{ navigate, isExactActive }">
+            <li class="inline-block p-2"
+            :class="isExactActive ? 'active' : 'cursor-pointer'"
+            @click="navigate" role="link">最新消息</li>
+          </RouterLink>
           </ul>
           <ul class="flex gap-4 text-lg *:transition-all *:duration-150 hover:*:rounded-sm
             hover:*:text-primary-800 hover:*:bg-primary-200
@@ -47,20 +68,36 @@
     </div>
     <!-- 漢堡menu -->
     <TransitionAccordion>
-      <div v-if="isMenuOpen" class="bg-primary-800 text-primary-200  w-full
-      overflow-y-hidden h-[240px]">
+      <div v-if="isMenuOpen" class="bg-primary-800/95 text-primary-200 w-full
+      overflow-y-hidden h-[544px]">
         <div class="container">
-          <ul class="flex flex-col gap-4 pt-8 pb-10
-          text-md font-bold
-          *:transition-all *:duration-300 *:rounded-sm *:text-center
-          hover:*:text-primary-800 hover:*:bg-primary-200
-          focus:*:text-primary-800 focus:*:bg-primary-200">
-            <li><RouterLink class="block py-3" to="/about"
-            @click="toggleMenu">關於我們</RouterLink></li>
-            <li><RouterLink class="block py-3" to="/products"
-            @click="toggleMenu">產品列表</RouterLink></li>
-            <li><RouterLink class="block py-3" to="/articles"
-            @click="toggleMenu">最新消息</RouterLink></li>
+          <ul class="flex flex-col gap-4 py-6
+          text-md font-bold">
+          <MenuLink link-to="/about" @on-click="toggleMenu">關於我們</MenuLink>
+            <li class="py-3 px-4 -mx-2">
+              <button class="block text-start w-full " to="/products"
+              @click="toggleProduct">
+                產品列表
+                <i class="bi bi-chevron-down float-right transition-all duration-300"
+                :class="{'origin-center rotate-180 ': isProductOpen}"></i>
+              </button>
+              <TransitionAccordion>
+                <ul v-show="isProductOpen"
+                class="flex flex-col gap-3 px-2 py-3 overflow-y-hidden h-80">
+                  <MenuLink link-to="/products"
+                  :isQueryActive="currentCategory === ''" @on-click="closeMenuAndProduct">
+                    - 全部
+                  </MenuLink>
+                  <MenuLink v-for="(item, category) in categories" :key="category"
+                  :link-to="{ path: `/products`, query: { category }}"
+                  :isQueryActive="currentCategory === category"
+                  @on-click="closeMenuAndProduct">
+                    - {{ category }}
+                  </MenuLink>
+                </ul>
+              </TransitionAccordion>
+            </li>
+            <MenuLink link-to="/articles" @on-click="toggleMenu">最新消息</MenuLink>
           </ul>
         </div>
       </div>
@@ -82,15 +119,20 @@ import cartStore from '@/stores/cartStore';
 import scrollStore from '@/stores/scrollStore';
 import LogoComponent from '@/components/shared/logo/LogoComponent.vue';
 import TransitionAccordion from '@/components/shared/transition/TransitionAccordion.vue';
+import TooltipComponent from '@/components/shared/tooltip/TooltipComponent.vue';
+import productStore from '@/stores/productStore';
+import CategoryLinks from '@/components/userPages/product/CategoryLinks.vue';
 import CartModal from './CartModal.vue';
+import MenuLink from './MenuLink.vue';
 
 export default {
   components: {
-    LogoComponent, TransitionAccordion, CartModal,
+    LogoComponent, TransitionAccordion, CartModal, TooltipComponent, MenuLink, CategoryLinks,
   },
   data() {
     return {
       isMenuOpen: false,
+      isProductOpen: true,
     };
   },
   watch: {
@@ -107,6 +149,13 @@ export default {
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
     },
+    toggleProduct() {
+      this.isProductOpen = !this.isProductOpen;
+    },
+    closeMenuAndProduct() {
+      this.isMenuOpen = false;
+      this.isProductOpen = false;
+    },
     openCartModal() {
       this.$refs.cartModal.showModal();
     },
@@ -116,6 +165,7 @@ export default {
   },
   computed: {
     ...mapState(cartStore, ['cartNum']),
+    ...mapState(productStore, ['categories', 'currentCategory']),
   },
 };
 </script>
