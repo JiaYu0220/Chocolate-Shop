@@ -1,0 +1,1 @@
+import{E as a}from"./index-BBoj-WCo.js";const o=a("loading",{state:()=>({isLoading:!1,loadingStatus:{productId:"",newProduct:!1,orderId:"",articleId:"",editArticle:!1,couponId:"",newCoupon:!1,cartId:"",imageUrl:!1,imagesUrl:!1}}),actions:{showLoading(){this.isLoading=!0},hideLoading(){this.isLoading=!1}}});export{o as l};

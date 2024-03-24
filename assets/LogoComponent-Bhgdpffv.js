@@ -1,0 +1,1 @@
+import{_ as e,o,e as t,n}from"./index-BBoj-WCo.js";const r={},s={class:n("font-zenMaru text-primary-800 text-center text-nowrap logoShadow")};function a(c,_){return o(),t("h1",s," 可_可 ")}const m=e(r,[["render",a]]);export{m as L};
