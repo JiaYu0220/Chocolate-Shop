@@ -79,6 +79,7 @@ export default {
         const res = await this.$http.get(url);
         this.coupons = res.data.coupons;
         this.pagination = res.data.pagination;
+        this.hideLoading();
       } catch (error) {
         this.hideLoading();
         // 通知
