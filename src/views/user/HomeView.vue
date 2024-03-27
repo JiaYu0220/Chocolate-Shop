@@ -6,7 +6,8 @@
     <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-primary-50">
         <!-- <h2 class="text-8xl font-bold">黑巧克力專賣</h2> -->
         <div class="flex flex-col items-center backdrop:brightness-75">
-          <h2 class="text-lg font-bold text-center text-nowrap leading-relaxed drop-shadow-md mb-5
+          <h2
+          class="text-lg font-bold text-center text-nowrap leading-relaxed drop-shadow-md mb-5
           md:text-3xl md:leading-relaxed">
             人生就像一塊
             <span class="relative px-1 before:absolute before:-inset-1 before:-skew-y-3
@@ -24,7 +25,7 @@
     <div class="container">
       <SectionTitle title="品項" link-to="/products" link-text="查看所有商品"></SectionTitle>
       <ul class="flex flex-wrap -m-1 *:p-1 *:h-72">
-        <li class="w-1/3">
+        <li data-aos="fade-down-right" class="w-1/3">
           <RouterLink to="/products?category=基本" class="block h-full overflow-hidden relative
             group/cate">
             <img class="object-cover w-full h-full group-hover/cate:brightness-75 group-hover/cate:scale-110 transition-all duration-300" loading="lazy" src="https://images.pexels.com/photos/4110097/pexels-photo-4110097.jpeg?auto=compress&cs=tinysrgb&w=800&h=auto&dpr=1" alt="基本類別">
@@ -36,7 +37,7 @@
             backdrop:bg-primary-300">基本</h4>
         </RouterLink>
         </li>
-        <li class="w-2/3">
+        <li data-aos="fade-down-left" class="w-2/3">
           <RouterLink to="/products?category=禮盒"
           class="block h-full overflow-hidden relative group/cate">
             <img class="object-cover w-full h-full group-hover/cate:brightness-75 group-hover/cate:scale-110 transition-all duration-300" loading="lazy" src="https://images.unsplash.com/photo-1513201099705-a9746e1e201f?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="禮盒類別">
@@ -47,7 +48,7 @@
             md:text-4xl md:p-8">禮盒</h4>
           </RouterLink>
         </li>
-        <li class="w-1/2">
+        <li data-aos="fade-up-right" class="w-1/2">
           <RouterLink to="/products?category=特殊口味"
           class="block h-full overflow-hidden relative group/cate">
             <img class="object-cover w-full h-full group-hover/cate:brightness-75 group-hover/cate:scale-110 transition-all duration-300" loading="lazy" src="https://images.unsplash.com/photo-1545396635-f4865ca1448b?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="特殊口味">
@@ -58,7 +59,7 @@
             md:text-4xl md:p-8">特殊</h4>
           </RouterLink>
         </li>
-        <li class="w-1/2">
+        <li data-aos="fade-up-left" class="w-1/2">
           <RouterLink to="/products?category=料理"
           class="block h-full overflow-hidden relative group/cate">
             <img class="object-cover w-full h-full group-hover/cate:brightness-75 group-hover/cate:scale-110 transition-all duration-300" loading="lazy" src="https://images.pexels.com/photos/5078594/pexels-photo-5078594.jpeg?auto=compress&cs=tinysrgb&w=800&h=auto&dpr=1" alt="料理類別">
@@ -77,8 +78,9 @@
     <!-- 優勢 -->
     <section class="py-10 md:py-20 bg-primary-100 text-primary-800">
     <div class="container">
-      <SectionTitle title="巧克力也可以吃得很健康"></SectionTitle>
-      <ul class="flex flex-wrap -m-4 *:text-center *:w-full *:sm:w-1/2 *:p-4 md:*:w-1/4">
+      <SectionTitle data-aos="fade-up" title="巧克力也可以吃得很健康"></SectionTitle>
+      <ul data-aos="fade-up"
+      class="flex flex-wrap -m-4 *:text-center *:w-full *:sm:w-1/2 *:p-4 md:*:w-1/4">
         <li v-for="item in features" :key="item.title">
           <i :class="`bi ${item.icon} text-7xl`"></i>
           <h4 class="text-2xl font-bold mt-6 mb-2">{{ item.title }}</h4>
@@ -89,7 +91,7 @@
   </section>
   <!-- 推薦商品 -->
   <section class="bg-primary-50 overflow-hidden">
-    <div class="container py-10 md:py-20">
+    <div data-aos="fade-up" class="container py-10 md:py-20">
       <SectionTitle title="推薦商品" link-to="/products" link-text="查看所有商品"></SectionTitle>
       <ProductSwiper/>
     </div>
@@ -98,13 +100,13 @@
   <section class="bg-primary-100">
     <div class="container pt-10 md:pt-20">
       <SectionTitle title="快閃優惠"></SectionTitle>
-      <div class="rounded relative">
+      <div data-aos="fade-up" class="rounded relative">
         <img class="object-cover w-full" lazy="loading" src="https://storage.googleapis.com/vue-course-api.appspot.com/jiayu/1711024085141.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=dgPjEh%2BoMN9HqpgPCOYpMPSvmcjvky0%2BYvmvD0Q4T8pubg%2BU92ZgA4E10wNqeIKbv62XpiQuiwcno7VIDL4hrd6n6JoGKqpFp8T%2FhHozBz83kN1jWa0Er7JqJxRU%2BnTOngwy1AD7h5E4co1a0RcpJQsheMsO9mMkNeEsTlRwKIyenxyumtBnNr6XR362IKmrEv9INKYBCwD6sDf8AAJqn6vL%2FF4ajiMkN0L2M5xEyTJ9OaAhxA8vHGjO5mP8Fn6BAO7S93NmIVnPwzMEcKjOcqLuN36GFR5pmfkXydsJqSheenwd9SaaOUoy8g3CQClCc0%2FeccNQo%2FunRKm2vlTWww%3D%3D" alt="">
         <ProductSpot v-for="product in imageProductData" :key="product.id"
         :class="product.position" :product="product">
         </ProductSpot>
       </div>
-      <div class="p-6 bg-orange-700 text-primary-50 text-center gap-4
+      <div data-aos="fade-up" class="p-6 bg-orange-700 text-primary-50 text-center gap-4
       flex flex-col md:flex-row md:items-center md:justify-center md:p-10 md:gap-16">
         <div>
           <p class="text-2xl mb-1 font-bold text-nowrap md:text-5xl">全館 8 折</p>
@@ -114,7 +116,7 @@
         <div class="flex flex-col items-center gap-8 lg:gap-16 lg:flex-row">
           <ul class="flex justify-center gap-2 md:py-0 md:gap-3">
             <li
-            v-for="(item, key) in timer" :key="item">
+            v-for="(item, key) in timer" :key="`${key}-${item}`">
               <p class="text-2xl font-bold mb-1 md:text-4xl">
                 {{ item }}
               <span v-if="key !== '秒'" class="px-2">:</span></p>
@@ -133,7 +135,7 @@
   <section class="bg-primary-50">
     <div class="container py-10 md:py-20">
       <SectionTitle title="最新消息" link-to="/articles" link-text="查看所有文章"></SectionTitle>
-      <ul v-if="articles.length" class="flex flex-wrap sm:-mx-2 sm:-my-4" >
+      <ul data-aos="fade-up" v-if="articles.length" class="flex flex-wrap sm:-mx-2 sm:-my-4" >
         <template v-for="(article, i) in articles" :key="article.id">
           <li v-if="i < 3"
           class="w-full sm:first:w-full sm:w-1/2 xl:w-1/3 xl:first:w-1/3 sm:px-2 sm:py-4">
