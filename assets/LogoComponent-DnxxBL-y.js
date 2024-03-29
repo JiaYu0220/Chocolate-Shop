@@ -1,0 +1,1 @@
+import{_ as e,o,e as t}from"./index-WktPDQpM.js";const n={},r={class:"font-zenMaru text-primary-800 text-center text-nowrap logoShadow"};function c(s,a){return o(),t("h1",r," 可_可 ")}const p=e(n,[["render",c]]);export{p as L};
