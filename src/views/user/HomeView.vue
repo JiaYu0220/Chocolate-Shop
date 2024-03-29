@@ -22,7 +22,7 @@
   </section>
   <!-- 分類 -->
   <section class="bg-primary-50 py-10 md:py-20">
-    <div class="container">
+    <div class="container overflow-hidden">
       <SectionTitle title="品項" link-to="/products" link-text="查看所有商品"></SectionTitle>
       <ul class="flex flex-wrap -m-1 *:p-1 *:h-72">
         <li data-aos="fade-down-right" class="w-1/3">
