@@ -1,35 +1,11 @@
 <template>
-  <swiper-container init="false"
-  ref="productSwiper"
-  >
+  <swiper-container init="false" ref="productSwiper">
     <swiper-slide v-for="product in products" :key="product.id">
-    <ProductCard :product="product"></ProductCard>
+      <ProductCard :product="product" />
     </swiper-slide>
   </swiper-container>
 </template>
-<style scoped>
-swiper-container::part(container){
-  --swiper-theme-color: #361707;
-}
-swiper-slide{
-  @apply h-auto
-}
 
-swiper-container::part(button-prev),swiper-container::part(button-next){
-  width: 20px;
-  --swiper-navigation-size: 20px;
-  --swiper-navigation-sides-offset: 40px;
-  --swiper-navigation-top-offset: 30%;
-  @apply bg-primary-50/80 rounded-full p-4 hover:scale-110 hover:bg-primary-50
-  transition-transform duration-300
-}
-swiper-container::part(scrollbar){
-  --swiper-scrollbar-drag-bg-color: rgba(38, 16, 5, 0.5);
-  --swiper-scrollbar-bg-color: rgba(38, 16, 5, 0.1);
-  @apply static mt-5 w-2/3 mx-auto
-}
-
-</style>
 <script>
 import { register } from 'swiper/element/bundle';
 import { mapState } from 'pinia';
@@ -47,13 +23,8 @@ export default {
       spaceBetween: 12,
       setWrapperSize: true,
       navigation: {
-        enabled: false,
-      },
-      scrollbar: {
         enabled: true,
-        draggable: true,
       },
-      grabCursor: true,
       breakpoints: {
         480: {
           slidesPerView: 2,
@@ -61,9 +32,6 @@ export default {
         768: {
           slidesPerView: 3,
           spaceBetween: 16,
-          navigation: {
-            enabled: true,
-          },
         },
         1280: {
           slidesPerView: 4,
@@ -80,3 +48,27 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+swiper-container::part(container) {
+  --swiper-theme-color: #361707;
+}
+swiper-slide {
+  @apply h-auto;
+}
+
+swiper-container::part(button-prev),
+swiper-container::part(button-next) {
+  width: 16px;
+  --swiper-navigation-size: 16px;
+  --swiper-navigation-top-offset: 30%;
+  @apply rounded-full bg-primary-50/80 p-3 transition-transform duration-300
+  hover:scale-110 hover:bg-primary-50 md:p-4;
+}
+
+swiper-container::part(scrollbar) {
+  --swiper-scrollbar-drag-bg-color: rgba(38, 16, 5, 0.5);
+  --swiper-scrollbar-bg-color: rgba(38, 16, 5, 0.1);
+  @apply static mx-auto mt-5 w-2/3;
+}
+</style>

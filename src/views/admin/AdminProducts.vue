@@ -1,9 +1,12 @@
 <template>
   <!-- nav -->
-  <div class="flex justify-between items-center mb-8">
+  <div class="mb-8 flex items-center justify-between">
     <h2 class="text-2xl font-bold">產品管理</h2>
-    <LoadingBtn class="btn btn-primary" :isLoading="loadingStatus.newProduct"
-    @click="openModal('new')">
+    <LoadingBtn
+      class="btn btn-primary"
+      :isLoading="loadingStatus.newProduct"
+      @click="openModal('new')"
+    >
       <i v-if="!loadingStatus.newProduct" class="bi bi-plus-lg me-1"></i>新增產品
     </LoadingBtn>
   </div>
@@ -11,26 +14,16 @@
   <TableComponent class="mb-8">
     <!-- thead > tr -->
     <template #th>
-      <th scope="col" class="min-w-8">
-        分類
-      </th>
+      <th scope="col" class="min-w-8">分類</th>
       <th scope="col" class="min-w-24">產品名稱</th>
-      <th scope="col" class="text-end min-w-9">
-        原價
-      </th>
-      <th scope="col" class="text-end min-w-9">
-        售價
-      </th>
-      <th scope="col" class="text-end min-w-9">
-        庫存
-      </th>
-      <th scope="col" class="text-center">
-        狀態
-      </th>
+      <th scope="col" class="min-w-9 text-end">原價</th>
+      <th scope="col" class="min-w-9 text-end">售價</th>
+      <th scope="col" class="min-w-9 text-end">庫存</th>
+      <th scope="col" class="text-center">狀態</th>
       <th scope="col"></th>
     </template>
     <!-- tbody -->
-    <template #tr="{trClass}">
+    <template #tr="{ trClass }">
       <tr :class="trClass" v-for="product in products" :key="product.id">
         <td>{{ product.category }}</td>
         <td>{{ product.title }}</td>
@@ -45,8 +38,11 @@
         </td>
         <td>
           <AdminActionBtns
-          :data="product" loadingId="productId"
-          @open-modal="openModal" @del-item="delProduct">
+            :data="product"
+            loadingId="productId"
+            @open-modal="openModal"
+            @del-item="delProduct"
+          >
           </AdminActionBtns>
         </td>
       </tr>
@@ -55,9 +51,14 @@
 
   <PaginationComponent :pagination="pagination" @get-data="getAdminProducts" />
 
-  <ProductModal ref="productModal" :product="tempProduct" :is-new="isNew"
-  :pagination="pagination" :categories="categories"
-  @get-data="getAdminProducts" />
+  <ProductModal
+    ref="productModal"
+    :product="tempProduct"
+    :is-new="isNew"
+    :pagination="pagination"
+    :categories="categories"
+    @get-data="getAdminProducts"
+  />
 </template>
 
 <script>
@@ -167,5 +168,4 @@ export default {
     ...mapState(loadingStore, ['loadingStatus']),
   },
 };
-
 </script>

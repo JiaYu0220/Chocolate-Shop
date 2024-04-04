@@ -4,7 +4,6 @@ import swalStore from './swalStore';
 const { swalToast } = swalStore();
 
 export default defineStore('favoriteStore', {
-
   state: () => ({
     favorites: [],
   }),

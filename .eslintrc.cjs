@@ -1,33 +1,28 @@
-/* eslint-env node */
-// require('@rushstack/eslint-patch/modern-module-resolution');
-
 module.exports = {
   root: true,
+  env: {
+    browser: true,
+    es2021: true,
+  },
   extends: [
     'plugin:vue/vue3-essential',
     'eslint:recommended',
-    '@vue/eslint-config-prettier/skip-formatting',
     'airbnb-base',
+    '@vue/eslint-config-prettier',
   ],
   parserOptions: {
     ecmaVersion: 'latest',
+    sourceType: 'module',
   },
   settings: {
     'import/resolver': {
       alias: {
-        map: [
-          ['@', './src'],
-        ],
+        map: [['@', './src']],
         extensions: ['.js', '.vue'],
       },
     },
-    'import/core-modules': [
-      'vite',
-      '@vitejs/plugin-vue',
-    ],
-    rules: {
-      // 'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
-    },
-
+    'import/core-modules': ['vite', '@vitejs/plugin-vue'],
   },
+  plugins: ['vue'],
+  rules: {},
 };

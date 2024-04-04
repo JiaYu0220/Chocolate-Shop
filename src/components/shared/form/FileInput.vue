@@ -1,31 +1,41 @@
 <template>
-  <label ref="input" for="imageInput"
-      class="flex flex-col items-center justify-center
-      p-4 text-stone-400 text-center border-4 rounded-md
-      cursor-pointer w-full relative duration-150 text-sm md:text-base
-      hover:bg-stone-100"
-      :class="isDragfile?'border-primary-300': 'border-stone-300 border-dashed'">
-        <i class="bi bi-file-earmark-image-fill text-2xl"></i>
-        <p>請拖曳圖片檔案到此區，或點擊後選取圖片檔案</p>
-        <p v-if="isMultiple">可上傳多個檔案</p>
-        <p>PNG、JPG、JPEG，檔案大小須為 3MB 以下</p>
-        <input class="opacity-0 absolute w-full h-full cursor-pointer"
-        type="file" accept=".png, .jpg, .jpeg" id="imageInput"
-        ref="imageFile" title="" :multiple="isMultiple"
-        :disabled="isLoading"
-        @change="handleChange"
-        @dragover="isDragfile = true"
-        @drop="isDragfile = false"
-        @dragleave="isDragfile = false">
-        <div v-if="isLoading" class="absolute w-full h-full bg-primary-50 opacity-80
-        flex items-center justify-center">
-        <IconLoading size="lg"></IconLoading></div>
-      </label>
+  <label
+    ref="input"
+    for="imageInput"
+    class="relative flex w-full cursor-pointer flex-col items-center justify-center rounded-md
+      border-4 p-4 text-center text-sm text-stone-400 duration-150 hover:bg-stone-100 md:text-base"
+    :class="isDragfile ? 'border-primary-300' : 'border-dashed border-stone-300'"
+  >
+    <i class="bi bi-file-earmark-image-fill text-2xl"></i>
+    <p>請拖曳圖片檔案到此區，或點擊後選取圖片檔案</p>
+    <p v-if="isMultiple">可上傳多個檔案</p>
+    <p>PNG、JPG、JPEG，檔案大小須為 3MB 以下</p>
+    <input
+      class="absolute h-full w-full cursor-pointer opacity-0"
+      type="file"
+      accept=".png, .jpg, .jpeg"
+      id="imageInput"
+      ref="imageFile"
+      title=""
+      :multiple="isMultiple"
+      :disabled="isLoading"
+      @change="handleChange"
+      @dragover="isDragfile = true"
+      @drop="isDragfile = false"
+      @dragleave="isDragfile = false"
+    />
+    <div
+      v-if="isLoading"
+      class="absolute flex h-full w-full items-center justify-center bg-primary-50 opacity-80"
+    >
+      <IconLoading size="lg" />
+    </div>
+  </label>
 </template>
 
 <script>
-import IconLoading from '@/components/icons/IconLoading.vue';
 import { mapState, mapActions } from 'pinia';
+import IconLoading from '@/components/icons/IconLoading.vue';
 import loadingStore from '@/stores/loadingStore';
 import swalStore from '@/stores/swalStore';
 

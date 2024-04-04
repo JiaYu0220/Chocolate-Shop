@@ -15,12 +15,9 @@ import Loading from 'vue-loading-overlay';
 import VueSweetalert2 from 'vue-sweetalert2';
 import VueCropper from 'vue-cropper';
 import VueDatePicker from '@vuepic/vue-datepicker';
-// import { register } from 'swiper/element/bundle';
 
 // veeValidate
-import {
-  Form, Field, ErrorMessage, defineRule, configure,
-} from 'vee-validate';
+import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate';
 import * as AllRules from '@vee-validate/rules';
 import { localize, setLocale } from '@vee-validate/i18n';
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json';
@@ -63,9 +60,7 @@ app.use(pinia);
 app.use(router);
 app.use(VueAxios, axios);
 app.use(VueSweetalert2, swlOptions);
-// app.use(LoadingPlugin);
 app.use(VueCropper);
-// app.use(register);
 app.component('LoadingOverlay', Loading);
 app.component('VForm', Form);
 app.component('VField', Field);

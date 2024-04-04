@@ -5,7 +5,7 @@ const router = createRouter({
   scrollBehavior() {
     return { top: 0 };
   },
-  linkExactActiveClass: 'active', // 準確比對，在其他頁面時首頁連結才不會被活化
+  linkExactActiveClass: 'active',
   routes: [
     {
       path: '/',

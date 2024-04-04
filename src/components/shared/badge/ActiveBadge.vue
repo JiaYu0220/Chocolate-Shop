@@ -1,14 +1,18 @@
 <template>
-  <span v-if="active"
-  :class="`inline-flex items-center gap-1 px-2 py-1 rounded-lg text-sm text-nowrap
-  bg-lime-50 text-lime-700`">
-    <span :class="`hidden md:inline-block h-1.5 w-1.5 rounded-full bg-lime-700`"></span>
+  <span
+    v-if="active"
+    :class="`inline-flex items-center gap-1 text-nowrap rounded-lg bg-lime-50 px-2 py-1 text-sm
+      text-lime-700`"
+  >
+    <span :class="'hidden h-1.5 w-1.5 rounded-full bg-lime-700 md:inline-block'"></span>
     <slot name="trueMsg"></slot>
   </span>
-  <span v-else
-  :class="`inline-flex items-center gap-1 px-2 py-1 rounded-lg text-sm text-nowrap
-  bg-orange-50 text-orange-700`">
-    <span :class="`hidden md:inline-block h-1.5 w-1.5 rounded-full bg-orange-700`"></span>
+  <span
+    v-else
+    :class="`inline-flex items-center gap-1 text-nowrap rounded-lg bg-orange-50 px-2 py-1 text-sm
+      text-orange-700`"
+  >
+    <span :class="'hidden h-1.5 w-1.5 rounded-full bg-orange-700 md:inline-block'"></span>
     <slot name="falseMsg"></slot>
   </span>
 </template>

@@ -1,10 +1,10 @@
 <template>
   <div>
-    <p>收件人：{{order.user.name}}</p>
-    <p>電子信箱：{{order.user.email}}</p>
-    <p>電話：{{order.user.tel}}</p>
-    <p>地址：{{order.user.address}}</p>
-    <p>備註：{{order.message}}</p>
+    <p>收件人：{{ order.user.name }}</p>
+    <p>電子信箱：{{ order.user.email }}</p>
+    <p>電話：{{ order.user.tel }}</p>
+    <p>地址：{{ order.user.address }}</p>
+    <p>備註：{{ order.message }}</p>
   </div>
 </template>
 <script>

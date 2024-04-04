@@ -1,34 +1,26 @@
 <template>
   <div class="container py-10">
-    <div class="pb-10 mb-8 border-b-2 border-primary-200">
-      <!-- 麵包屑 -->
-      <!-- <nav class="mb-6" aria-label="Breadcrumb">
-        <ol class="flex text-sm md:text-sm">
-          <li class="after:content-['/'] after:mx-1 after:md:mx-2">
-            <RouterLink class="link" to="/">首頁</RouterLink>
-          </li>
-          <li class="after:content-['/'] after:mx-1 after:md:mx-2">
-            <RouterLink class="link" to="/products">產品列表</RouterLink>
-          </li>
-          <li>{{ currentBreadcrumb }}</li>
-        </ol>
-      </nav> -->
-      <h2 class="text-center text-2xl font-bold tracking-widest text-primary-800
-      pb-6">{{ currentCategory || '全部' }}</h2>
-      <ul class="flex justify-center gap-4 md:gap-8 text font-medium">
-        <CategoryLinks category="全部"></CategoryLinks>
-        <CategoryLinks v-for="(item, category) in categories" :key="category"
-        :category="category"></CategoryLinks>
+    <div class="mb-8 border-b-2 border-primary-200 pb-10">
+      <h2 class="pb-6 text-center text-2xl font-bold tracking-widest text-primary-800">
+        {{ currentCategory || '全部' }}
+      </h2>
+      <ul class="text flex justify-center gap-4 font-medium md:gap-8">
+        <CategoryLinks category="全部" />
+        <CategoryLinks
+          v-for="(item, category) in categories"
+          :key="category"
+          :category="category"
+        />
       </ul>
     </div>
     <!-- 產品 -->
     <div class="w-full">
-      <ul v-if="products.length" class="flex flex-wrap -m-4 mb-8 *:p-4">
+      <ul v-if="products.length" class="-m-4 mb-8 flex flex-wrap *:p-4">
         <li class="w-full md:w-1/2 xl:w-1/3" v-for="product in products" :key="product.id">
           <ProductCard :product="product" />
         </li>
       </ul>
-      <PaginationComponent :pagination="pagination" @get-data="getProducts"/>
+      <PaginationComponent :pagination="pagination" @get-data="getProducts" />
     </div>
   </div>
 </template>
@@ -46,13 +38,14 @@ const { VITE_URL, VITE_PATH } = import.meta.env;
 
 export default {
   components: {
-    ProductCard, PaginationComponent, CategoryLinks,
+    ProductCard,
+    PaginationComponent,
+    CategoryLinks,
   },
   data() {
     return {
       products: [],
       pagination: {},
-      // currentBreadcrumb: '全部',
     };
   },
   mounted() {

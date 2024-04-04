@@ -1,73 +1,92 @@
 <template>
   <!-- 打開 modal 按鈕 -->
-  <button type="button" class="btn btn-primary-light"
-  @click="$refs.cropperModal.showModal()">
+  <button type="button" class="btn btn-primary-light" @click="$refs.cropperModal.showModal()">
     <i class="bi bi-scissors mr-1"></i>裁剪圖片小工具
   </button>
   <!-- modal -->
   <FormModal ref="cropperModal" target="cropperModal" @reset-form="clear">
     <!-- modal 標題 -->
-    <template #title="{titleClass}">
+    <template #title="{ titleClass }">
       <h3 :class="titleClass">裁剪圖片小工具</h3>
     </template>
-
     <!-- 上傳檔案 input -->
     <p class="mb-2">請選擇圖片檔案或貼上圖片網址：</p>
-    <FileInput @emit-change="upload" class="mb-3"></FileInput>
+    <FileInput @emit-change="upload" class="mb-3" />
     <FormFloat :label-for="'imgUrl'" :label="'圖片網址'" class="mb-3">
-      <template #default="{inputClass}">
-        <input type="text" name="圖片" id="imgUrl" :class="inputClass"
-        v-model="option.img" placeholder>
+      <template #default="{ inputClass }">
+        <input
+          type="text"
+          name="圖片"
+          id="imgUrl"
+          :class="inputClass"
+          v-model="option.img"
+          placeholder
+        />
       </template>
-      <template #icon="{iconClass}" v-if="option.img" >
+      <template #icon="{ iconClass }" v-if="option.img">
         <button type="button" :class="iconClass" @click="clear">
-          <i class="bi bi-x text-xl" ></i>
+          <i class="bi bi-x text-xl"></i>
         </button>
       </template>
     </FormFloat>
 
     <!-- 裁剪區 -->
-    <div class="w-full h-[200px] md:h-[400px]" v-if="option.img">
-      <VueCropper ref="cropper" :img="option.img" center-wrapper
-      :output-size="option.outputSize"
-      :output-type="option.outputType"
-      :info="option.info"
-      :full="option.full"
-      :fixed="fixed"
-      :fixed-number="fixedNumber"
-      :can-move="option.canMove"
-      :can-move-box="option.canMoveBox"
-      :can-scale ="option.canScale"
-      :original="option.original"
-      :auto-crop="option.autoCrop"
-      :autoCropWidth="option.autoCropWidth"
-      :autoCropHeight="option.autoCropHeight"
-      :center-box="option.centerBox"
-      :high="option.high"
-      :max-img-size="option.maxImgSize"
-      :mode="option.mode">
+    <div class="h-[200px] w-full md:h-[400px]" v-if="option.img">
+      <VueCropper
+        ref="cropper"
+        :img="option.img"
+        center-wrapper
+        :output-size="option.outputSize"
+        :output-type="option.outputType"
+        :info="option.info"
+        :full="option.full"
+        :fixed="fixed"
+        :fixed-number="fixedNumber"
+        :can-move="option.canMove"
+        :can-move-box="option.canMoveBox"
+        :can-scale="option.canScale"
+        :original="option.original"
+        :auto-crop="option.autoCrop"
+        :autoCropWidth="option.autoCropWidth"
+        :autoCropHeight="option.autoCropHeight"
+        :center-box="option.centerBox"
+        :high="option.high"
+        :max-img-size="option.maxImgSize"
+        :mode="option.mode"
+      >
       </VueCropper>
     </div>
 
     <!-- 下載裁剪圖片 -->
-    <div class="flex mt-5">
-      <FormFloat v-if="option.img" :label-for="'fileName'" :label="'下載的檔案名稱'" class="flex-grow">
-        <template #default="{inputClass}">
-          <input type="text" name="檔案名稱" id="fileName"
-          class="rounded-r-none"
-          :class="inputClass"
-          v-model="fileName" placeholder>
+    <div class="mt-5 flex">
+      <FormFloat
+        v-if="option.img"
+        :label-for="'fileName'"
+        :label="'下載的檔案名稱'"
+        class="flex-grow"
+      >
+        <template #default="{ inputClass }">
+          <input
+            type="text"
+            name="檔案名稱"
+            id="fileName"
+            class="rounded-r-none"
+            :class="inputClass"
+            v-model="fileName"
+            placeholder
+          />
         </template>
       </FormFloat>
-      <button type="button" v-if="option.img" class="btn btn-primary rounded-l-none text-nowrap"
-      @click="download">下載</button>
+      <button
+        type="button"
+        v-if="option.img"
+        class="btn btn-primary text-nowrap rounded-l-none"
+        @click="download"
+      >
+        下載
+      </button>
     </div>
-    <!-- 裁剪完圖片 -->
-    <!-- <div class="" v-show="cropperUrl">
-    <img :src="cropperUrl" alt="">
-    </div> -->
   </FormModal>
-
 </template>
 
 <script>
@@ -104,7 +123,9 @@ export default {
     };
   },
   components: {
-    FormFloat, FileInput, FormModal,
+    FormFloat,
+    FileInput,
+    FormModal,
   },
   props: {
     downName: String,

@@ -1,3 +1,6 @@
 {
-  "[FILE EXTENSION OF STEP 3].lint.unknownAtRules": "ignore"
+  "[FILE EXTENSION OF STEP 3].lint.unknownAtRules": "ignore",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  }, //儲存時自動執行 ESLint 格式化
 }

@@ -19,7 +19,6 @@ export default defineConfig({
     eslintPlugin({
       include: ['src/**/*.js', 'src/**/*.vue', 'src/*.js', 'src/*.vue'],
     }),
-
   ],
   resolve: {
     alias: {

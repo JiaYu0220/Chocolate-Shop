@@ -1,9 +1,12 @@
 <template>
-     <!-- nav -->
-  <div class="flex justify-between items-center mb-8">
+  <!-- nav -->
+  <div class="mb-8 flex items-center justify-between">
     <h2 class="text-2xl font-bold">優惠券管理</h2>
-    <LoadingBtn class="btn btn-primary" :isLoading="loadingStatus.newCoupon"
-    @click="openModal('new')">
+    <LoadingBtn
+      class="btn btn-primary"
+      :isLoading="loadingStatus.newCoupon"
+      @click="openModal('new')"
+    >
       <i v-if="!loadingStatus.newCoupon" class="bi bi-plus-lg me-1"></i>新增優惠券
     </LoadingBtn>
   </div>
@@ -16,32 +19,40 @@
       <th scope="col">期限</th>
       <th scope="col">啟用</th>
     </template>
-    <template #tr="{trClass}">
-      <tr :class="trClass" v-for="(coupon) in coupons" :key="coupon.id">
-          <td>{{ coupon.title }}</td>
-          <td>{{ coupon.percent }}</td>
-          <td>{{ coupon.code }}</td>
-          <td>{{ timestampToDate(coupon.due_date) }}</td>
-          <td>
-            <ActiveBadge :active="coupon.is_enabled">
-              <template #trueMsg>啟用</template>
-              <template #falseMsg>未啟用</template>
-            </ActiveBadge>
-          </td>
-          <td>
-            <AdminActionBtns
-            :data="coupon" loadingId="couponId"
-            @open-modal="openModal" @del-item="delCoupon">
-            </AdminActionBtns>
-          </td>
+    <template #tr="{ trClass }">
+      <tr :class="trClass" v-for="coupon in coupons" :key="coupon.id">
+        <td>{{ coupon.title }}</td>
+        <td>{{ coupon.percent }}</td>
+        <td>{{ coupon.code }}</td>
+        <td>{{ timestampToDate(coupon.due_date) }}</td>
+        <td>
+          <ActiveBadge :active="coupon.is_enabled">
+            <template #trueMsg>啟用</template>
+            <template #falseMsg>未啟用</template>
+          </ActiveBadge>
+        </td>
+        <td>
+          <AdminActionBtns
+            :data="coupon"
+            loadingId="couponId"
+            @open-modal="openModal"
+            @del-item="delCoupon"
+          >
+          </AdminActionBtns>
+        </td>
       </tr>
     </template>
   </TableComponent>
 
   <PaginationComponent :pagination="pagination" @get-data="getAdminCoupons" />
 
-  <CouponModal ref="couponModal" :coupon="tempCoupon" :is-new="isNew" :pagination="pagination"
-  @get-data="getAdminCoupons" />
+  <CouponModal
+    ref="couponModal"
+    :coupon="tempCoupon"
+    :is-new="isNew"
+    :pagination="pagination"
+    @get-data="getAdminCoupons"
+  />
 </template>
 <script>
 import { mapState, mapActions } from 'pinia';
@@ -58,7 +69,12 @@ import CouponModal from '../../components/adminPages/adminCoupons/CouponModal.vu
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
   components: {
-    TableComponent, PaginationComponent, AdminActionBtns, ActiveBadge, CouponModal, LoadingBtn,
+    TableComponent,
+    PaginationComponent,
+    AdminActionBtns,
+    ActiveBadge,
+    CouponModal,
+    LoadingBtn,
   },
   data() {
     return {

@@ -1,25 +1,25 @@
+import GlobalVariables from '@/GlobalVariableHolder';
 import { defineStore } from 'pinia';
 import axios from 'axios';
-import GlobalVariables from '@/GlobalVariableHolder';
 import loadingStore from './loadingStore';
 
 const { $swal } = GlobalVariables.variables;
 
+const { VITE_URL, VITE_PATH } = import.meta.env;
 const { hideLoading } = loadingStore();
 
-const { VITE_URL, VITE_PATH } = import.meta.env;
-
-export default defineStore('articleStore', {
+export default defineStore('orderStore', {
   state: () => ({
-    articles: [],
+    orders: [],
+    currentOrder: {},
   }),
   actions: {
-    async getAllArticles() {
+    async getOrders() {
       try {
-        const url = `${VITE_URL}/api/${VITE_PATH}/articles`;
-        const res = await axios.get(url);
-        res.data.articles.sort((a, b) => b.create_at - a.create_at);
-        this.articles = res.data.articles;
+        const url = `${VITE_URL}/api/${VITE_PATH}/orders`;
+        const { data } = await axios.get(url);
+        this.orders = data?.orders;
+        [this.currentOrder] = this.orders;
       } catch (error) {
         hideLoading();
         // 通知

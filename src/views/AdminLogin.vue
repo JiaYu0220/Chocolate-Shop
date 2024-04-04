@@ -1,50 +1,62 @@
 <template>
-   <MyLoading></MyLoading>
+  <MyLoading></MyLoading>
   <div class="bg-primary-100">
     <div class="container">
-      <div class="h-screen flex justify-center items-center">
+      <div class="flex h-screen items-center justify-center">
         <div class="w-72">
-          <LogoComponent class="mb-8 text-4xl"/>
-          <VForm v-slot="{ errors }" @submit="login"
-          class="bg-primary-50 p-4 rounded-lg border-2 border-primary-800">
-            <h2 class="font-bold text-xl text-center py-6">
-              後台登入
-            </h2>
+          <LogoComponent class="mb-8 text-4xl" />
+          <VForm
+            v-slot="{ errors }"
+            @submit="login"
+            class="rounded-lg border-2 border-primary-800 bg-primary-50 p-4"
+          >
+            <h2 class="py-6 text-center text-xl font-bold">後台登入</h2>
             <div class="mb-3">
               <FormFloat :label-for="'email'" :label="'電子信箱'" :errors="errors">
-              <template #default="{inputClass}">
-                <VField
-                type="email" name="電子信箱" id="email"
-                rules="email|required"
-                autocomplete="username" v-model="user.username"
-                :class="inputClass" placeholder required>
-                </VField>
-              </template>
-            </FormFloat>
+                <template #default="{ inputClass }">
+                  <VField
+                    type="email"
+                    name="電子信箱"
+                    id="email"
+                    rules="email|required"
+                    autocomplete="username"
+                    v-model="user.username"
+                    :class="inputClass"
+                    placeholder
+                    required
+                  >
+                  </VField>
+                </template>
+              </FormFloat>
             </div>
             <div class="mb-6">
               <FormFloat :label-for="'password'" :label="'密碼'" :errors="errors">
-                <template #default="{inputClass}">
+                <template #default="{ inputClass }">
                   <VField
-                  :type="`${isPwVisible? 'text': 'password'}`" name="密碼" id="password"
-                  rules="required"
-                  autocomplete="current-password"
-                  v-model="user.password"
-                  :class="inputClass" placeholder required>
+                    :type="`${isPwVisible ? 'text' : 'password'}`"
+                    name="密碼"
+                    id="password"
+                    rules="required"
+                    autocomplete="current-password"
+                    v-model="user.password"
+                    :class="inputClass"
+                    placeholder
+                    required
+                  >
                   </VField>
                 </template>
-                <template #icon="{iconClass}">
-                  <button :class="iconClass"
-                  type="button" @click="isPwVisible = !isPwVisible">
-                  <i :class="`text-2xl bi bi-eye-${isPwVisible? 'slash-fill': 'fill'}`"></i>
+                <template #icon="{ iconClass }">
+                  <button :class="iconClass" type="button" @click="isPwVisible = !isPwVisible">
+                    <i :class="`bi text-2xl bi-eye-${isPwVisible ? 'slash-fill' : 'fill'}`"></i>
                   </button>
                 </template>
               </FormFloat>
             </div>
-            <button type="button" class="w-full btn btn-primary btn-lg mb-3"
-            @click="autoLogin">一鍵登入 (測試用)</button>
-            <button type="submit" class="w-full btn btn-primary btn-lg mb-3">進入後台</button>
-            <RouterLink to="/" class="block text-center btn btn-link btn-lg">回首頁</RouterLink>
+            <button type="button" class="btn btn-primary btn-lg mb-3 w-full" @click="autoLogin">
+              一鍵登入 (測試用)
+            </button>
+            <button type="submit" class="btn btn-primary btn-lg mb-3 w-full">進入後台</button>
+            <RouterLink to="/" class="btn btn-link btn-lg block text-center">回首頁</RouterLink>
           </VForm>
         </div>
       </div>

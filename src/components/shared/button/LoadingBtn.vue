@@ -1,7 +1,7 @@
 <template>
   <button type="button" :disabled="isLoading">
-    <IconLoading v-if="isLoading"></IconLoading>
-      <slot></slot>
+    <IconLoading v-if="isLoading" />
+    <slot></slot>
   </button>
 </template>
 <script>

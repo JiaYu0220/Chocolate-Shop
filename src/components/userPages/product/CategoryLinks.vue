@@ -1,12 +1,16 @@
 <template>
-  <RouterLink
-  :to="path" custom v-slot="{ navigate, isExactActive }">
-    <li class="text-nowrap"
-    :class="(isExactActive && currentCategory === category) ?
-    'link-active' : 'link cursor-pointer'"
-    @click="navigate" role="link">{{ category }}</li>
+  <RouterLink :to="path" custom v-slot="{ navigate, isExactActive }">
+    <li
+      class="text-nowrap"
+      :class="isExactActive && currentCategory === category ? 'link-active' : 'link cursor-pointer'"
+      @click="navigate"
+      role="link"
+    >
+      {{ category }}
+    </li>
   </RouterLink>
 </template>
+
 <script>
 import { mapState } from 'pinia';
 import productStore from '@/stores/productStore';
@@ -31,8 +35,8 @@ export default {
 };
 </script>
 <style>
-  .link-active{
-    @apply relative text-primary-700 after:absolute after:content-['']
-    after:w-full after:h-[2px] after:bg-primary-700 after:-bottom-1 after:left-0
-  }
+.link-active {
+  @apply relative text-primary-700 after:absolute after:-bottom-1
+    after:left-0 after:h-[2px] after:w-full after:bg-primary-700 after:content-[''];
+}
 </style>

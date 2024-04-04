@@ -1,38 +1,30 @@
 <template>
-  <ul class="text-primary-950 bg-primary-100 flex-grow flex flex-col justify-center w-full
-  md:text-lg md:justify-start">
+  <ul
+    class="flex w-full flex-grow flex-col justify-center bg-primary-100 text-primary-950
+      md:justify-start md:text-lg"
+  >
     <li v-for="item in catalog" :key="item.title" class="mb-4 font-bold">
-      <RouterLink :to="`/admin/${item.path}`" class="block text-center py-3 rounded-md
-      hover:bg-primary-800 hover:text-primary-200 hover:shadow-md duration-300 mx-2
-      md:pl-7 md:text-left"
-      @click="$emit('close-menu')">
+      <RouterLink
+        :to="`/admin/${item.path}`"
+        class="mx-2 block rounded-md py-3 text-center duration-300 hover:bg-primary-800
+          hover:text-primary-200 hover:shadow-md md:pl-7 md:text-left"
+        @click="$emit('close-menu')"
+      >
         <i :class="`bi ${item.icon} me-4`"></i>{{ item.title }}
       </RouterLink>
     </li>
-    <li class="font-bold mt-2 md:mt-auto">
-      <a class="block text-center cursor-pointer py-3 rounded-md text-primary-700
-      border-l-8 border-transparent transition-color duration-300
-      hover:bg-primary-800 hover:text-primary-200 hover:shadow-md
-      md:pl-7 md:mx-2 md:text-left"
-      @click="logout">
-      <i class="bi bi-door-open-fill me-4"></i>登出
+    <li class="mt-2 font-bold md:mt-auto">
+      <a
+        class="transition-color block cursor-pointer rounded-md border-l-8 border-transparent py-3
+          text-center text-primary-700 duration-300 hover:bg-primary-800 hover:text-primary-200
+          hover:shadow-md md:mx-2 md:pl-7 md:text-left"
+        @click="logout"
+      >
+        <i class="bi bi-door-open-fill me-4"></i>登出
       </a>
     </li>
   </ul>
 </template>
-
-<style scoped>
-.active {
-  @apply bg-primary-800 text-primary-200 shadow-md pointer-events-none
-}
-
-@screen md {
-  .active {
-    @apply mx-0 pl-7 rounded-none border-l-8 bg-primary-100 border-primary-700 text-primary-700
-    shadow-none pointer-events-none
-  }
-}
-</style>
 
 <script>
 import { mapActions } from 'pinia';
@@ -44,7 +36,12 @@ export default {
   data() {
     return {
       isMenuOpen: false,
-      catalog: [{ title: '產品', path: 'products', icon: 'bi-bag-fill' }, { title: '優惠券', path: 'coupons', icon: 'bi-ticket-perforated-fill' }, { title: '訂單', path: 'orders', icon: 'bi-stickies-fill' }, { title: '文章', path: 'articles', icon: 'bi-file-richtext-fill' }],
+      catalog: [
+        { title: '產品', path: 'products', icon: 'bi-bag-fill' },
+        { title: '優惠券', path: 'coupons', icon: 'bi-ticket-perforated-fill' },
+        { title: '訂單', path: 'orders', icon: 'bi-stickies-fill' },
+        { title: '文章', path: 'articles', icon: 'bi-file-richtext-fill' },
+      ],
     };
   },
   methods: {
@@ -65,3 +62,16 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.active {
+  @apply pointer-events-none bg-primary-800 text-primary-200 shadow-md;
+}
+
+@screen md {
+  .active {
+    @apply pointer-events-none mx-0 rounded-none border-l-8 border-primary-700 bg-primary-100 pl-7
+    text-primary-700 shadow-none;
+  }
+}
+</style>

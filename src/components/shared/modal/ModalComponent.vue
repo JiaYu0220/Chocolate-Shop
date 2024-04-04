@@ -1,13 +1,18 @@
 <template>
-  <Transition :name="direction" :enter-active-class="`animate__animated
+  <Transition
+    :name="direction"
+    :enter-active-class="`animate__animated
   animate__${entranceAnim} animate__faster`"
-  :leave-active-class="`animate__animated
+    :leave-active-class="`animate__animated
   animate__${exitAnim} animate__faster`"
-  @after-leave="onAfterLeave">
-    <dialog v-show="isShow" ref="modal"
-    class="backdrop:bg-stone-900/45"
-    :class="[{'backdrop:bg-transparent':!isShow}, $attrs.class]"
-    @cancel.prevent="closeModal"
+    @after-leave="onAfterLeave"
+  >
+    <dialog
+      v-show="isShow"
+      ref="modal"
+      class="backdrop:bg-stone-900/45"
+      :class="[{ 'backdrop:bg-transparent': !isShow }, $attrs.class]"
+      @cancel.prevent="closeModal"
     >
       <slot></slot>
     </dialog>
@@ -84,6 +89,5 @@ export default {
     // },
     ...mapActions(scrollStore, ['getCurrentScroll', 'disableScroll', 'enableScroll']),
   },
-
 };
 </script>

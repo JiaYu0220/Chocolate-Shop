@@ -1,10 +1,8 @@
 <template>
-  <h1 class="font-zenMaru text-primary-800 text-center text-nowrap logoShadow">
-     可_可
-  </h1>
+  <h1 class="logoShadow text-nowrap text-center font-zenMaru text-primary-800">可_可</h1>
 </template>
 <style>
-.logoShadow{
+.logoShadow {
   text-shadow: 2px 0 0 #261005;
 }
 </style>

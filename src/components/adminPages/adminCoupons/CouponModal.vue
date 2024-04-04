@@ -1,40 +1,62 @@
 <template>
   <FormModal target="coupon" ref="couponFormModal" @reset-form="resetModalForm">
     <!-- 標題 -->
-    <template #title="{titleClass}">
-      <h3 :class="titleClass">{{isNew ? '新增' : '編輯'}}優惠券</h3>
+    <template #title="{ titleClass }">
+      <h3 :class="titleClass">{{ isNew ? '新增' : '編輯' }}優惠券</h3>
     </template>
-
     <!-- 編輯區 -->
-    <VForm v-slot="{errors}" ref="couponForm"
-    @submit="updateCoupon">
-      <div class="flex flex-col gap-6 h-full">
+    <VForm v-slot="{ errors }" ref="couponForm" @submit="updateCoupon">
+      <div class="flex h-full flex-col gap-6">
         <!-- 名稱 -->
         <FormFloat :label-for="'title'" :label="'名稱'" :errors="errors">
-          <template #default="{inputClass}">
-            <VField type="text" name="名稱" id="title" v-model="tempCoupon.title"
-            :class="inputClass" rules="required" placeholder required></VField>
+          <template #default="{ inputClass }">
+            <VField
+              type="text"
+              name="名稱"
+              id="title"
+              v-model="tempCoupon.title"
+              :class="inputClass"
+              rules="required"
+              placeholder
+              required
+            />
           </template>
         </FormFloat>
         <!-- 優惠碼 -->
         <div>
           <FormFloat :label-for="'code'" :label="'優惠碼'" :errors="errors">
-            <template #default="{inputClass}">
-              <VField type="text" name="優惠碼" id="code" v-model="tempCoupon.code"
-              :class="inputClass" rules="required"
-              placeholder required></VField>
+            <template #default="{ inputClass }">
+              <VField
+                type="text"
+                name="優惠碼"
+                id="code"
+                v-model="tempCoupon.code"
+                :class="inputClass"
+                rules="required"
+                placeholder
+                required
+              />
             </template>
           </FormFloat>
-          <p class="text-stone-500 mt-1">※ 優惠碼英文小寫將會被轉成大寫</p>
+          <p class="mt-1 text-stone-500">※ 優惠碼英文小寫將會被轉成大寫</p>
         </div>
         <div class="flex gap-3">
           <!-- 折扣 -->
           <div class="w-1/3">
             <FormFloat :label-for="'percent'" :label="'折扣 (%)'" :errors="errors">
-              <template #default="{inputClass}">
-                <VField type="number" min="0" step="5" name="折扣 (%)" id="percent"
-                v-model.number="tempCoupon.percent"
-                :class="inputClass" rules="required" placeholder required></VField>
+              <template #default="{ inputClass }">
+                <VField
+                  type="number"
+                  min="0"
+                  step="5"
+                  name="折扣 (%)"
+                  id="percent"
+                  v-model.number="tempCoupon.percent"
+                  :class="inputClass"
+                  rules="required"
+                  placeholder
+                  required
+                />
               </template>
             </FormFloat>
           </div>
@@ -43,40 +65,55 @@
             <FormFloat :label-for="'due_date'" :label="'期限'">
               <template #default>
                 <VueDatePicker
-                v-model="tempCoupon.due_date" model-type="timestamp"
-                :enable-time-picker="false" format="yyyy/MM/dd"
-                locale="zh-TW" :day-names="['一', '二', '三', '四', '五', '六', '日']"
-                hide-input-icon :clearable="false"
-                teleport-center auto-apply required/>
+                  v-model="tempCoupon.due_date"
+                  model-type="timestamp"
+                  :enable-time-picker="false"
+                  format="yyyy/MM/dd"
+                  locale="zh-TW"
+                  :day-names="['一', '二', '三', '四', '五', '六', '日']"
+                  hide-input-icon
+                  :clearable="false"
+                  teleport-center
+                  auto-apply
+                  required
+                />
               </template>
             </FormFloat>
           </div>
         </div>
         <!-- 是否啟用 -->
         <ChecksRadio label-for="is_enable" label="是否啟用">
-          <template #default="{inputClass}">
-            <input id="is_enable"
-            :class="inputClass" type="checkbox"
-            v-model="tempCoupon.is_enable">
+          <template #default="{ inputClass }">
+            <input
+              id="is_enable"
+              :class="inputClass"
+              type="checkbox"
+              v-model="tempCoupon.is_enable"
+            />
           </template>
         </ChecksRadio>
         <!-- 按鈕 -->
         <div class="mt-5 text-end">
-          <button type="button" class="btn btn-outline-primary me-3"
-          @click="closeModal();resetModalForm()">
-          取消編輯</button>
-          <button type="submit" class="btn btn-primary">
-          儲存編輯</button>
+          <button
+            type="button"
+            class="btn btn-outline-primary me-3"
+            @click="
+              closeModal();
+              resetModalForm();
+            "
+          >
+            取消編輯
+          </button>
+          <button type="submit" class="btn btn-primary">儲存編輯</button>
         </div>
       </div>
-
     </VForm>
   </FormModal>
 </template>
 
 <script>
-import FormFloat from '@/components/shared/form/FormFloat.vue';
 import { mapActions, mapState } from 'pinia';
+import FormFloat from '@/components/shared/form/FormFloat.vue';
 import swalStore from '@/stores/swalStore';
 import loadingStore from '@/stores/loadingStore';
 import ChecksRadio from '@/components/shared/form/ChecksRadio.vue';
@@ -85,7 +122,9 @@ import FormModal from '@/components/shared/modal/FormModal.vue';
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
   components: {
-    FormModal, FormFloat, ChecksRadio,
+    FormModal,
+    FormFloat,
+    ChecksRadio,
   },
   props: {
     coupon: Object,

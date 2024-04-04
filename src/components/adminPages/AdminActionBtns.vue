@@ -1,13 +1,9 @@
 <template>
-  <div class="flex gap-2 justify-end">
-    <LoadingBtn class="btn btn-link p-1 md:p-2"
-    :is-loading="isLoading"
-    @click="openModal">
+  <div class="flex justify-end gap-2">
+    <LoadingBtn class="btn btn-link p-1 md:p-2" :is-loading="isLoading" @click="openModal">
       <i v-if="!isLoading" class="bi bi-pencil-fill"></i>
     </LoadingBtn>
-    <LoadingBtn class="btn btn-link p-1 md:p-2"
-    :is-loading="isLoading"
-    @click="delItem">
+    <LoadingBtn class="btn btn-link p-1 md:p-2" :is-loading="isLoading" @click="delItem">
       <i v-if="!isLoading" class="bi bi-trash3-fill"></i>
     </LoadingBtn>
   </div>

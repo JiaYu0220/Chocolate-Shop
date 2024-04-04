@@ -1,92 +1,119 @@
 <template>
   <div v-if="Object.keys(product).length" class="container py-10">
-    <div class="flex flex-col sm:flex-row pb-16">
+    <div class="flex flex-col pb-16 sm:flex-row">
       <!-- 圖 -->
-      <div class="sm:w-1/2 pb-5 sm:pb-0 sm:pr-4 h-96 md:h-[500px]">
+      <div class="h-96 pb-5 sm:w-1/2 sm:pb-0 sm:pr-4 md:h-[500px]">
         <!-- 顯示的圖 -->
-        <swiper-container class="w-full h-4/5 mx-auto *:rounded-sm *:overflow-hidden"
-        thumbs-swiper=".thumbs" space-between="10" navigation="true">
+        <swiper-container
+          class="mx-auto h-4/5 w-full *:overflow-hidden *:rounded-sm"
+          thumbs-swiper=".thumbs"
+          space-between="10"
+          navigation="true"
+        >
           <!-- 主圖 -->
           <swiper-slide lazy="true">
-            <VueMagnifier :src="product.imageUrl"
-            mgShape="square" class="object-cover aspect-square"/>
+            <VueMagnifier
+              :src="product.imageUrl"
+              mgShape="square"
+              class="aspect-square object-cover"
+            />
           </swiper-slide>
           <!-- 其他圖 -->
           <swiper-slide v-for="(img, i) in product.imagesUrl" :key="`img${i}`" lazy="true">
-            <VueMagnifier :src="img" class="object-cover aspect-square"/>
+            <VueMagnifier :src="img" class="aspect-square object-cover" />
           </swiper-slide>
         </swiper-container>
         <!-- thumbs -->
-        <swiper-container class="thumbs h-1/5 pt-2
-        *:w-1/4 *:h-full *:opacity-40 *:cursor-pointer *:rounded-sm *:overflow-hidden"
-        slides-per-view="4" free-mode="true" space-between="10"
-        watch-slides-progress="true">
+        <swiper-container
+          class="thumbs h-1/5 pt-2 *:h-full *:w-1/4 *:cursor-pointer *:overflow-hidden *:rounded-sm
+            *:opacity-40"
+          slides-per-view="4"
+          free-mode="true"
+          space-between="10"
+          watch-slides-progress="true"
+        >
           <!-- 主圖 -->
-          <swiper-slide lazy="true"><img loading="lazy" class="object-cover h-full w-full"
-          :src="product.imageUrl" alt="產品圖"></swiper-slide>
+          <swiper-slide lazy="true"
+            ><img
+              loading="lazy"
+              class="h-full w-full object-cover"
+              :src="product.imageUrl"
+              alt="產品圖"
+          /></swiper-slide>
           <!-- 其他圖 -->
           <swiper-slide v-for="(img, i) in product.imagesUrl" :key="`img${i}`" lazy="true">
-            <img class="object-cover h-full w-full" loading="lazy" :src="img" alt="產品圖">
+            <img class="h-full w-full object-cover" loading="lazy" :src="img" alt="產品圖" />
           </swiper-slide>
         </swiper-container>
       </div>
       <!-- 內容 -->
-      <div class="sm:w-1/2 sm:pl-4 flex flex-col justify-between relative">
-        <h2 class="font-bold text-2xl text-primary-800 mb-3">{{ product.title }}</h2>
+      <div class="relative flex flex-col justify-between sm:w-1/2 sm:pl-4">
+        <h2 class="mb-3 text-2xl font-bold text-primary-800">{{ product.title }}</h2>
         <p class="mb-5">{{ product.unit }}</p>
         <p class="mb-5">{{ product.description }}</p>
         <p class="mb-5">
-          <span class="text-2xl text-primary-800 mr-1">
-          <template v-if="product.price !== product.origin_price">特惠</template>
-          NT$ {{ product.price }}</span>
+          <span class="mr-1 text-2xl text-primary-800">
+            <template v-if="product.price !== product.origin_price">特惠</template>
+            NT$ {{ product.price }}</span
+          >
           <del v-if="product.price !== product.origin_price">NT$ {{ product.origin_price }}</del>
         </p>
         <!-- 數量按鈕 -->
         <p>數量</p>
-        <div class=" flex w-fit border-2 border-primary-700 rounded mb-5 *:px-3 *:py-2">
-          <button type="button"
-          class="transition-colors hover:bg-primary-700 hover:text-primary-50
-          focus:bg-primary-700 focus:text-primary-50 active:bg-primary-700 active:text-primary-50
-          disabled:text-stone-500 disabled:bg-stone-100 disabled:cursor-not-allowed"
-          @click="qty--" :disabled="qty === 1">
-          －
+        <div class="mb-5 flex w-fit rounded border-2 border-primary-700 *:px-3 *:py-2">
+          <button
+            type="button"
+            class="transition-colors hover:bg-primary-700 hover:text-primary-50 focus:bg-primary-700
+              focus:text-primary-50 active:bg-primary-700 active:text-primary-50
+              disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500"
+            @click="qty--"
+            :disabled="qty === 1"
+          >
+            －
           </button>
-          <input type="text" class="border-y-0 bg-transparent w-10 text-center
-          border-x border-primary-700
-          focus:ring-primary-700"
-          v-model="qty" readonly>
-          <button type="button"
-          class="transition-colors hover:bg-primary-700 hover:text-primary-50
-          focus:bg-primary-700 focus:text-primary-50 active:bg-primary-700 active:text-primary-50
-          disabled:text-stone-500 disabled:bg-stone-100/50 disabled:cursor-not-allowed"
-          @click="qty++">
-          ＋
+          <input
+            type="text"
+            class="w-10 border-x border-y-0 border-primary-700 bg-transparent text-center
+              focus:ring-primary-700"
+            v-model="qty"
+            readonly
+          />
+          <button
+            type="button"
+            class="transition-colors hover:bg-primary-700 hover:text-primary-50 focus:bg-primary-700
+              focus:text-primary-50 active:bg-primary-700 active:text-primary-50
+              disabled:cursor-not-allowed disabled:bg-stone-100/50 disabled:text-stone-500"
+            @click="qty++"
+          >
+            ＋
           </button>
         </div>
-        <LoadingBtn class="btn btn-primary w-full mt-auto"
-        @click.prevent="postCart(product.id, qty)"
-        :is-loading="(loadingStatus.productId === product.id)"
-        >加入購物車</LoadingBtn>
+        <LoadingBtn
+          class="btn btn-primary mt-auto w-full"
+          @click.prevent="postCart(product.id, qty)"
+          :is-loading="loadingStatus.productId === product.id"
+          >加入購物車</LoadingBtn
+        >
       </div>
     </div>
     <!-- 推薦商品 -->
-    <div class="flex justify-between items-center mb-5">
-      <h2 class="text-primary-800 text-xl font-bold">推薦商品</h2>
+    <div class="mb-5 flex items-center justify-between">
+      <h2 class="text-xl font-bold text-primary-800">推薦商品</h2>
       <RouterLink to="/products" class="link font-bold">查看所有商品 →</RouterLink>
     </div>
-    <ProductSwiper/>
+    <ProductSwiper />
   </div>
 </template>
 <style scoped>
-.thumbs .swiper-slide-thumb-active{
-  @apply opacity-100
+.thumbs .swiper-slide-thumb-active {
+  @apply opacity-100;
 }
-swiper-container::part(container){
+swiper-container::part(container) {
   --swiper-theme-color: #361707;
 }
 swiper-container[thumbs-swiper]::part(button-prev),
 swiper-container[thumbs-swiper]::part(button-next) {
-  @apply text-primary-50
+  @apply text-primary-50;
 }
 </style>
 <script>
@@ -106,7 +133,9 @@ const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
   props: ['id'],
   components: {
-    LoadingBtn, ProductSwiper, VueMagnifier,
+    LoadingBtn,
+    ProductSwiper,
+    VueMagnifier,
   },
   data() {
     return {

@@ -1,53 +1,62 @@
 <template>
-  <RouterLink :to="`/product/${product.id}`"
-  class="flex flex-col bg-primary-50 rounded-md border border-primary-300
-  overflow-hidden h-full transition-all group
-  hover:shadow-md" @mouseenter="handleEnter" @mouseleave="handleLeave">
-    <div class="h-64 overflow-hidden">
+  <RouterLink
+    :to="`/product/${product.id}`"
+    class="group flex h-full flex-col overflow-hidden rounded-md border border-primary-300
+      bg-primary-50 transition-all hover:shadow-md"
+    @mouseenter="handleEnter"
+    @mouseleave="handleLeave"
+  >
+    <div class="h-64 relative overflow-hidden">
       <swiper-container class="h-full" ref="imageSwiper" effect="fade">
         <swiper-slide class="h-full" lazy="true">
-          <img loading="lazy"
-          class="object-cover h-full w-full"
-          :src="this.product.imageUrl" alt="產品圖" />
+          <img
+            loading="lazy"
+            class="h-full w-full object-cover"
+            :src="this.product.imageUrl"
+            alt="產品圖"
+          />
         </swiper-slide>
         <swiper-slide lazy="true" v-if="Array.isArray(this.product.imagesUrl)">
-          <img loading="lazy"
-          class="object-cover h-full w-full"
-          :src="this.product.imagesUrl[0]" alt="產品圖" />
+          <img
+            loading="lazy"
+            class="h-full w-full object-cover"
+            :src="this.product.imagesUrl[0]"
+            alt="產品圖"
+          />
         </swiper-slide>
       </swiper-container>
+      <span
+        class="absolute top-2 left-2 z-10 rounded-sm px-3 py-1 bg-orange-700 text-primary-100"
+        v-if="product.price !== product.origin_price"
+        >特惠</span
+      >
     </div>
-    <div class="p-5 grow flex flex-col">
-      <div class="flex justify-between items-center">
+    <div class="flex grow flex-col p-5">
+      <div class="flex items-center justify-between">
         <p class="text mb-1">{{ product.category }}</p>
         <button type="button" class="btn btn-link shadow-none" @click.prevent="toggleFavorite">
           <i v-if="isFavorite" class="bi bi-heart-fill"></i>
           <i v-else class="bi bi-heart"></i>
         </button>
       </div>
-      <p class="font-bold text-lg text-primary-800 mb-1">{{ product.title }}</p>
-      <p class="text-sm mb-3">{{ product.unit }}</p>
-      <p class="mb-3 flex flex-wrap">
-        <span class="text-lg md:text-2xl text-primary-800 mr-1">
-        <template v-if="product.price !== product.origin_price">特惠</template>
-        NT$ {{ product.price }}</span>
-        <del class="text-sm md:text-base"
-        v-if="product.price !== product.origin_price">NT$ {{ product.origin_price }}</del>
+      <p class="mb-1 text-lg font-bold text-primary-800">{{ product.title }}</p>
+      <p class="mb-3 text-sm">{{ product.unit }}</p>
+      <p class="mb-3 flex flex-wrap items-center">
+        <span class="mr-1 text-lg text-primary-800 md:text-2xl"> NT$ {{ product.price }}</span>
+        <del class="text-sm md:text-base" v-if="product.price !== product.origin_price"
+          >NT$ {{ product.origin_price }}</del
+        >
       </p>
-      <LoadingBtn class="btn btn-primary w-full mt-auto"
-      @click.prevent="postCart(product.id)"
-      :is-loading="(loadingStatus.productId === product.id)"
-      >加入購物車</LoadingBtn>
-      <!-- <button
-      type="button" class="btn btn-primary w-full mt-auto" disabled>已售完</button> -->
+      <LoadingBtn
+        class="btn btn-primary mt-auto w-full"
+        @click.prevent="postCart(product.id)"
+        :is-loading="loadingStatus.productId === product.id"
+        >加入購物車</LoadingBtn
+      >
     </div>
   </RouterLink>
 </template>
-<style>
-swiper-container::part(container){
-  --swiper-theme-color: #361707;
-}
-</style>
+
 <script>
 import { register } from 'swiper/element/bundle';
 import { mapActions, mapState } from 'pinia';
@@ -66,14 +75,11 @@ export default {
   data() {
     return {
       isFavorite: false,
-      // image: '',
-      // isHover: false,
     };
   },
   mounted() {
     register();
     this.isFavorite = this.favorites.includes(this.product.id);
-    // this.image = this.product.imageUrl;
   },
   methods: {
     handleEnter() {
@@ -92,7 +98,12 @@ export default {
   computed: {
     ...mapState(loadingStore, ['loadingStatus']),
     ...mapState(favoriteStore, ['favorites']),
-
   },
 };
 </script>
+
+<style scoped>
+swiper-container::part(container) {
+  --swiper-theme-color: #361707;
+}
+</style>

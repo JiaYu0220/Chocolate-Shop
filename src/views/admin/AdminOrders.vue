@@ -1,5 +1,5 @@
 <template>
-  <h2 class="text-2xl font-bold mb-8">訂單管理</h2>
+  <h2 class="mb-8 text-2xl font-bold">訂單管理</h2>
   <TableComponent class="mb-8 text-xs sm:text-sm md:text-base">
     <template #th>
       <th scope="col">#</th>
@@ -7,89 +7,97 @@
       <!-- <th scope="col">地址</th> -->
       <th scope="col">連絡</th>
       <th scope="col" class="min-w-15">品項</th>
-      <th scope="col" class="text-end text-nowrap">總額</th>
+      <th scope="col" class="text-nowrap text-end">總額</th>
       <th scope="col" class="min-w-15 text-nowrap">備註</th>
       <th scope="col">日期</th>
       <th scope="col">付款</th>
       <th scope="col"></th>
     </template>
-    <template #tr="{trClass}">
+    <template #tr="{ trClass }">
       <tr :class="trClass" v-for="(order, key) in orders" :key="order.id">
-          <td>{{ order.num }}</td>
-          <td class="py-2 pr-1">
-            <p>{{ order.user.name }}</p>
-          </td>
-          <!-- <td>
+        <td>{{ order.num }}</td>
+        <td class="py-2 pr-1">
+          <p>{{ order.user.name }}</p>
+        </td>
+        <!-- <td>
             <span class="hidden md:inline">{{ order.user.address }}</span>
             <CopyBtn :text="order.user.address" msg="地址" class="text-primary-700 md:hidden"/>
           </td> -->
-          <!-- 聯絡 -->
-          <td class="text-center md:text-start">
-            <a class="link inline-block after:bottom-0 before:bottom-0"
-            :href="`mailto:${order.user.email}`">
-              <span class="hidden md:inline">{{ order.user.email }}</span>
-              <i class="bi bi-envelope-arrow-up-fill text-primary-700 md:hidden"></i>
-            </a>
-            <a class="link inline-block after:bottom-0 before:bottom-0"
-            :href="handleTelLink(order.user.tel)">
-              <span class="hidden md:inline">{{ order.user.tel }}</span>
-              <i class="bi bi-telephone-outbound-fill text-primary-700 md:hidden"></i>
-            </a>
-          </td>
-          <!-- 訂單產品 -->
-          <td>
-            <p
-            v-for="(product, key) in order.products" :key="key">
+        <!-- 聯絡 -->
+        <td class="text-center md:text-start">
+          <a
+            class="link inline-block before:bottom-0 after:bottom-0"
+            :href="`mailto:${order.user.email}`"
+          >
+            <span class="hidden md:inline">{{ order.user.email }}</span>
+            <i class="bi bi-envelope-arrow-up-fill text-primary-700 md:hidden"></i>
+          </a>
+          <a
+            class="link inline-block before:bottom-0 after:bottom-0"
+            :href="handleTelLink(order.user.tel)"
+          >
+            <span class="hidden md:inline">{{ order.user.tel }}</span>
+            <i class="bi bi-telephone-outbound-fill text-primary-700 md:hidden"></i>
+          </a>
+        </td>
+        <!-- 訂單產品 -->
+        <td>
+          <p v-for="(product, key) in order.products" :key="key">
             {{ `${product.product.title} * ${product.qty}` }}
-            </p>
-          </td>
-          <!-- 總額 -->
-          <td class="text-end">{{ Math.floor(order.total) }}</td>
-          <!-- 備註 -->
-          <td>
-            <span class="line-clamp-5">
-              {{ order.message }}
-            </span>
-          </td>
-          <!-- 日期 -->
-          <td>
-            <span class="hidden md:inline">{{ timestampToDate(order.create_at) }}</span>
-            <span class="md:hidden">{{ timestampToDate(order.create_at).substring(5) }}</span>
-          </td>
-          <!-- 是否付款 -->
-          <td>
-            <label :for="`paidStatus${key}`"
-            class="inline-flex w-8 h-4 items-center cursor-pointer
-             bg-primary-800 rounded-full transition-all duration-150
-             has-[:checked]:bg-primary-300
-            has-[:disabled]:bg-stone-300 has-[:disabled]:cursor-default">
-             <input type="checkbox" :id="`paidStatus${key}`" class="hidden peer"
-              v-model="order.is_paid" :disabled="loadingStatus.orderId === order.id"
-              @change="putOrder(order)">
-              <div class="w-4 h-4 flex items-center justify-center
-              bg-primary-50 text-primary-800 border border-primary-800 rounded-full ml-[50%]
-              transition-all duration-150 bg-icon-x bg-center bg-no-repeat
-              peer-checked:bg-icon-check peer-checked:ml-[0%] peer-checked:border-primary-300
-              peer-disabled:border-stone-300
-              ">
-              </div>
-            </label>
-          </td>
-          <td>
-            <AdminActionBtns
+          </p>
+        </td>
+        <!-- 總額 -->
+        <td class="text-end">{{ Math.floor(order.total) }}</td>
+        <!-- 備註 -->
+        <td>
+          <span class="line-clamp-5">
+            {{ order.message }}
+          </span>
+        </td>
+        <!-- 日期 -->
+        <td>
+          <span class="hidden md:inline">{{ timestampToDate(order.create_at) }}</span>
+          <span class="md:hidden">{{ timestampToDate(order.create_at).substring(5) }}</span>
+        </td>
+        <!-- 是否付款 -->
+        <td>
+          <label
+            :for="`paidStatus${key}`"
+            class="inline-flex h-4 w-8 cursor-pointer items-center rounded-full bg-primary-800
+              transition-all duration-150 has-[:disabled]:cursor-default
+              has-[:checked]:bg-primary-300 has-[:disabled]:bg-stone-300"
+          >
+            <input
+              type="checkbox"
+              :id="`paidStatus${key}`"
+              class="peer hidden"
+              v-model="order.is_paid"
+              :disabled="loadingStatus.orderId === order.id"
+              @change="putOrder(order)"
+            />
+            <div
+              class="ml-[50%] flex h-4 w-4 items-center justify-center rounded-full border
+                border-primary-800 bg-primary-50 bg-icon-x bg-center bg-no-repeat text-primary-800
+                transition-all duration-150 peer-checked:ml-[0%] peer-checked:border-primary-300
+                peer-checked:bg-icon-check peer-disabled:border-stone-300"
+            ></div>
+          </label>
+        </td>
+        <td>
+          <AdminActionBtns
             :data="order"
             loadingId="orderId"
-            @open-modal="openModal" @del-item="delOrder">
-            </AdminActionBtns>
-          </td>
+            @open-modal="openModal"
+            @del-item="delOrder"
+          >
+          </AdminActionBtns>
+        </td>
       </tr>
     </template>
   </TableComponent>
   <PaginationComponent :pagination="pagination" @get-data="getAdminOrders" />
 
-  <OrderModal
-  ref="orderModal" :order="tempOrder"  :pagination="pagination"
-  @put-order="putOrder" />
+  <OrderModal ref="orderModal" :order="tempOrder" :pagination="pagination" @put-order="putOrder" />
 </template>
 <script>
 import { mapState, mapActions } from 'pinia';
@@ -104,7 +112,10 @@ import OrderModal from '../../components/adminPages/adminOrders/OrderModal.vue';
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
   components: {
-    TableComponent, PaginationComponent, OrderModal, AdminActionBtns,
+    TableComponent,
+    PaginationComponent,
+    OrderModal,
+    AdminActionBtns,
   },
   data() {
     return {

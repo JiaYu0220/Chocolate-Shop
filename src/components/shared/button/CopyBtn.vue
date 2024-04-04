@@ -3,9 +3,13 @@
     <div class="relative">
       <i class="bi bi-copy"></i>
       <TransitionFade>
-        <div v-if="isCopy" class="isolate absolute bottom-full right-0 p-1 m-1 bg-primary-100
-        text-primary-800 rounded z-10 text-nowrap text-sm shadow-sm">
-        {{isFail ? '複製失敗' : `已複製${ msg }`}}</div>
+        <div
+          v-if="isCopy"
+          class="absolute bottom-full right-0 isolate z-10 m-1 text-nowrap rounded bg-primary-100
+            p-1 text-sm text-primary-800 shadow-sm"
+        >
+          {{ isFail ? '複製失敗' : `已複製${msg}` }}
+        </div>
       </TransitionFade>
     </div>
   </button>
