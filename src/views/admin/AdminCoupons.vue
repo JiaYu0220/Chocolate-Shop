@@ -18,6 +18,7 @@
       <th scope="col">優惠碼</th>
       <th scope="col">期限</th>
       <th scope="col">啟用</th>
+      <th scope="col">主打</th>
     </template>
     <template #tr="{ trClass }">
       <tr :class="trClass" v-for="coupon in coupons" :key="coupon.id">
@@ -29,6 +30,12 @@
           <ActiveBadge :active="coupon.is_enabled">
             <template #trueMsg>啟用</template>
             <template #falseMsg>未啟用</template>
+          </ActiveBadge>
+        </td>
+        <td>
+          <ActiveBadge :active="coupon.is_main">
+            <template #trueMsg>主打</template>
+            <template #falseMsg>非主打</template>
           </ActiveBadge>
         </td>
         <td>
@@ -130,6 +137,7 @@ export default {
         case 'new':
           this.tempCoupon = {
             is_enabled: 0,
+            is_main: false,
             due_date: new Date().getTime(),
           };
           this.isNew = true;

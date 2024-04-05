@@ -172,8 +172,10 @@
           md:items-center md:justify-center md:gap-16 md:p-10"
       >
         <div>
-          <p class="mb-1 text-nowrap text-2xl font-bold md:text-5xl">全館 8 折</p>
-          <p class="text-nowrap md:text-lg">輸入優惠碼 ILOVECACAO</p>
+          <p class="mb-1 text-nowrap text-2xl font-bold md:text-5xl">
+            全館 {{ coupon.percent / 10 }} 折
+          </p>
+          <p class="text-nowrap md:text-lg">輸入優惠碼 {{ coupon.code }}</p>
         </div>
         <!-- 倒數 -->
         <div class="flex flex-col items-center gap-8 lg:flex-row lg:gap-16">
@@ -238,7 +240,7 @@ export default {
     ArticleCard,
     ProductSpot,
   },
-  props: ['myTimer'],
+  props: ['myTimer', 'coupon'],
   data() {
     return {
       timer: {},

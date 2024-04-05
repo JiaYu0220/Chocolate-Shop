@@ -5,13 +5,15 @@
     <NavbarComponent />
     <!-- content -->
     <div class="mt-[65px] grow bg-primary-50 md:mt-[73px]">
-      <RouterView :my-timer="timer" />
+      <RouterView :my-timer="timer" :coupon="coupon" />
     </div>
     <div
       class="item-center fixed bottom-0 left-0 z-20 flex w-full flex-wrap justify-center
         bg-orange-600 py-2 text-sm text-primary-50 md:py-3 md:text-base"
     >
-      <p class="pr-4">結帳輸入 ILOVECACAO <span class="font-bold">全館 8 折</span></p>
+      <p class="pr-4">
+        結帳輸入 {{ coupon.code }} <span class="font-bold">全館 {{ coupon.percent / 10 }} 折</span>
+      </p>
       <i class="bi bi-alarm me-1 hidden md:inline"></i>
       <ul class="flex gap-1">
         <li v-for="(item, key) in timer" :key="item">
@@ -95,6 +97,16 @@ export default {
   data() {
     return {
       timer: {},
+      coupon: {
+        code: 'ILOVECACAO',
+        due_date: 1714665060,
+        id: '-NuixPXLqbqvgW08-R1y',
+        is_enabled: 1,
+        is_main: true,
+        percent: 80,
+        title: '快閃',
+        num: 1,
+      },
       timerInterval: null,
       now: Math.floor(new Date().getTime() / 1000),
     };
@@ -112,7 +124,6 @@ export default {
     },
 
     handleTimer() {
-      const deadLine = Date.parse('2024-03-31') / 1000;
       // 清除之前的計時器，避免多個計時器並行運行
       if (this.timerInterval) {
         clearInterval(this.timerInterval);
@@ -120,7 +131,7 @@ export default {
       // 設置新的計時器
       this.timerInterval = setInterval(() => {
         const now = Math.floor(new Date().getTime() / 1000);
-        const time = deadLine - now;
+        const time = this.coupon.due_date - now;
         this.timer = {
           日: Math.floor(time / 60 / 60 / 24)
             .toString()

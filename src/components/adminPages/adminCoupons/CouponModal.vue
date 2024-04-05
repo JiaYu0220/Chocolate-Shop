@@ -82,14 +82,22 @@
           </div>
         </div>
         <!-- 是否啟用 -->
-        <ChecksRadio label-for="is_enable" label="是否啟用">
+        <ChecksRadio label-for="is_enabled" label="是否啟用">
           <template #default="{ inputClass }">
             <input
-              id="is_enable"
+              id="is_enabled"
               :class="inputClass"
               type="checkbox"
-              v-model="tempCoupon.is_enable"
+              v-model="tempCoupon.is_enabled"
+              :true-value="1"
+              :false-value="0"
             />
+          </template>
+        </ChecksRadio>
+        <!-- 是否為主打優惠(推播在首頁) -->
+        <ChecksRadio label-for="is_main" label="是否為主打優惠 (會推播在首頁)">
+          <template #default="{ inputClass }">
+            <input id="is_main" :class="inputClass" type="checkbox" v-model="tempCoupon.is_main" />
           </template>
         </ChecksRadio>
         <!-- 按鈕 -->
