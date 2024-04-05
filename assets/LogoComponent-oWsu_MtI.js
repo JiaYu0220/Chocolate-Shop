@@ -1,1 +1,0 @@
-import{_ as e,o,e as t}from"./index-CY03ZQzG.js";const n={},r={class:"logoShadow text-nowrap text-center font-zenMaru text-primary-800"};function c(s,a){return o(),t("h1",r,"可_可")}const p=e(n,[["render",c]]);export{p as L};
