@@ -13,7 +13,7 @@
         <!-- 裁剪小工具 -->
         <CropperComponent :down-name="tempProduct.title" />
       </div>
-      <p class="mb-3 text-stone-500">※ 請先使用裁剪小工具將圖片裁剪成適當長寬比 (4:3) 再上傳！</p>
+      <p class="mb-3 text-stone-500">※ 請先使用裁剪小工具將圖片裁剪成適當長寬比 (1:1) 再上傳！</p>
       <!-- 圖片內容 -->
       <div class="mb-4 border-b border-primary-700 pb-4 md:pb-8">
         <h5 class="mb-1 text-lg">- 主圖 -</h5>

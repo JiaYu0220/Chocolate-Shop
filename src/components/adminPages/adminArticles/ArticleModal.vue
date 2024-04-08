@@ -39,7 +39,7 @@
               type="button"
               class="btn btn-primary text-nowrap rounded-l-none"
               :disabled="!tempImageUrl"
-              @click="tempArticle.image = tempImageUrl"
+              @click="addImageUrl(tempImageUrl)"
             >
               加入圖片
             </button>
@@ -144,6 +144,7 @@
                 :class="inputClass"
                 v-model="tempTag"
                 placeholder
+                autocomplete="off"
                 @input="isTagDuplicate = false"
               />
               <datalist id="tagList">
@@ -216,7 +217,7 @@ export default {
     EditImage,
   },
   props: {
-    id: String,
+    tempId: String,
     tags: Array,
     isNew: Boolean,
     pagination: Object,
@@ -224,7 +225,6 @@ export default {
   data() {
     return {
       tempArticle: {},
-      tempId: '',
       tempImageUrl: '',
       tempTag: '',
       isTagDuplicate: false,
@@ -259,7 +259,9 @@ export default {
     resetModalForm() {
       this.$refs.articleForm.resetForm();
       this.tempArticle.image = '';
+      this.tempArticle.tag = [];
       this.tempTag = '';
+      this.tempImageUrl = '';
       this.isTagDuplicate = false;
     },
     addImageUrl(url) {
@@ -278,11 +280,10 @@ export default {
         // 新增文章
         let url = `${VITE_URL}/api/${VITE_PATH}/admin/article`;
         let httpMethod = 'post';
-        // 回到第一頁
+
         let page = 1;
         this.tempArticle.create_at = Math.floor(new Date().getTime() / 1000);
 
-        // 提示文字
         const alertText = `已${this.isNew ? '新增' : '更新'}文章「${this.tempArticle.title}」`;
 
         // 不是新增文章時換成編輯文章
@@ -291,20 +292,19 @@ export default {
           httpMethod = 'put';
           // 待在目前頁數
           page = this.pagination.current_page;
-          // 設定按鈕 loading
           this.loadingStatus.articleId = this.tempArticle.id;
         }
         // 關閉 modal
         this.closeModal();
         // axios
         await this.$http[httpMethod](url, { data: this.tempArticle });
-        // 重置表單，避免殘留上次驗證結果
-        this.resetModalForm();
 
         // 取資料
         this.$emit('getData', page);
         // 關閉 loading
         this.loadingStatus.articleId = '';
+        // 重置表單，避免殘留上次驗證結果
+        this.resetModalForm();
         // 通知
         this.swalToast(alertText);
       } catch (error) {

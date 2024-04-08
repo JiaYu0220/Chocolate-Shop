@@ -21,6 +21,7 @@
     "aos": "^3.0.0-beta.6",
     "axios": "^1.6.7",
     "bootstrap-icons": "^1.11.3",
+    "default-passive-events": "^2.0.0",
     "gh-pages": "^6.1.1",
     "pinia": "^2.1.7",
     "sweetalert2": "^11.10.5",

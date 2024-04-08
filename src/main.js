@@ -5,7 +5,6 @@ import 'bootstrap-icons/font/bootstrap-icons.min.css';
 import 'vue-cropper/dist/index.css';
 import '@vuepic/vue-datepicker/dist/main.css';
 import './assets/main.css';
-
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 

@@ -119,7 +119,7 @@ export default {
         mode: 'contain',
       },
       fixed: true,
-      fixedNumber: [4, 3],
+      fixedNumber: [1, 1],
     };
   },
   components: {
@@ -162,16 +162,6 @@ export default {
     clear() {
       this.option.img = '';
     },
-    // closeCropperModal() {
-    //   this.$refs.cropperModal.closeModal();
-    //   this.clear();
-    // },
-    // finish() {
-    //   this.$refs.cropper.getCropBlob((data) => {
-    //     this.cropperUrl = window.URL.createObjectURL(data);
-    //     this.postImg(data);
-    //   });
-    // },
   },
 };
 </script>
