@@ -91,8 +91,15 @@ export default {
       } catch (error) {
         this.loadingStatus.imageUrl = false;
         // 通知
-        const dialog = event.target.closest('dialog');
-        this.apiErrorSwal(error, dialog);
+        if (error?.response) {
+          this.apiErrorSwal(error, this.$refs.input);
+        } else if (error?.code === 'ERR_NETWORK') {
+          this.$swal({
+            title: '上傳失敗',
+            text: '上傳的檔案可能太大，請選擇小於 3MB 的檔案。',
+            target: this.$refs.input,
+          });
+        }
       }
     },
     async uploadMultiImg(event) {
@@ -122,8 +129,15 @@ export default {
       } catch (error) {
         this.loadingStatus.imagesUrl = false;
         // 通知
-        const dialog = event.target.closest('dialog');
-        this.apiErrorSwal(error, dialog);
+        if (error?.response) {
+          this.apiErrorSwal(error, this.$refs.input);
+        } else if (error?.code === 'ERR_NETWORK') {
+          this.$swal({
+            title: '上傳失敗',
+            text: '上傳的檔案可能太大，請選擇小於 3MB 的檔案。',
+            target: this.$refs.input,
+          });
+        }
       }
     },
     ...mapActions(swalStore, ['apiErrorSwal']),
