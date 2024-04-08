@@ -83,12 +83,12 @@
 import { mapState, mapActions } from 'pinia';
 import loadingStore from '@/stores/loadingStore';
 import swalStore from '@/stores/swalStore';
-import helperStore from '@/stores/helperStore';
 
 import PaginationComponent from '@/components/shared/pagination/PaginationComponent.vue';
 import TableComponent from '@/components/shared/table/TableComponent.vue';
 import AdminActionBtns from '@/components/adminPages/AdminActionBtns.vue';
 import ActiveBadge from '@/components/shared/badge/ActiveBadge.vue';
+import helperStore from '@/stores/helperStore';
 import ArticleModal from '../../components/adminPages/adminArticles/ArticleModal.vue';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
@@ -121,7 +121,7 @@ export default {
         this.articles = res.data.articles;
         this.pagination = res.data.pagination;
         // 取得不重複的標籤列表
-        this.tags = this.handleArrayInData(this.articles, 'tag');
+        this.tags = this.removeDuplicateArray(this.articles, 'tag');
         this.hideLoading();
       } catch (error) {
         this.hideLoading();
@@ -131,7 +131,7 @@ export default {
     },
     async delArticle(article) {
       try {
-        const swal = await this.delSwal('優惠券', article.title);
+        const swal = await this.delSwal('文章', article.title);
         if (swal.isConfirmed) {
           // 設定按鈕 loading
           this.loadingStatus.articleId = article.id;
@@ -141,7 +141,7 @@ export default {
           // 取資料
           this.getAdminArticles();
           // 通知
-          this.swalToast(`已刪除優惠券「${article.title}」`);
+          this.swalToast(`已刪除文章「${article.title}」`);
           // 關閉 loading
           this.loadingStatus.articleId = '';
         }
@@ -159,6 +159,7 @@ export default {
           this.tempArticle = {
             isPublic: false,
             tag: [],
+            image: '',
           };
           this.isNew = true;
           break;
@@ -173,7 +174,7 @@ export default {
     },
     ...mapActions(swalStore, ['delSwal', 'swalToast', 'apiErrorSwal']),
     ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
-    ...mapActions(helperStore, ['timestampToDate', 'handleArrayInData']),
+    ...mapActions(helperStore, ['timestampToDate', 'removeDuplicateArray']),
   },
   computed: {
     ...mapState(loadingStore, ['isLoading', 'loadingStatus']),

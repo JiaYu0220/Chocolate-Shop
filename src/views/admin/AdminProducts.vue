@@ -105,7 +105,7 @@ export default {
         this.products = data.products;
         this.pagination = data.pagination;
         // 取得不重複的類別列表
-        this.categories = this.handleArrayInData(this.products, 'category');
+        this.categories = this.removeDuplicateArray(this.products, 'category');
 
         // 關掉 loading
         this.loadingStatus.productId = '';
@@ -162,7 +162,7 @@ export default {
     },
     ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
     ...mapActions(swalStore, ['swalToast', 'delSwal', 'apiErrorSwal']),
-    ...mapActions(helperStore, ['handleArrayInData']),
+    ...mapActions(helperStore, ['removeDuplicateArray']),
   },
   computed: {
     ...mapState(loadingStore, ['loadingStatus']),
