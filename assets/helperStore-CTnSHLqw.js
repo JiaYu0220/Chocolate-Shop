@@ -1,0 +1,1 @@
+import{s}from"./index-hIBv_cFW.js";const f=s("helperStore",{actions:{timestampToDate(t){return new Date(t*1e3).toLocaleDateString()},removeDuplicateArray(t,e){const r=new Set;return e==="tag"?t.forEach(o=>{Array.isArray(o[e])&&o[e].forEach(i=>{r.add(i)})}):e==="category"&&t.forEach(o=>{r.add(o[e])}),Array.from(r)}}});export{f as h};
