@@ -1,41 +1,43 @@
 <template>
-  <template v-if="Object.keys(article).length">
-    <div class="relative h-64 w-full md:h-96">
-      <img class="h-full w-full object-cover" lazy="loading" :src="article.image" alt="文章圖" />
-      <div class="absolute bottom-0 left-0 mb-8 flex w-full justify-center md:mb-12">
-        <div class="bg-primary-800/60 p-4 font-bold text-primary-50">
-          <p class="mb-2 md:text-lg">
-            {{ timestampToDate(article.create_at) }}
-          </p>
-          <h2 class="text-xl md:text-4xl">{{ article.title }}</h2>
+  <TransitionFade mode="out-in">
+    <div v-show="Object.keys(article).length">
+      <div class="relative h-64 w-full md:h-96">
+        <img class="h-full w-full object-cover" lazy="loading" :src="article.image" alt="文章圖" />
+        <div class="absolute bottom-0 left-0 mb-8 flex w-full justify-center md:mb-12">
+          <div class="bg-primary-800/60 p-4 font-bold text-primary-50">
+            <p class="mb-2 md:text-lg">
+              {{ timestampToDate(article.create_at) }}
+            </p>
+            <h2 class="text-xl md:text-4xl">{{ article.title }}</h2>
+          </div>
+        </div>
+      </div>
+      <div class="container py-10">
+        <pre class="mx-auto mb-6 text-wrap md:w-1/2">{{ article.content }}</pre>
+        <ul class="mx-auto mb-20 md:w-1/2">
+          <li v-for="item in article.tag" :key="item" class="text-primary-700"># {{ item }}</li>
+        </ul>
+        <div class="flex justify-between md:text-lg">
+          <!-- 上一篇 -->
+          <RouterLink v-if="prevId" class="link" :to="`/article/${prevId}`"
+            ><i class="bi bi-chevron-left me-1"></i>上一篇
+          </RouterLink>
+          <span v-else class="text-stone-500" :class="{ link: prevId }">
+            <i class="bi bi-chevron-left me-1"></i>上一篇
+          </span>
+          <!-- 返回文章列表 -->
+          <RouterLink class="link" to="/articles">返回文章列表</RouterLink>
+          <!-- 下一篇 -->
+          <RouterLink v-if="nextId" class="link" :to="`/article/${nextId}`"
+            >下一篇<i class="bi bi-chevron-right ml-1"></i
+          ></RouterLink>
+          <span v-else class="text-stone-500" :class="{ link: nextId }">
+            下一篇<i class="bi bi-chevron-right ml-1"></i>
+          </span>
         </div>
       </div>
     </div>
-    <div class="container py-10">
-      <pre class="mx-auto mb-6 text-wrap md:w-1/2">{{ article.content }}</pre>
-      <ul class="mx-auto mb-20 md:w-1/2">
-        <li v-for="item in article.tag" :key="item" class="text-primary-700"># {{ item }}</li>
-      </ul>
-      <div class="flex justify-between md:text-lg">
-        <!-- 上一篇 -->
-        <RouterLink v-if="prevId" class="link" :to="`/article/${prevId}`"
-          ><i class="bi bi-chevron-left me-1"></i>上一篇
-        </RouterLink>
-        <span v-else class="text-stone-500" :class="{ link: prevId }">
-          <i class="bi bi-chevron-left me-1"></i>上一篇
-        </span>
-        <!-- 返回文章列表 -->
-        <RouterLink class="link" to="/articles">返回文章列表</RouterLink>
-        <!-- 下一篇 -->
-        <RouterLink v-if="nextId" class="link" :to="`/article/${nextId}`"
-          >下一篇<i class="bi bi-chevron-right ml-1"></i
-        ></RouterLink>
-        <span v-else class="text-stone-500" :class="{ link: nextId }">
-          下一篇<i class="bi bi-chevron-right ml-1"></i>
-        </span>
-      </div>
-    </div>
-  </template>
+  </TransitionFade>
 </template>
 <script>
 import { mapActions, mapState } from 'pinia';
@@ -43,9 +45,13 @@ import loadingStore from '@/stores/loadingStore';
 import helperStore from '@/stores/helperStore';
 import articleStore from '@/stores/articleStore';
 import swalStore from '@/stores/swalStore';
+import TransitionFade from '@/components/shared/transition/TransitionFade.vue';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
+  components: {
+    TransitionFade,
+  },
   data() {
     return {
       article: {},
