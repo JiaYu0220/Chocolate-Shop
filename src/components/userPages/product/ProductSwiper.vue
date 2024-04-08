@@ -25,6 +25,7 @@ export default {
       navigation: {
         enabled: true,
       },
+
       breakpoints: {
         480: {
           slidesPerView: 2,

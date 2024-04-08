@@ -15,24 +15,27 @@
     </div>
     <!-- 產品 -->
     <div class="w-full">
-      <ul v-if="products.length" class="-m-4 mb-8 flex flex-wrap *:p-4">
-        <li class="w-full md:w-1/2 xl:w-1/3" v-for="product in products" :key="product.id">
-          <ProductCard :product="product" />
-        </li>
-      </ul>
+      <TransitionFade mode="out-in">
+        <ul v-show="products.length" :key="products" class="-m-4 mb-8 flex flex-wrap *:p-4">
+          <li class="w-full md:w-1/2 xl:w-1/3" v-for="product in products" :key="product.id">
+            <ProductCard :product="product" />
+          </li>
+        </ul>
+      </TransitionFade>
       <PaginationComponent :pagination="pagination" @get-data="getProducts" />
     </div>
   </div>
 </template>
 
 <script>
-import ProductCard from '@/components/userPages/product/ProductCard.vue';
-import PaginationComponent from '@/components/shared/pagination/PaginationComponent.vue';
 import { mapState, mapActions } from 'pinia';
+import swalStore from '@/stores/swalStore';
 import loadingStore from '@/stores/loadingStore';
 import productStore from '@/stores/productStore';
+import ProductCard from '@/components/userPages/product/ProductCard.vue';
+import PaginationComponent from '@/components/shared/pagination/PaginationComponent.vue';
 import CategoryLinks from '@/components/userPages/product/CategoryLinks.vue';
-import swalStore from '@/stores/swalStore';
+import TransitionFade from '@/components/shared/transition/TransitionFade.vue';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 
@@ -41,6 +44,7 @@ export default {
     ProductCard,
     PaginationComponent,
     CategoryLinks,
+    TransitionFade,
   },
   data() {
     return {
@@ -65,7 +69,7 @@ export default {
         this.showLoading();
         const { category = '' } = this.$route.query;
         this.updatedCategory(category);
-        const url = `${VITE_URL}/api/${VITE_PATH}/products?page=${page}&category=${this.currentCategory}`;
+        const url = `${VITE_URL}/api/${VITE_PATH}/products?page=${page}&category=${category}`;
         const res = await this.$http.get(url);
         this.products = res.data.products;
         this.pagination = res.data.pagination;

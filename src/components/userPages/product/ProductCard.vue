@@ -6,12 +6,12 @@
     @mouseenter="handleEnter"
     @mouseleave="handleLeave"
   >
-    <div class="h-64 relative overflow-hidden">
+    <div class="relative overflow-hidden">
       <swiper-container class="h-full" ref="imageSwiper" effect="fade">
         <swiper-slide class="h-full" lazy="true">
           <img
             loading="lazy"
-            class="h-full w-full object-cover"
+            class="w-full object-cover aspect-square"
             :src="this.product.imageUrl"
             alt="產品圖"
           />
@@ -19,7 +19,7 @@
         <swiper-slide lazy="true" v-if="Array.isArray(this.product.imagesUrl)">
           <img
             loading="lazy"
-            class="h-full w-full object-cover"
+            class="w-full object-cover aspect-square"
             :src="this.product.imagesUrl[0]"
             alt="產品圖"
           />
@@ -78,15 +78,23 @@ export default {
     };
   },
   mounted() {
-    register();
     this.isFavorite = this.favorites.includes(this.product.id);
+    register();
+    Object.assign(this.$refs.imageSwiper, {
+      effect: 'fade',
+    });
+    this.$refs.imageSwiper.initialize();
   },
   methods: {
     handleEnter() {
-      this.$refs.imageSwiper.swiper.slideNext();
+      if (this.$refs.imageSwiper?.swiper) {
+        this.$refs.imageSwiper.swiper.slideNext();
+      }
     },
     handleLeave() {
-      this.$refs.imageSwiper.swiper.slidePrev();
+      if (this.$refs.imageSwiper?.swiper) {
+        this.$refs.imageSwiper.swiper.slidePrev();
+      }
     },
     toggleFavorite() {
       this.isFavorite = !this.isFavorite;
@@ -103,6 +111,8 @@ export default {
 </script>
 
 <style scoped>
+@import 'swiper/element/css/effect-fade';
+
 swiper-container::part(container) {
   --swiper-theme-color: #361707;
 }

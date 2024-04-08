@@ -52,7 +52,7 @@ export default defineStore('productStore', {
       return this.allProducts.filter((item) => item[key] === value);
     },
     updatedCategory(category) {
-      this.currentCategory = category;
+      this.currentCategory = category || '全部';
     },
   },
 });
