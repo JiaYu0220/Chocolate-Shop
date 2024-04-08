@@ -5,7 +5,11 @@
     <NavbarComponent />
     <!-- content -->
     <div class="mt-[65px] grow bg-primary-50 md:mt-[73px]">
-      <RouterView :my-timer="timer" :coupon="coupon" />
+      <RouterView v-slot="{ Component, route }">
+        <TransitionFade mode="out-in">
+          <component :is="Component" :key="route.path" />
+        </TransitionFade>
+      </RouterView>
     </div>
     <div
       class="item-center fixed bottom-0 left-0 z-20 flex w-full flex-wrap justify-center
@@ -15,8 +19,8 @@
         結帳輸入 {{ coupon.code }} <span class="font-bold">全館 {{ coupon.percent / 10 }} 折</span>
       </p>
       <i class="bi bi-alarm me-1 hidden md:inline"></i>
-      <ul class="flex gap-1">
-        <li v-for="(item, key) in timer" :key="item">
+      <ul v-if="Object.keys(couponTimer).length" class="flex gap-1">
+        <li v-for="(item, key) in couponTimer" :key="item">
           <p class="font-bold">{{ `${item} ${key}` }}</p>
         </li>
       </ul>
@@ -81,39 +85,25 @@
 </template>
 
 <script>
-import { mapActions } from 'pinia';
+import { mapActions, mapState } from 'pinia';
 import loadingStore from '@/stores/loadingStore';
 import cartStore from '@/stores/cartStore';
+import timerStore from '@/stores/timerStore';
 import MyLoading from '@/components/shared/helpers/MyLoading.vue';
 import NavbarComponent from '@/components/userPages/layout/NavbarComponent.vue';
 import ScrollTopBtn from '@/components/userPages/layout/ScrollTopBtn.vue';
+import TransitionFade from '@/components/shared/transition/TransitionFade.vue';
 
 export default {
   components: {
     MyLoading,
     NavbarComponent,
     ScrollTopBtn,
-  },
-  data() {
-    return {
-      timer: {},
-      coupon: {
-        code: 'ILOVECACAO',
-        due_date: 1714665060,
-        id: '-NuixPXLqbqvgW08-R1y',
-        is_enabled: 1,
-        is_main: true,
-        percent: 80,
-        title: '快閃',
-        num: 1,
-      },
-      timerInterval: null,
-      now: Math.floor(new Date().getTime() / 1000),
-    };
+    TransitionFade,
   },
   mounted() {
     this.getCart();
-    this.handleTimer();
+    this.handleCouponTimer();
   },
   methods: {
     closeModal() {
@@ -123,27 +113,12 @@ export default {
       this.isMenuOpen = !this.isMenuOpen;
     },
 
-    handleTimer() {
-      // 清除之前的計時器，避免多個計時器並行運行
-      if (this.timerInterval) {
-        clearInterval(this.timerInterval);
-      }
-      // 設置新的計時器
-      this.timerInterval = setInterval(() => {
-        const now = Math.floor(new Date().getTime() / 1000);
-        const time = this.coupon.due_date - now;
-        this.timer = {
-          日: Math.floor(time / 60 / 60 / 24)
-            .toString()
-            .padStart(2, '0'),
-          時: (Math.floor(time / 60 / 60) % 24).toString().padStart(2, '0'),
-          分: (Math.floor(time / 60) % 60).toString().padStart(2, '0'),
-          秒: (time % 60).toString().padStart(2, '0'),
-        };
-      }, 1000);
-    },
     ...mapActions(loadingStore, ['showLoading']),
     ...mapActions(cartStore, ['getCart']),
+    ...mapActions(timerStore, ['handleCouponTimer']),
+  },
+  computed: {
+    ...mapState(timerStore, ['couponTimer', 'coupon']),
   },
 };
 </script>
