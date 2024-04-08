@@ -19,7 +19,9 @@
     >
       <swiper-slide v-for="product in products" :key="product.id">
         <span class="mr-6">特價！！{{ product.title }}現在只要 $ {{ product.price }}</span>
-        <span class="btn btn-primary-light">立即選購</span>
+        <RouterLink :to="`product/${product.id}`" class="btn btn-primary-light"
+          >立即選購</RouterLink
+        >
       </swiper-slide>
     </swiper-container>
   </RouterLink>
