@@ -8,7 +8,7 @@ const { $swal } = GlobalVariables.variables;
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 const { swalToast, delSwal } = swalStore();
-const { loadingStatus, showLoading, hideLoading } = loadingStore();
+const { loadingStatus, hideLoading } = loadingStore();
 
 export default defineStore('cartStore', {
   state: () => ({
@@ -23,7 +23,6 @@ export default defineStore('cartStore', {
   actions: {
     async getCart() {
       try {
-        showLoading();
         const url = `${VITE_URL}/api/${VITE_PATH}/cart`;
         const { data } = await axios.get(url);
         this.carts = data?.data?.carts;
@@ -31,7 +30,6 @@ export default defineStore('cartStore', {
         this.usedCoupon = this.carts[0]?.coupon?.code;
         this.total = data?.data?.total;
         this.final_total = Math.floor(data?.data?.final_total);
-        hideLoading();
       } catch (error) {
         hideLoading();
         // 通知
