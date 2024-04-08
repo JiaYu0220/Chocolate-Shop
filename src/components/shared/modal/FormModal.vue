@@ -5,7 +5,13 @@
   >
     <div class="mb-6 flex justify-between">
       <slot name="title" titleClass="text-2xl font-bold"></slot>
-      <XBtn class="-mt-2" @click="closeModal" />
+      <XBtn
+        class="-mt-2"
+        @click="
+          closeModal();
+          $emit('resetForm');
+        "
+      />
     </div>
     <slot></slot>
   </ModalComponent>
@@ -34,7 +40,6 @@ export default {
     },
     closeModal() {
       this.modal.closeModal();
-      this.$emit('resetForm');
     },
   },
 };
