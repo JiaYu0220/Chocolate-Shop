@@ -113,11 +113,11 @@
 import { mapState, mapActions } from 'pinia';
 import cartStore from '@/stores/cartStore';
 import orderStore from '@/stores/orderStore';
+import helperStore from '@/stores/helperStore';
 import CartList from '@/components/userPages/cart/CartList.vue';
 import CartSection from '@/components/userPages/cart/CartSection.vue';
 import OrderForm from '@/components/userPages/cart/OrderForm.vue';
 import CouponInput from '@/components/userPages/cart/CouponInput.vue';
-import helperStore from '@/stores/helperStore';
 import ModalComponent from '@/components/shared/modal/ModalComponent.vue';
 import XBtn from '@/components/shared/button/XBtn.vue';
 
@@ -162,7 +162,7 @@ export default {
       this.$refs.detailModal.closeModal();
     },
 
-    ...mapActions(cartStore, ['postCoupon', 'getCart']),
+    ...mapActions(cartStore, ['postCoupon']),
     ...mapActions(helperStore, ['timestampToDate']),
   },
   computed: {
