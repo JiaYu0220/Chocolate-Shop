@@ -74,7 +74,7 @@
 
 - 我是使用者，我想要查看店家相關文章
 
-![image](https://github.com/JiaYu0220/Chocolate-Shop/assets/134919211/a64523ea-1a76-41d7-8cd1-7d8f4049b3ec)
+  ![image](https://github.com/JiaYu0220/Chocolate-Shop/assets/134919211/a64523ea-1a76-41d7-8cd1-7d8f4049b3ec)
 
 - 我是使用者，我想要購買課程
 
