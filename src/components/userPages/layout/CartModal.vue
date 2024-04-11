@@ -1,13 +1,17 @@
 <template>
-  <ModalComponent ref="modal" direction="right" class="my-0 mr-0 max-h-dvh w-11/12 max-w-md">
-    <div class="flex h-dvh flex-col bg-primary-50 text-primary-950">
+  <ModalComponent
+    ref="modal"
+    direction="right"
+    class="my-0 mr-0 min-h-dvh h-dvh max-h-dvh w-11/12 max-w-md"
+  >
+    <div class="flex flex-col h-full bg-primary-50 text-primary-950">
       <!-- 標題 -->
       <div class="flex items-center justify-between border-b border-primary-300 px-7 py-2 sm:px-8">
         <h3 class="text-lg font-bold">購物車</h3>
         <XBtn @click="closeModal" />
       </div>
       <!-- 商品 -->
-      <div v-if="cartNum" class="px-7 py-6 sm:px-8">
+      <div v-if="cartNum" class="px-7 py-6 bg-primary-50 sm:px-8">
         <CartList />
       </div>
       <!-- 空購物車 -->
@@ -20,7 +24,10 @@
           </RouterLink>
         </div>
       </div>
-      <div v-if="cartNum" class="mt-auto border-t border-primary-300 px-7 py-6 sm:px-8">
+      <div
+        v-if="cartNum"
+        class="mt-auto border-t border-primary-300 px-7 py-6 bg-primary-50 sm:px-8"
+      >
         <!-- 總額 -->
         <div class="flex items-center justify-between pb-6 text-xl font-bold text-primary-800">
           <p>總額</p>
