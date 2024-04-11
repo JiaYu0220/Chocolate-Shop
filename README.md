@@ -70,7 +70,7 @@
 
 - 我是使用者，我想要查看產品相關資訊
 
-  ![image](https://github.com/Peg-L/project-code/assets/134919211/ded7a7ee-eab7-4956-8721-4c4be7c3f9d2)
+  ![image](https://github.com/JiaYu0220/Chocolate-Shop/assets/134919211/1d929e1e-8732-44a8-b5d3-b648ac09cf44)
 
 - 我是使用者，我想要查看店家相關文章
 
