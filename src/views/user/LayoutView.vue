@@ -4,29 +4,15 @@
     <!-- header -->
     <NavbarComponent />
     <!-- content -->
-    <div class="mt-[65px] grow bg-primary-50 md:mt-[73px]">
+    <div class="mt-[97px] grow bg-primary-50 sm:mt-[117px]">
       <RouterView v-slot="{ Component, route }">
         <TransitionFade mode="out-in">
           <component :is="Component" :key="route.path" />
         </TransitionFade>
       </RouterView>
     </div>
-    <div
-      class="item-center fixed bottom-0 left-0 z-20 flex w-full flex-wrap justify-center
-        bg-orange-600 py-2 text-sm text-primary-50 md:py-3 md:text-base"
-    >
-      <p class="pr-4">
-        結帳輸入 {{ coupon.code }} <span class="font-bold">全館 {{ coupon.percent / 10 }} 折</span>
-      </p>
-      <i class="bi bi-alarm me-1 hidden md:inline"></i>
-      <ul v-if="Object.keys(couponTimer).length" class="flex gap-1">
-        <li v-for="(item, key) in couponTimer" :key="item">
-          <p class="font-bold">{{ `${item} ${key}` }}</p>
-        </li>
-      </ul>
-    </div>
     <!-- footer -->
-    <footer class="mt-auto bg-primary-800 pb-16 pt-6 text-primary-200">
+    <footer class="mt-auto bg-primary-800 py-6 text-primary-200">
       <div class="container">
         <div class="mb-4 flex justify-between border-b border-primary-200 pb-6">
           <div class="flex flex-col">
@@ -85,10 +71,9 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'pinia';
+import { mapActions } from 'pinia';
 import loadingStore from '@/stores/loadingStore';
 import cartStore from '@/stores/cartStore';
-import timerStore from '@/stores/timerStore';
 import MyLoading from '@/components/shared/helpers/MyLoading.vue';
 import NavbarComponent from '@/components/userPages/layout/NavbarComponent.vue';
 import ScrollTopBtn from '@/components/userPages/layout/ScrollTopBtn.vue';
@@ -103,7 +88,6 @@ export default {
   },
   mounted() {
     this.getCart();
-    this.handleCouponTimer();
   },
   methods: {
     closeModal() {
@@ -115,10 +99,6 @@ export default {
 
     ...mapActions(loadingStore, ['showLoading']),
     ...mapActions(cartStore, ['getCart']),
-    ...mapActions(timerStore, ['handleCouponTimer']),
-  },
-  computed: {
-    ...mapState(timerStore, ['couponTimer', 'coupon']),
   },
 };
 </script>

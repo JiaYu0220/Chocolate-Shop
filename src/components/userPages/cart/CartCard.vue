@@ -1,5 +1,5 @@
 <template>
-  <li class="flex items-center gap-2 rounded sm:gap-4">
+  <li ref="card" class="flex items-center gap-2 rounded sm:gap-4">
     <!-- 左 -->
     <div class="h-28 w-1/3 overflow-hidden rounded-md sm:h-32">
       <img
@@ -17,7 +17,7 @@
         <LoadingBtn
           v-if="canEdit"
           class="btn btn-link -mr-3 -mt-2 shadow-none"
-          @click="delCart(cart, swalContainer)"
+          @click="delCart(cart, false)"
           :isLoading="loadingStatus.cartId === cart.id"
         >
           <i v-if="loadingStatus.cartId !== cart.id" class="bi bi-trash3 text-orange-700"></i
@@ -82,9 +82,6 @@ import LoadingBtn from '@/components/shared/button/LoadingBtn.vue';
 export default {
   props: {
     cart: Object,
-    swalContainer: {
-      default: 'body',
-    },
     canEdit: {
       type: Boolean,
       default: true,

@@ -1,5 +1,5 @@
 <template>
-  <nav class="block text-center" aria-label="Pagination">
+  <nav v-if="pagination.total_pages !== 1" class="block text-center" aria-label="Pagination">
     <ul
       class="mx-auto inline-flex justify-center overflow-hidden rounded-lg border border-stone-200
         bg-primary-50 text-sm md:text-lg"

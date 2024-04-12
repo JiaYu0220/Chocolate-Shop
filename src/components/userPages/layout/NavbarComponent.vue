@@ -3,6 +3,7 @@
     class="fixed top-0 z-40 w-full backdrop-brightness-75 md:backdrop-brightness-100"
     :class="{ 'h-full': isMenuOpen }"
   >
+    <AdBanner />
     <div
       class="relative border-b border-primary-300 bg-primary-800 text-primary-200 py-2 md:py-3
         md:static"
@@ -154,6 +155,7 @@ import productStore from '@/stores/productStore';
 import CategoryLinks from '@/components/userPages/product/CategoryLinks.vue';
 import CartModal from './CartModal.vue';
 import MenuLink from './MenuLink.vue';
+import AdBanner from './AdBanner.vue';
 
 export default {
   components: {
@@ -163,6 +165,7 @@ export default {
     TooltipComponent,
     MenuLink,
     CategoryLinks,
+    AdBanner,
   },
   data() {
     return {

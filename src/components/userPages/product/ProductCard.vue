@@ -43,7 +43,9 @@
       <p class="mb-3 text-sm">{{ product.unit }}</p>
       <p class="mb-3 flex flex-wrap items-center">
         <span class="mr-1 text-lg text-primary-800 md:text-2xl"> NT$ {{ product.price }}</span>
-        <del class="text-sm md:text-base" v-if="product.price !== product.origin_price"
+        <del
+          class="text-sm text-stone-400 md:text-base"
+          v-if="product.price !== product.origin_price"
           >NT$ {{ product.origin_price }}</del
         >
       </p>

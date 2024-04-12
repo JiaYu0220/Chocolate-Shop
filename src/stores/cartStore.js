@@ -90,19 +90,25 @@ export default defineStore('cartStore', {
     },
     async delCart(cart, swalContainer = 'body') {
       try {
-        const swal = await delSwal('購物車中', cart.product.title, swalContainer);
+        loadingStatus.cartId = cart.id;
+        const url = `${VITE_URL}/api/${VITE_PATH}/cart/${cart.id}`;
 
-        if (swal.isConfirmed) {
-          loadingStatus.cartId = cart.id;
-
-          const url = `${VITE_URL}/api/${VITE_PATH}/cart/${cart.id}`;
-
+        if (swalContainer === false) {
           await axios.delete(url);
           swalToast(`已刪除 ${cart.product.title}`, swalContainer);
           this.getCart();
 
           loadingStatus.cartId = '';
+        } else {
+          const swal = await delSwal('購物車中', cart.product.title, swalContainer);
+
+          if (swal.isConfirmed) {
+            await axios.delete(url);
+            swalToast(`已刪除 ${cart.product.title}`, swalContainer);
+            this.getCart();
+          }
         }
+        loadingStatus.cartId = '';
       } catch (error) {
         // 通知
         const { message } = error.response.data;

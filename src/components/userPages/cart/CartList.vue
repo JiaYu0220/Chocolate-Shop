@@ -7,13 +7,7 @@
   </div>
   <p v-else class="pb-4">共 {{ myNum }} 項商品</p>
   <ul ref="cartList" class="flex flex-col gap-6 sm:gap-8">
-    <CartCard
-      v-for="cart in myCarts"
-      :key="cart.id"
-      :cart="cart"
-      :swal-container="$refs.cartList"
-      :can-edit="canEdit"
-    />
+    <CartCard v-for="cart in myCarts" :key="cart.id" :cart="cart" :can-edit="canEdit" />
   </ul>
 </template>
 <script>
