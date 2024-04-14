@@ -4,7 +4,7 @@
     <!-- header -->
     <NavbarComponent />
     <!-- content -->
-    <div class="mt-[97px] grow bg-primary-50 sm:mt-[117px]">
+    <div class="mt-[97px] grow bg-primary-50 sm:mt-[109px] md:mt-[117px]">
       <RouterView v-slot="{ Component, route }">
         <TransitionFade mode="out-in">
           <component :is="Component" :key="route.path" />
