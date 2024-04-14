@@ -210,7 +210,7 @@
           <template v-for="(article, i) in articles" :key="article.id">
             <li
               v-if="i < 3"
-              class="w-full sm:w-1/2 sm:px-2 sm:py-4 sm:first:w-full xl:w-1/3 xl:first:w-1/3"
+              class="w-full sm:w-1/2 sm:px-2 py-4 sm:first:w-full xl:w-1/3 xl:first:w-1/3"
             >
               <ArticleCard :article="article" />
             </li>
