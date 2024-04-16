@@ -156,7 +156,7 @@
           <img
             class="w-full object-cover"
             lazy="loading"
-            src="https://storage.googleapis.com/vue-course-api.appspot.com/jiayu/1711024085141.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=dgPjEh%2BoMN9HqpgPCOYpMPSvmcjvky0%2BYvmvD0Q4T8pubg%2BU92ZgA4E10wNqeIKbv62XpiQuiwcno7VIDL4hrd6n6JoGKqpFp8T%2FhHozBz83kN1jWa0Er7JqJxRU%2BnTOngwy1AD7h5E4co1a0RcpJQsheMsO9mMkNeEsTlRwKIyenxyumtBnNr6XR362IKmrEv9INKYBCwD6sDf8AAJqn6vL%2FF4ajiMkN0L2M5xEyTJ9OaAhxA8vHGjO5mP8Fn6BAO7S93NmIVnPwzMEcKjOcqLuN36GFR5pmfkXydsJqSheenwd9SaaOUoy8g3CQClCc0%2FeccNQo%2FunRKm2vlTWww%3D%3D"
+            src="https://storage.googleapis.com/vue-course-api.appspot.com/jiayu/1713285198077.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=lWOjPk%2B0S8DHi%2BrZeQKrUW5uS4r3RLtBqPh06Zw70bVWqAVqMbYUEoZCRbC6JwNJj%2FdCZ6s2fRw8hzx1tlBlYPTMEcVjVcaXyxHOzTDRgodyI5hZncDLJ3HNxowP5d3SBxSou2GR6nK7QQBzdj9xIyqz51eo9FjQuFaWDwPjsdc%2FWvtRLH3j6wn7JtGL0RwrNGdlKvuMyzymejnT1WcF3PutiBUkAfn61dankw9DybTlM8QfVR%2FifvH4Y2eWrzNnJARKnJ2Ktv6PGioOtejB98nyw6QT986phzgQpL5wmBpo66RUESH32Zab%2FP4h4nRGegrLo7W3SyhDAnagYu%2BLWw%3D%3D"
             alt=""
           />
           <ProductSpot
