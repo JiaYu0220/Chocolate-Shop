@@ -95,7 +95,7 @@ export default defineStore('cartStore', {
 
         if (swalContainer === false) {
           await axios.delete(url);
-          swalToast(`已刪除 ${cart.product.title}`, swalContainer);
+          swalToast(`已刪除 ${cart.product.title}`);
           this.getCart();
 
           loadingStatus.cartId = '';

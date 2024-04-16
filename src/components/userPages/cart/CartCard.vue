@@ -101,7 +101,7 @@ export default {
   methods: {
     reduceQty() {
       if (this.qty === 1) {
-        this.delCart(this.cart, this.swalContainer);
+        this.delCart(this.cart, this.refs.card);
       } else {
         this.qty -= 1;
         this.debouncePutCart(this.cart, this.qty);
