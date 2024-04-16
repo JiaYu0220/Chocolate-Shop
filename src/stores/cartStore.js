@@ -88,14 +88,14 @@ export default defineStore('cartStore', {
         this.putCart(item, qty);
       }, 300);
     },
-    async delCart(cart, swalContainer = 'body') {
+    async delCart(cart, swalContainer = 'body', hasDelSwal = true) {
       try {
         loadingStatus.cartId = cart.id;
         const url = `${VITE_URL}/api/${VITE_PATH}/cart/${cart.id}`;
 
-        if (swalContainer === false) {
+        if (hasDelSwal === false) {
           await axios.delete(url);
-          swalToast(`已刪除 ${cart.product.title}`);
+          swalToast(`已刪除 ${cart.product.title}`, swalContainer);
           this.getCart();
 
           loadingStatus.cartId = '';

@@ -17,7 +17,7 @@
         <LoadingBtn
           v-if="canEdit"
           class="btn btn-link -mr-3 -mt-2 shadow-none"
-          @click="delCart(cart, false)"
+          @click="delCart(cart, $refs.card, false)"
           :isLoading="loadingStatus.cartId === cart.id"
         >
           <i v-if="loadingStatus.cartId !== cart.id" class="bi bi-trash3 text-orange-700"></i
