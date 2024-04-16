@@ -17,7 +17,7 @@
         <LoadingBtn
           v-if="canEdit"
           class="btn btn-link -mr-3 -mt-2 shadow-none"
-          @click="delCart(cart, $refs.card, false)"
+          @click="delCart(cart, swalContainer, hasDelSwal)"
           :isLoading="loadingStatus.cartId === cart.id"
         >
           <i v-if="loadingStatus.cartId !== cart.id" class="bi bi-trash3 text-orange-700"></i
@@ -86,6 +86,13 @@ export default {
       type: Boolean,
       default: true,
     },
+    swalContainer: [Object, String],
+  },
+  inject: {
+    hasDelSwal: {
+      from: 'hasDelSwal',
+      default: true,
+    },
   },
   components: {
     LoadingBtn,
@@ -101,7 +108,7 @@ export default {
   methods: {
     reduceQty() {
       if (this.qty === 1) {
-        this.delCart(this.cart, this.$refs.card);
+        this.delCart(this.cart, this.swalContainer);
       } else {
         this.qty -= 1;
         this.debouncePutCart(this.cart, this.qty);

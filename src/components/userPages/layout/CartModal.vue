@@ -68,6 +68,9 @@ export default {
       modal: null,
     };
   },
+  provide: {
+    hasDelSwal: false,
+  },
   mounted() {
     this.modal = this.$refs.modal;
   },
