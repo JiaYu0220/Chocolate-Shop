@@ -102,11 +102,11 @@ export default {
     getAdjacentArticleId() {
       const lastIndex = this.articles.length - 1;
       const index = this.articles.findIndex((item) => item.id === this.currentId);
-      if (index !== 0) {
-        this.prevId = this.articles[index - 1].id;
-      }
       if (index !== lastIndex) {
-        this.nextId = this.articles[index + 1].id;
+        this.prevId = this.articles[index + 1].id;
+      }
+      if (index !== 0) {
+        this.nextId = this.articles[index - 1].id;
       }
     },
     ...mapActions(loadingStore, ['showLoading', 'hideLoading']),
