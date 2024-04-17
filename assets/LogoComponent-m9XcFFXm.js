@@ -1,0 +1,1 @@
+import{_ as o,o as e,e as t}from"./index-5P3JN48w.js";const c={},n={class:"logoShadow text-nowrap text-center font-Mochiy text-primary-800"};function r(s,_){return e(),t("h1",n,"可_可")}const p=o(c,[["render",r]]);export{p as L};
