@@ -41,7 +41,7 @@
                 class="h-full w-full object-cover transition-all duration-300
                   group-hover/cate:scale-110 group-hover/cate:brightness-75"
                 loading="lazy"
-                src="@/assets/基本.webp"
+                src="https://storage.googleapis.com/vue-course-api.appspot.com/jiayu/1713337131802.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=oRih4b4Z1VlDg%2B3EqwWrl8MwU%2FPxlGfo0E4PWPOuJEUpjTdzQKSEC9w1ICP1q8SU5dSmNRC3fUY0jf2%2FGVr0mfhABOzylZ0V5U4abI3D8bhqJlvCMl%2FYNYbSClGt2Ks0gcbyYVvIen%2FOzA6jEZ5RxCgqRAm5rpOzDqGA0SlySFvYDNgLfTUducHacOKod3UgyqbaBBBbYrKiFQQnqVOxcUAICZ9zjlUt2o5WCGUK5QNgBQvTzL5l1v2u7RLDS4EefrODXWRfxt6fQmephZLSC%2BWDoLb3Ia69pmiCSLNSGtasWjTwII3XRk7B6erOYrVM44hE%2BwLBFU4P1RRCNzIfEg%3D%3D"
                 alt="基本類別"
               />
               <h4
@@ -63,7 +63,7 @@
                 class="h-full w-full object-cover transition-all duration-300
                   group-hover/cate:scale-110 group-hover/cate:brightness-75"
                 loading="lazy"
-                src="@/assets/禮盒.webp"
+                src="https://storage.googleapis.com/vue-course-api.appspot.com/jiayu/1713337134466.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=Lqrs%2F1WZOU3Br79owH4lxUw6DI4rHmT%2FfLKc6O2VcT7cEJgD54%2BtBxeojIrZLfmY2Mqp5dhd2TFRVMJwilLSGBLdVOrI6lNLKLCUfb6P0rz9V5hocfAXSBMktyYyeS78I2NEoP%2F1%2BFZ6I8%2BsN3KoAQBM9EoubCYk2P%2B%2FCTOBwgFbG6cBs3I7CL%2Bc1ZRPdjSR80IYVTfOBrLMtIjFVKXbzCbVbY%2BSERIlzqmJcj80BN1WaCyDVLBkbegsNYxzvgATzfZDpuKXLtH1CqtzJ0MyPlQ7IC%2FsnANZ5MZW4JpAa86WfgsxJvFuux0Lha1hagdx58g8IdFd0Hdv5zmhpnv1aQ%3D%3D"
                 alt="禮盒類別"
               />
               <h4
@@ -85,7 +85,7 @@
                 class="h-full w-full object-cover transition-all duration-300
                   group-hover/cate:scale-110 group-hover/cate:brightness-75"
                 loading="lazy"
-                src="@/assets/特殊.webp"
+                src="https://storage.googleapis.com/vue-course-api.appspot.com/jiayu/1713337131786.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=h5qOn5xloWsqcyvUWeUtdqpls4PzVjYsoiPXr9b0YJzzRXkrfrEifKZUzIL2q%2FIw2dmnEQLyqmP6Xs4L9c6exyiH2N0fkuZlkvNDF7%2FJDujmpSVhzCQuXTTdSw5UN%2Fd0WTannl36FptwPfotqy9oXKvUCvxSJGHPGhV1ZIhnVznlHbqEDrrGU2qMc5ykCztD3Rnfbh%2FlfwluDzPM%2Fajos7rV59E3cjkDpHp3qkz%2BrXmdmoqRUTIZR2e8soedweMNVMDyMPW%2BT4pPZHf9Xh%2Bg0Ei%2FtDJ4Vbo%2B3SmisAIGFl8MtA%2BcgwcWVAZAAgf44bUVFgqHhQDRriDLtoMp5fCFVw%3D%3D"
                 alt="特殊口味"
               />
               <h4
@@ -107,7 +107,7 @@
                 class="h-full w-full object-cover transition-all duration-300
                   group-hover/cate:scale-110 group-hover/cate:brightness-75"
                 loading="lazy"
-                src="@/assets/料理.webp"
+                src="https://storage.googleapis.com/vue-course-api.appspot.com/jiayu/1713337131784.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=QT462OibVv3iH3ESqvqbN%2F7Z59mhRTultacAbJxt307TjmfIMYM%2BdYE0z7VRlmQH49GC%2FgNK8TGhIgqZ66T9Qwx6Avnh1Pvsn%2FouE%2BA9vWG6hZY4aRGdZN5GmjQWEJyI2JwxxbAsAHGdmbJzYVA9v88d4Jqirv4GgQb2m4rur6ak%2BNqkqFeJ%2B%2BBjP5dzwCxhNZ7qV93A%2BeaJsBKEY87FyOyfjIhTgp3sgEoPY5Uasyq8EBpaack23DgENs5hXv9wiCLKJQjPtV6BEMiNKBJuwccxzDy%2F6VKI%2FlX3Kx3osWe8MthBsyCFo3tCeVcezrqD7pdw9J7W6MEG3CHiBTTaXg%3D%3D"
                 alt="料理類別"
               />
               <h4
@@ -150,15 +150,23 @@
     </section>
     <!-- 倒數 -->
     <section class="bg-primary-100">
-      <div class="container pt-10 md:pt-20">
+      <div data-aos="fade-up" class="container pt-10 md:pt-20">
         <SectionTitle title="快閃優惠" />
-        <div data-aos="fade-up" class="relative rounded">
-          <img
-            class="w-full object-cover"
-            lazy="loading"
-            src="@/assets/discount-banner.webp"
-            alt="產品圖"
-          />
+        <div class="relative rounded">
+          <picture>
+            <source
+              media="(min-width:768px)"
+              srcset="
+                https://storage.googleapis.com/vue-course-api.appspot.com/jiayu/1713285198077.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=lWOjPk%2B0S8DHi%2BrZeQKrUW5uS4r3RLtBqPh06Zw70bVWqAVqMbYUEoZCRbC6JwNJj%2FdCZ6s2fRw8hzx1tlBlYPTMEcVjVcaXyxHOzTDRgodyI5hZncDLJ3HNxowP5d3SBxSou2GR6nK7QQBzdj9xIyqz51eo9FjQuFaWDwPjsdc%2FWvtRLH3j6wn7JtGL0RwrNGdlKvuMyzymejnT1WcF3PutiBUkAfn61dankw9DybTlM8QfVR%2FifvH4Y2eWrzNnJARKnJ2Ktv6PGioOtejB98nyw6QT986phzgQpL5wmBpo66RUESH32Zab%2FP4h4nRGegrLo7W3SyhDAnagYu%2BLWw%3D%3D
+              "
+            />
+            <img
+              class="w-full object-cover"
+              lazy="loading"
+              src="https://storage.googleapis.com/vue-course-api.appspot.com/jiayu/1713335272912.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=m7lCjQVfyvMt0lTe3Q6HdQoTntbisp8HBx41%2FtaRt0ZLKpzoZXzMxT5ukHa4BarSrhII53X7iHnklQAk2KsxPka8KQSWte1suVn6GpzoM2MOGMZXsv74fD8n2iQF%2Fnt75SSs%2BFkGX9HXCYMTrJ6x2il6w%2FoaqlcBlyJJR6Gtqr7b09mx%2BUlnyUhakolsPsSTYsLjcSb0xNScrKx31DaXUbfrrmf4eVbe2KHwrT%2BpJKrkpBam5pDuNtAAvdbR6hDpVy%2BCUOh0xcvbUcQFNVqRVUSiWcOR4D8fGhjTCxu2UaPH9%2FC%2FrRpXdCIyXloynOGxxYvrLDvk9Dn%2B%2Bv%2FA8GW5GA%3D%3D"
+              alt="產品圖"
+            />
+          </picture>
           <ProductSpot
             v-for="product in imageProductData"
             :key="product.id"
@@ -168,7 +176,6 @@
           </ProductSpot>
         </div>
         <div
-          data-aos="fade-up"
           class="flex flex-col gap-4 bg-orange-700 p-6 text-center text-primary-50 md:flex-row
             md:items-center md:justify-center md:gap-16 md:p-10"
         >
@@ -233,12 +240,6 @@ import ProductSwiper from '@/components/userPages/product/ProductSwiper.vue';
 import ArticleCard from '@/components/userPages/article/ArticleCard.vue';
 import ProductSpot from '@/components/userPages/home/ProductSpot.vue';
 import timerStore from '@/stores/timerStore';
-
-// import @/assets/基本.webp from '@/assets/基本.webp';
-// import @/assets/禮盒.webp from '@/assets/禮盒.webp';
-// import @/assets/特殊.webp from '@/assets/特殊.webp';
-// import @/assets/料理.webp from '@/assets/料理.webp';
-// import discountBanner from '@/assets/discount-banner.webp';
 
 export default {
   components: {
