@@ -74,7 +74,7 @@
 
 - 我是使用者，我想要查看店家相關文章
 
-  ![image](https://github.com/JiaYu0220/Chocolate-Shop/assets/134919211/a64523ea-1a76-41d7-8cd1-7d8f4049b3ec)
+  ![文章](https://github.com/JiaYu0220/Chocolate-Shop/assets/134919211/ca0c7e67-696f-42b1-9d6f-7c62f0bbf07c)
 
 - 我是使用者，我想要購買課程
 
@@ -83,15 +83,19 @@
   - 我能夠付款完成訂單
   - 我能夠看到訂購的資訊
 
-  ![image](https://github.com/JiaYu0220/Chocolate-Shop/assets/134919211/ed683ccd-d3df-48fa-8dff-10a90cf3d30a)
+    ![購物車](https://github.com/JiaYu0220/Chocolate-Shop/assets/134919211/8069f94e-27a2-487a-90f3-26b39cb9db9c)
+
+    ![購物車-表單](https://github.com/JiaYu0220/Chocolate-Shop/assets/134919211/85a6984d-ec43-4bb4-b135-2e6b58508568)
 
 #### 賣家端(後台)
 
+- 我是賣家，我想要管理訂單
+
 - 我是賣家，我想要編輯和新增產品、優惠券、文章，且能夠裁剪並上傳圖片
 
-  ![image](https://github.com/JiaYu0220/Chocolate-Shop/assets/134919211/06fa735a-8dd5-469b-8998-b33600173cae)
-
-- 我是賣家，我想要管理訂單
+  ![後臺編輯](https://github.com/JiaYu0220/Chocolate-Shop/assets/134919211/055b2cb8-910e-4460-b8a8-548264e13c0a)
+  
+  ![裁剪](https://github.com/JiaYu0220/Chocolate-Shop/assets/134919211/4b56d0e7-16f1-419e-95b6-6bdffb31e3be)
 
 ## 安裝
 
