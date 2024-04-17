@@ -1,5 +1,5 @@
 <template>
-  <h1 class="logoShadow text-nowrap text-center font-zenMaru text-primary-800">可_可</h1>
+  <h1 class="logoShadow text-nowrap text-center font-Mochiy text-primary-800">可_可</h1>
 </template>
 <style>
 .logoShadow {

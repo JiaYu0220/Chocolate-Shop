@@ -35,7 +35,7 @@ export default {
         },
       },
       fontFamily: {
-        zenMaru: ['"Mochiy Pop One"', ...defaultTheme.fontFamily.sans],
+        Mochiy: ['"Mochiy Pop One"', ...defaultTheme.fontFamily.sans],
       },
       backgroundImage: {
         'icon-check':

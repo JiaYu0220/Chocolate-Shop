@@ -41,7 +41,7 @@
                 class="h-full w-full object-cover transition-all duration-300
                   group-hover/cate:scale-110 group-hover/cate:brightness-75"
                 loading="lazy"
-                src="https://images.pexels.com/photos/4110097/pexels-photo-4110097.jpeg?auto=compress&cs=tinysrgb&w=800&h=auto&dpr=1"
+                src="@/assets/基本.webp"
                 alt="基本類別"
               />
               <h4
@@ -63,7 +63,7 @@
                 class="h-full w-full object-cover transition-all duration-300
                   group-hover/cate:scale-110 group-hover/cate:brightness-75"
                 loading="lazy"
-                src="https://images.unsplash.com/photo-1513201099705-a9746e1e201f?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src="@/assets/禮盒.webp"
                 alt="禮盒類別"
               />
               <h4
@@ -85,7 +85,7 @@
                 class="h-full w-full object-cover transition-all duration-300
                   group-hover/cate:scale-110 group-hover/cate:brightness-75"
                 loading="lazy"
-                src="https://images.unsplash.com/photo-1545396635-f4865ca1448b?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src="@/assets/特殊.webp"
                 alt="特殊口味"
               />
               <h4
@@ -107,7 +107,7 @@
                 class="h-full w-full object-cover transition-all duration-300
                   group-hover/cate:scale-110 group-hover/cate:brightness-75"
                 loading="lazy"
-                src="https://images.pexels.com/photos/5078594/pexels-photo-5078594.jpeg?auto=compress&cs=tinysrgb&w=800&h=auto&dpr=1"
+                src="@/assets/料理.webp"
                 alt="料理類別"
               />
               <h4
@@ -156,8 +156,8 @@
           <img
             class="w-full object-cover"
             lazy="loading"
-            src="https://storage.googleapis.com/vue-course-api.appspot.com/jiayu/1713285198077.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=lWOjPk%2B0S8DHi%2BrZeQKrUW5uS4r3RLtBqPh06Zw70bVWqAVqMbYUEoZCRbC6JwNJj%2FdCZ6s2fRw8hzx1tlBlYPTMEcVjVcaXyxHOzTDRgodyI5hZncDLJ3HNxowP5d3SBxSou2GR6nK7QQBzdj9xIyqz51eo9FjQuFaWDwPjsdc%2FWvtRLH3j6wn7JtGL0RwrNGdlKvuMyzymejnT1WcF3PutiBUkAfn61dankw9DybTlM8QfVR%2FifvH4Y2eWrzNnJARKnJ2Ktv6PGioOtejB98nyw6QT986phzgQpL5wmBpo66RUESH32Zab%2FP4h4nRGegrLo7W3SyhDAnagYu%2BLWw%3D%3D"
-            alt=""
+            src="@/assets/discount-banner.webp"
+            alt="產品圖"
           />
           <ProductSpot
             v-for="product in imageProductData"
@@ -233,6 +233,12 @@ import ProductSwiper from '@/components/userPages/product/ProductSwiper.vue';
 import ArticleCard from '@/components/userPages/article/ArticleCard.vue';
 import ProductSpot from '@/components/userPages/home/ProductSpot.vue';
 import timerStore from '@/stores/timerStore';
+
+// import @/assets/基本.webp from '@/assets/基本.webp';
+// import @/assets/禮盒.webp from '@/assets/禮盒.webp';
+// import @/assets/特殊.webp from '@/assets/特殊.webp';
+// import @/assets/料理.webp from '@/assets/料理.webp';
+// import discountBanner from '@/assets/discount-banner.webp';
 
 export default {
   components: {
