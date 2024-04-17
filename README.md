@@ -1,7 +1,7 @@
 # ![image](https://github.com/JiaYu0220/Chocolate-Shop/assets/134919211/f73a2b4b-cecf-446a-bc78-985c53ac5bf2) 黑巧克力專賣店 | [前台](https://jiayu0220.github.io/Chocolate-Shop/)、[後台](https://jiayu0220.github.io/Chocolate-Shop/#/login)
 
 - [作品說明](#作品說明)
-- 
+  
   - [發想](#發想)
 
 - [功能](#功能)
