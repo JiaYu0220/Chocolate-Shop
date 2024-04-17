@@ -62,15 +62,15 @@
 
 - 我能夠從首頁了解優惠產品、產品分類、優惠資訊(跑馬燈、倒數計時)
 
-  ![image](https://github.com/JiaYu0220/Chocolate-Shop/assets/134919211/7c91e963-ae2b-403e-9b9d-b59e64a64ce6)
+  ![首頁](https://github.com/JiaYu0220/Chocolate-Shop/assets/134919211/eaa8aeeb-c365-4863-853e-5adee0d0cc69)
 
 - 我是使用者，我想要選購商品
 
-  ![image](https://github.com/JiaYu0220/Chocolate-Shop/assets/134919211/cb89eaaa-502a-4a14-aa20-cade0390c296)
+  ![商品列表](https://github.com/JiaYu0220/Chocolate-Shop/assets/134919211/7188e9b9-5cf4-4577-8586-e15bd22652e5)
 
 - 我是使用者，我想要查看產品相關資訊
 
-  ![image](https://github.com/JiaYu0220/Chocolate-Shop/assets/134919211/1d929e1e-8732-44a8-b5d3-b648ac09cf44)
+  ![商品](https://github.com/JiaYu0220/Chocolate-Shop/assets/134919211/ebf837c3-0765-4dd2-bebf-7e89c83bc0d2)
 
 - 我是使用者，我想要查看店家相關文章
 
