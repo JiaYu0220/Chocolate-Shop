@@ -158,7 +158,7 @@ http://localhost:5173/
 - vue-router: `v4.2.5`
 - pinia: `v2.1.7`
 - axios: `v1.6.7`
-- vue-axios:: `v3.5.2`
+- vue-axios: `v3.5.2`
 - tailwindcss: `v3.4.1`
 - vee-validate: `v4.12.5`
 - swiper: `v11.0.7`
